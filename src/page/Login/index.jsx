@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './Login.css'
+
+import Footer from '../../component/Footer'
+
 export default class Login extends Component {
   render() {
     return (
@@ -41,6 +44,7 @@ export default class Login extends Component {
             </div>
           </div>
         </main>
+        <Footer />
       </>
     )
   }
