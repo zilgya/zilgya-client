@@ -12,7 +12,7 @@ export default class Footer extends Component {
                 <div className="footer-widget footer-column footer-column__a col-xl-5 col-lg-12 col-md-12 col-sm-6 col-12 text-xl-left mb-40">
                   <div className="inner">
                     <div className="logo">
-                      <a href="index.html">
+                      <a href="/">
                         <img
                           src="assets/images/logo-white.png"
                           alt="logo white"
