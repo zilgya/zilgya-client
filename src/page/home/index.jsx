@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Navbar from '../../component/Navbar/index'
+import Navbar from '../../component/Navbar/index'
 import Footer from '../../component/Footer/index'
 
 // import image
@@ -24,7 +24,7 @@ class Home extends Component {
     render() {
         return (
             <React.Fragment>
-                {/* <Navbar /> */}
+                <Navbar />
                 <header>
                     <section className='hm-content-banner-wrapper'>
                         <div className="hm-banner-content-body">
