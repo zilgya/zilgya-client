@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+
+.login-global-container {
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+}
+
+.login-header-title {
+  font-family: Arimo;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 64px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #1A1A1A;
+
+}
+
+.login-header-info {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #1A1A1A;
+
+}
+
+.login-main-container {
+  display: flex;
+}
+
+.login-login-section,
+.login-register-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 5%;
+}
+
+.login-register-title {
+  font-family: Arimo;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 37px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1A1A1A;
+
+}
+
+.login-input {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #4D4D4D;
+  margin: 10px 0;
+  height: 20px;
+  padding: 10px 15px;
+  border: 1px solid #CECECE;
+}
+
+.login-checkbox {
+  display: flex;
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.login-customer {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  margin-right: 20px;
+}
+
+
+#remember-me {
+  height: 15px;
+}
+
+.login-forgot {
+  color: #D25B5B;
+  cursor: pointer;
+}
+
+.login-button {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  background: #1A1A1A;
+  width: 100px;
+  height: 40px;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.login-button:hover {
+  background: #2b2b2b;
+}
+
+.login-button:active {
+  background: #1A1A1A;
+}
