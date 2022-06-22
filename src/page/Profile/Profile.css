@@ -1,0 +1,186 @@
+.login-header {
+  background-color: #ececec;
+}
+
+.profile-main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 15%;
+}
+
+.profile-profpic-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.profile-picture-edit {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #ffffff;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 2;
+
+}
+
+.profile-picture-edit-background {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #777777;
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+}
+
+.profile-picture-edit:hover {
+  opacity: 100%;
+}
+
+.profile-pencil-icon {
+  margin-left: 5px;
+}
+
+.profle-name-container {
+  margin-left: 30px;
+}
+
+.profile-name {
+  font-family: Arimo;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.profile-role {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 37px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.profile-input-all-container {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-input-container {
+  display: flex;
+  border-bottom: none;
+  justify-content: space-between;
+  border: 1px solid #D1D1D1;
+
+  padding: 30px;
+}
+
+.profile-input-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-label {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 37px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #4D4D4D;
+}
+
+.profile-input {
+  width: 100%;
+  font-family: Arimo;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1A1A1A;
+  border: none;
+
+}
+
+.profile-input:focus {
+  outline: none;
+}
+
+.profile-input-edit {
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #1A1A1A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.profile-logout-button {
+  width: 200px;
+  height: 50px;
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #D94141;
+  color: #ffffff;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.profile-logout-button:hover{
+  background: #d63030;
+}
+.profile-logout-button:active{
+  background: #D94141;
+}
+
+.profile-logout-pict{
+  margin: 10px;
+}
