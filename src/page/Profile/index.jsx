@@ -4,11 +4,14 @@ import './Profile.css'
 
 import Profpict from '../../assets/img/profpict.png'
 import Logout from '../../assets/img/logout.png'
+import Navbar from '../../component/Navbar'
+import Footer from '../../component/Footer'
 
 export default class Profile extends Component {
   render() {
     return (
       <>
+        <Navbar />
         <main className='login-global-container'>
           <div className="login-header">
             <div className="login-header-title">Profile</div>
@@ -51,9 +54,10 @@ export default class Profile extends Component {
                 </div>
               </div>
             </div>
-            <div className="profile-logout-button"><img src={Logout} alt="logout" className='profile-logout-pict'/>Logout</div>
+            <div className="profile-logout-button"><img src={Logout} alt="logout" className='profile-logout-pict' />Logout</div>
           </div>
         </main>
+        <Footer />
       </>
     )
   }

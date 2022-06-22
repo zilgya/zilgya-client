@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import './Login.css'
 
 import Footer from '../../component/Footer'
+import Navbar from '../../component/Navbar'
 
 export default class Login extends Component {
   render() {
     return (
       <>
+      <Navbar/>
         <main className='login-global-container'>
           <div className="login-header">
             <div className="login-header-title">My Account</div>
