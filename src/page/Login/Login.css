@@ -73,6 +73,10 @@
   border: 1px solid #CECECE;
 }
 
+.login-input:focus{
+  outline: none;
+}
+
 .login-checkbox {
   display: flex;
   font-family: Arimo;
