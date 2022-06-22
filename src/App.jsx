@@ -4,6 +4,8 @@ import Login from './page/Login';
 import Footer from "./component/Footer"
 // import Navbar from "./component/Navbar"
 import Home from './page/Home';
+import Profile from './page/Profile';
+
 
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/footer' element={<Footer />} />
         {/* <Route path='/navbar' element={<Navbar />} /> */}
       </Routes>
