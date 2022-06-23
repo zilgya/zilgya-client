@@ -110,7 +110,7 @@ export default class Navbar extends Component {
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </div>
-                    <div className="col-md-4">               
+                    <div className="col-md-4">
 
                       <nav id="navbar" className="navigation" role="navigation">
                         <input id="toggle1" type="checkbox" />
@@ -122,7 +122,7 @@ export default class Navbar extends Component {
 
                         <nav className="menu1">
                           <a className="link1" href="# ">
-                           Profile
+                            Profile
                           </a>
                           <a className="link1" href="# ">
                             Chat
@@ -131,8 +131,8 @@ export default class Navbar extends Component {
                             Notification
                           </a>
                           <a className="link1" href="# ">
-                           Logout
-                          </a>                       
+                            Logout
+                          </a>
                         </nav>
                       </nav>
                     </div>

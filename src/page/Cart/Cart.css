@@ -1,0 +1,26 @@
+.cart-container{
+    display: flex;
+    padding: 5%;
+}
+
+.cart-main-content-left{
+    flex-grow: 3;
+}
+
+.cart-main-content-right{
+    width: 360px;
+    height: 450px;
+    background-color: #F9F9F9;
+    flex-grow: 1;
+    padding: 5%;
+}
+
+.shipping{
+    display: flex;
+    justify-content: space-between;
+}
+
+.shipping-input{
+    display: flex;
+    flex-direction: column;
+}
