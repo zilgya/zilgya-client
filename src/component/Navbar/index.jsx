@@ -114,7 +114,7 @@ export default class Navbar extends Component {
 
                       <nav id="navbar" className="navigation" role="navigation">
                         <input id="toggle1" type="checkbox" />
-                        <label className="hamburger1" htmlFor="toggle1">
+                        <label className="hamburger1 navbar-label" htmlFor="toggle1">
                           <div className="top"></div>
                           <div className="meat"></div>
                           <div className="bottom"></div>

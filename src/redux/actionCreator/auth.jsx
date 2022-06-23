@@ -1,4 +1,4 @@
-import { doLogin } from "../../utility/axios";
+import { doLogin } from "../../utility/auth";
 import { loginString, logoutString } from "./actionString";
 
 export const loginAction = (body) => ({
