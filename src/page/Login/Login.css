@@ -105,6 +105,10 @@
   height: 15px;
 }
 
+.login-customer-input{
+  margin-right: 10px;
+}
+
 .login-forgot {
   color: #D25B5B;
   cursor: pointer;
@@ -139,4 +143,10 @@
 
 .login-button:active {
   background: #1A1A1A;
+}
+
+@media (max-width: 640px) {
+  .login-main-container{
+    flex-direction: column;
+  }
 }
