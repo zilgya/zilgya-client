@@ -112,25 +112,25 @@ export default class Navbar extends Component {
                     </div>
                     <div className="col-md-4">               
 
-                      <nav id="navbar" class="navigation" role="navigation">
+                      <nav id="navbar" className="navigation" role="navigation">
                         <input id="toggle1" type="checkbox" />
-                        <label class="hamburger1" for="toggle1">
-                          <div class="top"></div>
-                          <div class="meat"></div>
-                          <div class="bottom"></div>
+                        <label className="hamburger1" htmlFor="toggle1">
+                          <div className="top"></div>
+                          <div className="meat"></div>
+                          <div className="bottom"></div>
                         </label>
 
-                        <nav class="menu1">
-                          <a class="link1" href="# ">
+                        <nav className="menu1">
+                          <a className="link1" href="# ">
                            Profile
                           </a>
-                          <a class="link1" href="# ">
+                          <a className="link1" href="# ">
                             Chat
                           </a>
-                          <a class="link1" href="# ">
+                          <a className="link1" href="# ">
                             Notification
                           </a>
-                          <a class="link1" href="# ">
+                          <a className="link1" href="# ">
                            Logout
                           </a>                       
                         </nav>
