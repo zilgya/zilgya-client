@@ -1,0 +1,9 @@
+.favorite-product-item {
+  display: flex;
+  align-items: center;
+  padding: 20px 0
+}
+
+.favorite-heart{
+  margin-right: 5%;
+}

@@ -1,0 +1,131 @@
+.wl-main-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 10%;
+}
+
+.wl-col-name {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  border-top: 1px solid #D7D7D7;
+  border-bottom: 1px solid #D7D7D7;
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.wl-col-product,
+.wl-img-name-container {
+  flex: 3;
+}
+
+.wl-col-status {
+  flex: 2;
+}
+
+.wl-col-price {
+  flex: 2;
+}
+
+.wl-product-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.wl-product-item {
+  display: flex;
+  align-items: center;
+  padding: 20px 2.5%
+}
+
+.wl-img-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.wl-product-img-container {
+  flex: 2;
+  width: 100px;
+  height: 100px;
+}
+
+.wl-product-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.wl-product-name {
+  flex: 3;
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.wl-product-stock {
+  flex: 2;
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.wl-product-price-container {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wl-product-price {
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.wl-addcart-button {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+  background: #1A1A1A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.wl-addcart-button:hover {
+  background: #2b2b2b;
+}
+
+.wl-addcart-button:active {
+  background: #1A1A1A;
+}
