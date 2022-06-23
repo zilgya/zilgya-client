@@ -15,14 +15,12 @@
 }
 
 .profile-seller-navbar-active {
-  color: #1A1A1A;
-  border-bottom: 1px solid #C2C2C2;
-  ;
+  color: #1a1a1a;
+  border-bottom: 1px solid #c2c2c2;
 }
 
 .profile-seller-navbar-inactive {
-  color: #B4B4B4;
-
+  color: #b4b4b4;
 }
 
 .profile-seller-navbar-inactive,
@@ -75,7 +73,6 @@
   align-items: center;
   opacity: 0;
   z-index: 2;
-
 }
 
 .profile-picture-edit-background {
@@ -107,7 +104,6 @@
   line-height: 28px;
   letter-spacing: 0px;
   text-align: left;
-
 }
 
 .profile-role {
@@ -117,7 +113,6 @@
   line-height: 37px;
   letter-spacing: 0px;
   text-align: left;
-
 }
 
 .profile-input-all-container {
@@ -130,7 +125,7 @@
   display: flex;
   border-bottom: none;
   justify-content: space-between;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
 
   padding: 30px;
 }
@@ -147,7 +142,7 @@
   line-height: 37px;
   letter-spacing: 0px;
   text-align: left;
-  color: #4D4D4D;
+  color: #4d4d4d;
 }
 
 .profile-input {
@@ -158,13 +153,15 @@
   line-height: 28px;
   letter-spacing: 0px;
   text-align: left;
-  color: #1A1A1A;
+  color: #1a1a1a;
   border: none;
-
 }
 
 .profile-input:focus {
   outline: none;
+  border-bottom: 2px solid #1a1a1a;
+  /* border-color: #1a1a1a; */
+  /* border-bottom: #1a1a1a; */
 }
 
 .profile-input-edit {
@@ -174,11 +171,10 @@
   line-height: 21px;
   letter-spacing: 0px;
   text-align: left;
-  color: #1A1A1A;
+  color: #1a1a1a;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .profile-logout-button {
@@ -194,7 +190,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: #D94141;
+  background: #d94141;
   color: #ffffff;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -208,7 +204,7 @@
 }
 
 .profile-logout-button:active {
-  background: #D94141;
+  background: #d94141;
 }
 
 .profile-logout-pict {

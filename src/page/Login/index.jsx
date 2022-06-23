@@ -134,7 +134,7 @@ class Login extends Component {
                   const { email, password, roles_id } = this.state;
                   const body = { email, password, roles_id };
                   axios
-                    .post("http://localhost:8000/auth/new", body)
+                    .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                     .then((result) => {
                       console.log(result);
                       this.setState({
