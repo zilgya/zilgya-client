@@ -6,9 +6,12 @@ import { PersistGate } from "redux-persist/integration/react";
 import Login from './page/Login';
 import Home from './page/Home';
 import Profile from './page/Profile';
-import ProductDetail from './page/ProductDetail';
 import Product from './page/Product';
 import Checkout from './page/Checkout';
+import ProductDetail from './page/ProductDetail';
+import Wishlist from './page/Wishlist';
+import Favorite from './page/Favorite';
+import OrderTrack from './page/OrderTrack';
 
 
 
@@ -25,6 +28,9 @@ function App() {
             <Route path='/productdetail/' element={<ProductDetail />} />
             <Route path='/product' element={<Product />} />
             <Route path='/checkout' element={<Checkout />} />
+            <Route path='/wishlist' element={<Wishlist />} />
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='/track' element={<OrderTrack />} />
           </Routes>
         </Router>
       </PersistGate>
