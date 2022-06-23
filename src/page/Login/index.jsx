@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from 'react-redux'
 import { loginAction } from '../../redux/actionCreator/auth'
 import { Navigate } from 'react-router-dom'
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
 
 import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
@@ -16,7 +17,8 @@ class Login extends Component {
       email: "",
       password: "",
       roles_id: "",
-      //isPasswordShown: false,
+      isRegisPassShown: false,
+      isLoginPassShown: false,
       isError: false,
       errorMsg: "",
       isSuccess: false,
@@ -30,8 +32,8 @@ class Login extends Component {
   }
   render() {
     const { isSuccess } = this.props
-        if (isSuccess === true)
-            return <Navigate to="/" />
+    if (isSuccess === true)
+      return <Navigate to="/" />
     return (
       <>
         <Navbar />
@@ -49,12 +51,26 @@ class Login extends Component {
                     email: e.target.value,
                   })
                 }} />
-              <input type="text" className="login-input" placeholder='Password'
-                onChange={e => {
-                  this.setState({
-                    password: e.target.value,
-                  })
-                }} />
+              <div className="login-input-pass-container">
+                <input type={this.state.isLoginPassShown ? "text" : "password"} className="login-input-pass" placeholder='Password'
+                  onChange={(e) => {
+                    this.setState({
+                      password: e.target.value,
+                    });
+                  }} />
+                  {this.state.isLoginPassShown ? 
+                  <Eye className='login-eye'
+                  onClick={()=>{
+                    this.setState({
+                      isLoginPassShown: false
+                    })
+                  }}/> : 
+                  <EyeSlash className='login-eye'onClick={()=>{
+                    this.setState({
+                      isLoginPassShown: true
+                    })
+                  }}/>}
+              </div>
               <div className="login-button"
                 onClick={() => {
                   const { email, password } = this.state;
@@ -77,12 +93,26 @@ class Login extends Component {
                     email: e.target.value,
                   });
                 }} />
-              <input type="password" className="login-input" placeholder='Password'
-                onChange={(e) => {
-                  this.setState({
-                    password: e.target.value,
-                  });
-                }} />
+              <div className="login-input-pass-container">
+                <input type={this.state.isRegisPassShown ? "text" : "password"} className="login-input-pass" placeholder='Password'
+                  onChange={(e) => {
+                    this.setState({
+                      password: e.target.value,
+                    });
+                  }} />
+                  {this.state.isRegisPassShown ? 
+                  <Eye className='login-eye'
+                  onClick={()=>{
+                    this.setState({
+                      isRegisPassShown: false
+                    })
+                  }}/> : 
+                  <EyeSlash className='login-eye'onClick={()=>{
+                    this.setState({
+                      isRegisPassShown: true
+                    })
+                  }}/>}
+              </div>
               <div className="login-checkbox-register">
                 <label htmlFor="customer" className="login-customer">
                   <input type="radio" name="role" id="customer" className="login-customer-input"
