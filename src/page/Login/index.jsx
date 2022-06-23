@@ -22,7 +22,7 @@ export default class Login extends Component {
               <div className="login-button">Login</div>
               <div className="login-checkbox">
                 <label htmlFor="remember-me" className="login-customer">
-                  <input type="checkbox" name="remember-me" id="remember-me" />
+                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
                   Remember me
                 </label>
                 <div className='login-forgot'>Forget your password?</div>
@@ -34,11 +34,11 @@ export default class Login extends Component {
               <input type="text" className="login-input" placeholder='Password' />
               <div className="login-checkbox-register">
                 <label htmlFor="customer" className="login-customer">
-                  <input type="radio" name="role" id="customer" />
+                  <input type="radio" name="role" id="customer" className="login-customer-input"/>
                   I'm Customer
                 </label>
                 <label htmlFor="seller" className="login-customer">
-                  <input type="radio" name="role" id="seller" />
+                  <input type="radio" name="role" id="seller" className="login-customer-input"/>
                   I'm Seller
                 </label>
               </div>
