@@ -144,10 +144,10 @@ class Login extends Component {
                       });
                     })
                     .catch((error) => {
-                      console.log(error)
+                      // console.log(error)
                       this.setState({
                         isError: true,
-                        errorMsg: error.response
+                        errorMsg: error.response.data.err,
                       });
                     });
                 }}>Register</div>

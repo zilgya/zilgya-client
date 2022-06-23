@@ -14,7 +14,7 @@ import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["auth", "user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
