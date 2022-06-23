@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+.container {
+    max-width: 1440px !important;
+}
+
 .logo a {
     display: block;
 }
@@ -387,7 +391,7 @@
 
 .header-icon.cart a span.cart-count {
     position: absolute;
-    top: -15px;
+    top: 0px;
     font-size: 10px;
     width: 25px;
     height: 25px;
@@ -398,4 +402,115 @@
     right: 0;
     border-radius: 50px;
     background-color: #1A1A1A;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    cursor: pointer;
+}
+
+label span {
+    background: #000;
+    border-radius: 10px;
+    height: 7px;
+    margin: 7px 0;
+    transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.hamburger1 {
+    display: -ms-grid;
+    display: grid;
+    justify-items: center;
+    z-index: 120;
+}
+
+.hamburger1 div {
+    background-color: rgb(61, 61, 61);
+    position: relative;
+    width: 40px;
+    height: 5px;
+    margin-top: 7px;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.top {
+    width: 20px !important;
+    margin-left: 23px;
+}
+
+.bottom {
+    width: 20px !important;
+    margin-right: 23px;
+}
+
+#toggle1 {
+    display: none;
+}
+
+#toggle1:checked+.hamburger1 .top {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-top: 22.5px;
+}
+
+#toggle1:checked+.hamburger1 .meat {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+#toggle1:checked+.hamburger1 .bottom {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: -17px;
+}
+
+#toggle1:checked~.menu1 {
+    height: 335px;
+    margin: 43px -157px;
+}
+
+.menu1 {
+    width: 16vw;
+    position: absolute;
+    background-color: #1a1a1a;
+    margin: 0;
+    display: -ms-grid;
+    display: grid;
+    grid-row-gap: 25px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    height: 0px;
+    overflow: hidden;
+    transition: height .4s ease;
+    z-index: 120;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.menu1 a:first-child {
+    margin-top: 40px;
+}
+
+.menu1 a:last-child {
+    margin-bottom: 40px;
+}
+
+.link1 {
+    width: 100%;
+    margin: 0;
+    padding: 10px 40px;
+    font-size: 16px;
+    color: #868686;
+    text-align: left;
+}
+
+.link1:hover {
+    color: #ffffff;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }

@@ -310,6 +310,22 @@
     background-color: #EA4C8A;
 }
 
+.facebook {
+    padding: 3% 5% !important;
+}
+
+.twitter {
+    padding: 3% 4% !important;
+}
+
+.google {
+    padding: 3% 3% !important;
+}
+
+.dribbble {
+    padding: 3% 4% !important;
+}
+
 .footer-nav {
     text-align: center;
 }
