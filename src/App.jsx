@@ -5,9 +5,9 @@ import { PersistGate } from "redux-persist/integration/react";
 // import './App.css';
 import Login from './page/Login';
 import Footer from "./component/Footer"
-// import Navbar from "./component/Navbar"
 import Home from './page/Home';
 import Profile from './page/Profile';
+
 
 
 
