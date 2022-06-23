@@ -4,6 +4,7 @@
 
 .profile-seller-navbar {
   display: flex;
+  justify-content: space-evenly;
   padding: 70px 15% 0px 15%;
   font-family: Arimo;
   font-size: 26px;
@@ -13,9 +14,10 @@
   text-align: left;
 }
 
-.profile-seller-navbar-active{
+.profile-seller-navbar-active {
   color: #1A1A1A;
-  border-bottom: 1px solid #C2C2C2;;
+  border-bottom: 1px solid #C2C2C2;
+  ;
 }
 
 .profile-seller-navbar-inactive {
@@ -23,8 +25,8 @@
 
 }
 
-.profile-seller-navbar-inactive, .profile-seller-navbar-active{
-  margin-right: 50px;
+.profile-seller-navbar-inactive,
+.profile-seller-navbar-active {
   padding: 5px;
   cursor: pointer;
 }

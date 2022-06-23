@@ -404,7 +404,7 @@
     background-color: #1A1A1A;
 }
 
-label {
+.navbar-label {
     display: flex;
     flex-direction: column;
     width: 70px;
