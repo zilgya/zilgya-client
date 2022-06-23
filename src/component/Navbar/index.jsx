@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./navbar.css";
 
+import BannerNav from "../../assets/img/banner-nav.png"
 export default class Navbar extends Component {
   render() {
     return (
@@ -58,7 +59,7 @@ export default class Navbar extends Component {
                           <li>
                             <a href="# ">Shop</a>
                             <ul className="mega-menu">
-                              <li>
+                              <li className="col-md-6 pl-0">
                                 <a href="# " className="item-link">
                                   Other Page
                                 </a>
@@ -77,9 +78,9 @@ export default class Navbar extends Component {
                                   </li>
                                 </ul>
                               </li>
-                              <li className="mega-menu-banner">
+                              <li className="col-md-6 mega-menu-banner">
                                 <a href="# " className="item-link">
-                                  <img src="" alt="banner" />
+                                  <img src={BannerNav} alt="banner" />
                                 </a>
                               </li>
                             </ul>
@@ -94,9 +95,19 @@ export default class Navbar extends Component {
 
                   <div className="col-xl-3 col-lg-6 col-md-6 col-8 d-flex justify-content-end">
                     <div className="header-icon search ">
-                      <a className="search-trigger" href="# ">
-                        <i className="fa fa-search"></i>
-                      </a>
+                    <nav className="search-menu">
+                <ul>
+                  <li>
+                    <p><i className="fa fa-search"></i></p>
+                    <ul className="sub-search-menu">
+                      <li>
+                       <input type="text" placeholder="Search" />
+                      </li>                      
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+                      
                     </div>
                     <div className="header-icon cart ">
                       <a href="# ">
@@ -105,7 +116,7 @@ export default class Navbar extends Component {
                       </a>
                     </div>
                     <div className="header-icon cart ">
-                      <a className="cart-trigger" href="# ">
+                      <a href="# ">
                         <span className="cart-count">3</span>
                         <i className="fa fa-shopping-cart"></i>
                       </a>
