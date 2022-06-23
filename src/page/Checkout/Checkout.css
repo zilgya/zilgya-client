@@ -7,7 +7,8 @@
   background-color: #ececec;
   padding: 5%;
 }
-.co-header-title-container{
+
+.co-header-title-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,4 +36,102 @@
   text-align: center;
   color: #1A1A1A;
 
+}
+
+.co-main-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 30%;
+
+}
+
+.co-main-title {
+  font-family: Arimo;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 37px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-bottom: 15px;
+
+}
+
+.co-input-name,
+.co-payment-dropdown {
+  background: #FFFFFF;
+  border: 1px solid #CECECE;
+  color: #4D4D4D;
+  margin: 5px 0;
+  height: 50px;
+  padding: 10px 15px;
+  border: 1px solid #CECECE;
+}
+
+.co-input-name:focus,
+.co-number-dropdown,
+.co-input-phone-number,
+.co-payment-dropdown {
+  outline: none;
+}
+
+.co-phone-number-container {
+  background: #FFFFFF;
+  border: 1px solid #CECECE;
+  color: #4D4D4D;
+  margin: 5px 0;
+  height: 50px;
+  padding: 10px 15px;
+  border: 1px solid #CECECE;
+}
+
+.co-number-dropdown,
+.co-input-phone-number {
+  border: none;
+}
+
+.co-input-phone-number {
+  padding-left: 10px;
+  width: 80%;
+}
+
+.co-payment-dropdown {
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+
+}
+
+.co-button {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #FFFFFF;
+  background: #1A1A1A;
+  height: 40px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+
+}
+
+.co-button:hover{
+  background: #2b2b2b;
+}
+
+.co-button:active {
+  background: #1A1A1A;
 }
