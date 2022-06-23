@@ -5,6 +5,7 @@ import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
 
 export default class Login extends Component {
+  
   render() {
     return (
       <>
