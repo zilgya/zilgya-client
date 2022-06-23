@@ -8,6 +8,7 @@ import Footer from "./component/Footer"
 import Home from './page/Home';
 import Profile from './page/Profile';
 import Product from './page/Product';
+import ConfirmEmail from './page/Auth/ConfirmEmail';
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/auth' element={<Login />} />
+            <Route path='/auth/confirm/:token' element={<ConfirmEmail />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/product' element={<Product />} />
             <Route path='/footer' element={<Footer />} />

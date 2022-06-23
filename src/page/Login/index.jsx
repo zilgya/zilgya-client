@@ -134,7 +134,7 @@ class Login extends Component {
                   const { email, password, roles_id } = this.state;
                   const body = { email, password, roles_id };
                   axios
-                    .post("http://localhost:8000/auth/new", body)
+                    .post("https://zilgya-api.herokuapp.com/auth/new", body)
                     .then((result) => {
                       console.log(result);
                       this.setState({
