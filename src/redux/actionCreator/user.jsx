@@ -1,9 +1,12 @@
 import axios from "axios";
 
-export const GET_USER_INFO = "GET_USER_INFO";
-export const PATCH_UPDATE_USER = "PATCH_UPDATE_USER";
+import {
+  GET_USER_INFO,
+  PATCH_UPDATE_USER,
+  DEL_USER_INFO,
+} from "./actionString";
 
-export const getUserInfo = ({token}) => {
+export const getUserInfo = ({ token }) => {
   return (dispatch) => {
     //loading
     dispatch({
@@ -12,7 +15,8 @@ export const getUserInfo = ({token}) => {
         loading: true,
         data: [],
         errorMessage: false,
-        isSuccess: false
+        isSuccess: false,
+        isUpdate: false,
       },
     });
     //get api
@@ -22,7 +26,7 @@ export const getUserInfo = ({token}) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      timeout: 3000,
+      timeout: 10000,
     })
       .then((result) => {
         //success get api
@@ -33,6 +37,7 @@ export const getUserInfo = ({token}) => {
             data: result.data.data[0],
             errorMessage: false,
             isSuccess: true,
+            isUpdate: false,
           },
         });
       })
@@ -45,7 +50,8 @@ export const getUserInfo = ({token}) => {
             loading: false,
             data: false,
             errorMessage: error.response,
-            isSuccess: false
+            isSuccess: false,
+            isUpdate: false,
           },
         });
       });
@@ -54,15 +60,13 @@ export const getUserInfo = ({token}) => {
 
 export const updateUser = ({
   token,
+  username,
   email,
-  phone_number,
-  display_name,
-  first_name,
-  last_name,
-  delivery_address,
-  birthday,
   gender,
+  address,
+  description,
   photo,
+  store_name,
 }) => {
   console.log("2. masuk action");
   return (dispatch) => {
@@ -73,25 +77,24 @@ export const updateUser = ({
         loading: true,
         data: [],
         errorMessage: false,
+        isSuccess: false,
       },
     });
     axios({
       method: "PATCH",
-      url: `${process.env.REACT_APP_HOST_API}/user/edit`,
+      url: `${process.env.REACT_APP_HOST_API}/user`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
       data: {
+        username,
         email,
-        phone_number,
-        display_name,
-        first_name,
-        last_name,
-        delivery_address,
-        birthday,
         gender,
+        address,
+        description,
         photo,
+        store_name,
       },
       timeout: 3000,
     })
@@ -104,6 +107,7 @@ export const updateUser = ({
             loading: false,
             data: result.data.data[0],
             errorMessage: false,
+            isSuccess: true,
           },
         });
       })
@@ -114,9 +118,59 @@ export const updateUser = ({
         dispatch({
           type: PATCH_UPDATE_USER,
           payload: {
-            loading: true,
-            data: [],
+            loading: false,
+            data: false,
             errorMessage: error.response,
+            isSuccess: false,
+          },
+        });
+      });
+  };
+};
+
+export const logOutFromServer = ({ token }) => {
+  return (dispatch) => {
+    dispatch({
+      type: DEL_USER_INFO,
+      payload: {
+        loading: true,
+        data: [],
+        errorMessage: false,
+        isSucces: false,
+        isUpdate: false,
+      },
+    });
+    //get api
+    axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_HOST_API}/auth`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      timeout: 3000,
+    })
+      .then((result) => {
+        //success get api
+        dispatch({
+          type: DEL_USER_INFO,
+          payload: {
+            loading: false,
+            data: result.data.data.message,
+            errorMessage: false,
+            isSucces: true,
+            isUpdate: false,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: GET_USER_INFO,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: error.response,
+            isSuccess: false,
+            isUpdate: false,
           },
         });
       });

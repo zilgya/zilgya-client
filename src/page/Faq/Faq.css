@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Open+Sans:ital,wght@0,400;1,700&family=Playfair+Display&display=swap');
+
+*{
+    font-family: 'Arimo', sans-serif;;
+}
+
+.faq-main-content{
+    padding: 5%;
+}
+
+.top-shopping-questions-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-faq-icon{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #D8D8D8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-faq-icon img{
+    width: 30%;
+    height: 30%;
+    
+}
+
+.top-shopping-questions-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-underline{
+    width: 100px;
+    height: auto;
+    border-bottom: 5px solid #D8D8D8;
+    margin: 0px 25px;
+}
+
+.top-shopping-questions-title{
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.body-shopping-questions-wrapper{
+    display: flex;
+}
+
+.body-shopping-questions{
+    width: 50%;
+    padding: 1% 10%;
+}
+
+.body-shopping-questions-title{
+    font-size: 24px;
+    padding: 5% 0%;
+}
+
+.main-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4% 0;
+}
+
+.main-footer-title{
+    font-size: 36px;
+    margin: 1% 0;
+}
+
+.button-contact{
+    width: 100px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width:768px){
+    .top-faq-icon{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid #D8D8D8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .faq-underline{
+        width: 50%;
+        height: auto;
+        border-bottom: 5px solid #D8D8D8;
+        margin: 0px 25px;
+    }
+    
+    .top-shopping-questions-title{
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .body-shopping-questions-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .body-shopping-questions{
+        width: 100%;
+        padding: 1% 0%;
+    }
+}
+

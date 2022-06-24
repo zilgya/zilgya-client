@@ -54,10 +54,6 @@
     margin-bottom: 15px;
 }
 
-.pd-main-content-right {
-    flex: 3;
-}
-
 .pd-main-content-category-value {
     display: flex;
     width: 100%;
@@ -101,7 +97,10 @@
 
 .pd-main-content-right {
     margin: 0% 10%;
+    flex: 3;
+
 }
+
 
 .pd-main-header-right {
     width: 100%;

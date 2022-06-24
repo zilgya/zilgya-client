@@ -104,6 +104,7 @@
   line-height: 28px;
   letter-spacing: 0px;
   text-align: left;
+  cursor: default;
 }
 
 .profile-role {
@@ -156,12 +157,14 @@
   color: #1a1a1a;
   border: none;
 }
+.profile-input:disabled{
+  cursor: default;
+}
 
-.profile-input:focus {
+.profile-input:focus{
+
   outline: none;
   border-bottom: 2px solid #1a1a1a;
-  /* border-color: #1a1a1a; */
-  /* border-bottom: #1a1a1a; */
 }
 
 .profile-input-edit {
@@ -209,4 +212,32 @@
 
 .profile-logout-pict {
   margin: 10px;
+}
+.profile-save-button{
+  width: 200px;
+  height: 50px;
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #3c3c3c;
+  color: #ffffff;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+.profile-save-button:hover {
+  background: #2b2b2b;
+}
+
+.profile-save-button:active {
+  background: #1a1a1a;
 }
