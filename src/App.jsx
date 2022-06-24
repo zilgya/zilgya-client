@@ -9,6 +9,10 @@ import Profile from './page/Profile';
 import Product from './page/Product';
 import Cart from './page/Cart';
 import Checkout from './page/Checkout';
+import ProductDetail from './page/ProductDetail';
+import Wishlist from './page/Wishlist';
+import Favorite from './page/Favorite';
+import OrderTrack from './page/OrderTrack';
 
 
 
@@ -22,10 +26,14 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/auth' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/productdetail/' element={<ProductDetail />} />
             <Route path='/product' element={<Product />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/product' element={<Product />} />
             <Route path='/checkout' element={<Checkout />} />
+            <Route path='/wishlist' element={<Wishlist />} />
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='/track' element={<OrderTrack />} />
           </Routes>
         </Router>
       </PersistGate>

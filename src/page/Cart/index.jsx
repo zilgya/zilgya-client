@@ -29,14 +29,12 @@ class Cart extends Component {
                             <div className='cart-main-content-left-title-total'>TOTAL</div>
                         </div>
                         <div className='cart-main-content-left-body'>
-                            <div className="cart-main-content-product-wrapper-products">
+                            <div className='cart-main-content-product-delete-img-name'>
                                 <div className='cart-main-content-delete-product'>X</div>
                                 <img src={CartProductOne} alt="product-img" />
                                 <div className='cart-main-content-product-name'>Fabric Mid Century Chair</div>
                             </div>
-                            <div className='cart-main-content-product-wrapper-price'>
-                                <div className='cart-main-content-product-price'>$10.50</div>
-                            </div>
+                            <div className='cart-main-content-product-price'>$10.50</div>
                             <div className='cart-main-content-product-wrapper-quantity'>
                                 <div>-</div>
                                 <div className='cart-main-content-product-quantity'>02</div>

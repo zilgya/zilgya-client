@@ -13,10 +13,11 @@ export default class Footer extends Component {
                   <div className="inner">
                     <div className="logo">
                       <a href="/">
-                        <img
+                        <h1 style={{ color: "white"}}>ZILGYA</h1>
+                        {/* <img
                           src="assets/images/logo-white.png"
                           alt="logo white"
-                        />
+                        /> */}
                       </a>
                     </div>
                     <div className="footer-content">
