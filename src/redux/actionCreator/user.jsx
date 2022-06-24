@@ -26,7 +26,7 @@ export const getUserInfo = ({ token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      timeout: 3000,
+      timeout: 10000,
     })
       .then((result) => {
         //success get api
