@@ -14,6 +14,8 @@ import Wishlist from './page/Wishlist';
 import Favorite from './page/Favorite';
 import OrderTrack from './page/OrderTrack';
 import Faq from './page/Faq';
+import MyProduct from './page/MyProduct';
+import SellProduct from './page/SellProduct';
 
 
 
@@ -36,6 +38,8 @@ function App() {
             <Route path='/favorite' element={<Favorite />} />
             <Route path='/track' element={<OrderTrack />} />
             <Route path='/faq' element={<Faq />} />
+            <Route path='/seller/myproduct' element={<MyProduct />} />
+            <Route path='/seller/sellproduct' element={<SellProduct />} />
           </Routes>
         </Router>
       </PersistGate>
