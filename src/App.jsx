@@ -15,6 +15,8 @@ import Favorite from './page/Favorite';
 import OrderTrack from './page/OrderTrack';
 import Blog from './page/Blog';
 import Faq from './page/Faq';
+import PageNotFound from './page/PageNotFound';
+import ComingSoon from './page/CommingSoon';
 import MyProduct from './page/MyProduct';
 import SellProduct from './page/SellProduct';
 import MyOrder from './page/MyOrder';
@@ -41,9 +43,11 @@ function App() {
             <Route path='/favorite' element={<Favorite />} />
             <Route path='/track' element={<OrderTrack />} />
             <Route path='/faq' element={<Faq />} />
+            <Route path='/comingsoon' element={<ComingSoon />} />
             <Route path='/seller/myproduct' element={<MyProduct />} />
             <Route path='/seller/sellproduct' element={<SellProduct />} />
             <Route path='/seller/myorder' element={<MyOrder />} />
+            <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Router>
       </PersistGate>
