@@ -15,9 +15,11 @@ import {
 } from "../../redux/actionCreator/user";
 
 import { logoutAction } from "../../redux/actionCreator/auth";
+import { Navigate } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.auth.userInfo,
     token: state.auth.userInfo.token,
     role: Number(state.auth.userInfo.roles_id),
     userData: state.user.userResult,
@@ -43,17 +45,17 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isEdit: false,
-      username: null,
-      email: null,
-      gender: null,
-      address: null,
-      description: null,
+      username: this.props.userData.username,
+      email: this.props.userData.email,
+      gender: this.props.userData.gender,
+      address: this.props.userData.address,
+      description: this.props.userData.description,
+      store_name: this.props.userData.store_name,
       photo: null,
-      store_name: null,
     };
   }
   handleImage = (e) => {
@@ -90,18 +92,6 @@ class Profile extends Component {
     });
   };
 
-  handleGetuserinfo = () => {
-    const { token } = this.props;
-    this.props.getUser({ token });
-    this.setState({
-      username: this.props.userData.username,
-      email: this.props.userData.email,
-      gender: this.props.userData.gender,
-      address: this.props.userData.address,
-      description: this.props.userData.description,
-      store_name: this.props.userData.store_name,
-    });
-  };
   handleLogout = async () => {
     try {
       const token = await this.props.token;
@@ -115,14 +105,14 @@ class Profile extends Component {
     }
   };
 
-  componentDidMount() {
-    this.handleGetuserinfo();
-  }
   render() {
     console.log(this.state);
-    const { role, userData } = this.props;
+    const { role, userData, auth } = this.props;
     const { isEdit } = this.state;
 
+    if (auth === false) {
+      return <Navigate to="/" />;
+    }
     // role 1 = cust
     // role 2 seller
     return (
