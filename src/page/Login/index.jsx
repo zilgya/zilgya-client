@@ -35,75 +35,75 @@ class Login extends Component {
     return (
       <>
         <Navbar />
-        <>
-          <main className="login-global-container">
-            <div className="login-header">
-              <div className="login-header-title">My Account</div>
-              <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
-            </div>
-            <div className="login-main-container">
-              <form className="login-login-section">
-                <div className="login-register-title">Login</div>
+        <main className="login-global-container">
+          <div className="login-header">
+            <div className="login-header-title">My Account</div>
+            <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
+          </div>
+          <div className="login-main-container">
+            <form className="login-login-section">
+              <div className="login-register-title">Login</div>
+              <input
+                type="text"
+                className="login-input"
+                placeholder="User name or email address"
+                onChange={(e) => {
+                  this.setState({
+                    email: e.target.value,
+                  });
+                }}
+              />
+              <div className="login-input-pass-container">
                 <input
-                  type="text"
-                  className="login-input"
-                  placeholder="User name or email address"
+                  type={this.state.isLoginPassShown ? "text" : "password"}
+                  className="login-input-pass"
+                  placeholder="Password"
                   onChange={(e) => {
                     this.setState({
-                      email: e.target.value,
+                      password: e.target.value,
                     });
                   }}
                 />
-                <div className="login-input-pass-container">
-                  <input
-                    type={this.state.isLoginPassShown ? "text" : "password"}
-                    className="login-input-pass"
-                    placeholder="Password"
-                    onChange={(e) => {
+                {this.state.isLoginPassShown ? (
+                  <Eye
+                    className="login-eye"
+                    onClick={() => {
                       this.setState({
-                        password: e.target.value,
+                        isLoginPassShown: false,
                       });
                     }}
                   />
-                  {this.state.isLoginPassShown ? (
-                    <Eye
-                      className="login-eye"
-                      onClick={() => {
-                        this.setState({
-                          isLoginPassShown: false,
-                        });
-                      }}
-                    />
-                  ) : (
-                    <EyeSlash
-                      className="login-eye"
-                      onClick={() => {
-                        this.setState({
-                          isLoginPassShown: true,
-                        });
-                      }}
-                    />
-                  )}
-                </div>
-                <div
-                  className="login-button"
-                  onClick={() => {
-                    const { email, password } = this.state;
-                    const body = { email, password };
-                    this.props.dispatch(loginAction(body));
-                  }}
-                >
-                  Login
-                </div>
-                <div className="login-checkbox">
-                  <label htmlFor="remember-me" className="login-customer">
-                    <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
-                    Remember me
-                  </label>
-                  <div className="login-forgot">Forget your password?</div>
-                </div>
-              </form>
-            </div>
+                ) : (
+                  <EyeSlash
+                    className="login-eye"
+                    onClick={() => {
+                      this.setState({
+                        isLoginPassShown: true,
+                      });
+                    }}
+                  />
+                )}
+              </div>
+              <input
+                type="submit"
+                className="login-button"
+                value="Login"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const { email, password } = this.state;
+                  const body = { email, password };
+                  this.props.dispatch(loginAction(body));
+                }}
+              />
+
+              <div className="login-checkbox">
+                <label htmlFor="remember-me" className="login-customer">
+                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
+                  Remember me
+                </label>
+                <div className="login-forgot">Forget your password?</div>
+              </div>
+            </form>
             <form className="login-register-section">
               <div className="login-register-title">Create Account</div>
               <input
@@ -199,12 +199,10 @@ class Login extends Component {
                       });
                     });
                 }}
-              >
-                Register
-              </input>
+              />
             </form>
-          </main>
-        </>
+          </div>
+        </main>
         <Footer />
       </>
     );

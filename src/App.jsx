@@ -20,6 +20,7 @@ import ComingSoon from "./page/CommingSoon";
 import MyProduct from "./page/MyProduct";
 import SellProduct from "./page/SellProduct";
 import MyOrder from "./page/MyOrder";
+import ConfirmEmail from "./page/Auth/ConfirmEmail";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Login />} />
+            <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/productdetail" element={<ProductDetail />} />
             <Route path="/blog" element={<Blog />} />
