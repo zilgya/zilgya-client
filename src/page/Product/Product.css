@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Open+Sans:ital,wght@0,400;1,700&family=Playfair+Display&display=swap');
+* {
+    font-family: 'Arimo', sans-serif;
+    ;
+}
+
+.pd-banner-img-background {
+    width: 100%;
+    height: 300px;
+    /* background-image: url(../../assets/img/banner-product.png); */
+    background-position: 50% 50%;
+    background-size: cover;
+    padding: 5% 5%;
+    /* opacity: 5%; */
+}
+
+.pd-banner-content-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pd-banner-content-body h1 {
+    font-weight: 400;
+    font-size: 56px;
+}
+
+.container-main-content {
+    padding: 5% 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pd-main-content-left {
+    flex: 1;
+}
+
+.pd-category-left-content {
+    margin-bottom: 20px;
+}
+
+.pd-price-left-content {
+    margin-bottom: 20px;
+}
+
+.pd-category-title {
+    font-family: Arimo;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.pd-main-content-category-value {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    justify-content: space-between;
+    /* margin: 20% 5%; */
+}
+
+.pd-button-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.input-brands-left-content {
+    width: 100%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.product-brand-input {
+    width: 15px;
+    height: 15px;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+
+.product-brand-label {
+    width: 80%;
+    margin-bottom: 0;
+}
+
+
+/* RIGHT CONTENT */
+
+.pd-main-content-right {
+    margin: 0% 10%;
+    flex: 3;
+
+}
+
+
+.pd-main-header-right {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-product {
+    margin: 10px 0;
+    border: none;
+}
+
+.card-product-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/* SORT MENU */
+
+.sort-menu>ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.sort-menu>ul>li {
+    position: relative;
+    margin: 0 10px;
+    padding: 0 25px;
+    list-style: none;
+}
+
+.sort-menu>ul>li::before {
+    content: "";
+    font-family: "FontAwesome";
+    font-size: 18px;
+    color: inherit;
+    font-weight: 600;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top: 30%;
+}
+
+.sort-menu>ul>li>p {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    height: 30px;
+    text-decoration: none;
+}
+
+.sort-menu>ul>li>p::after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* top: 60%; */
+    width: 20%;
+    /* border-bottom: 2px solid; */
+    content: "";
+    z-index: 1;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.sort-menu>ul>li:hover>.sub-sort-menu {
+    top: 100%;
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+}
+
+.sort-menu>ul>li:hover>.mega-menu {
+    margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+}
+
+.sort-menu>ul>li:last-child .sub-sort-menu {
+    left: auto;
+    right: 0;
+}
+
+.sort-menu>ul>li:last-child .sub-sort-menu .sub-sort-menu .sub-sort-menu {
+    left: 100%;
+    right: auto;
+}
+
+.sort-menu>ul>li:last-child .sub-sort-menu .sub-sort-menu .sub-sort-menu .sub-sort-menu {
+    left: auto;
+    right: 100%;
+}
+
+.sort-menu>ul>li:nth-last-child(-n+3) .sub-sort-menu .sub-sort-menu {
+    right: auto;
+}
+
+.sort-menu>ul>li:nth-last-child(-n+3) .sub-sort-menu .sub-sort-menu .sub-sort-menu {
+    left: 100%;
+    right: auto;
+}
+
+.sort-menu>ul>li.active,
+.sort-menu>ul>li:hover {
+    border-bottom-color: #1A1A1A;
+}
+
+.sort-menu>ul>li.active>p,
+.sort-menu>ul>li:hover>p {
+    color: #1a1a1a;
+}
+
+.sort-menu>ul>li.active>p::after,
+.sort-menu>ul>li:hover>p::after {
+    width: 100%;
+    opacity: 0.8;
+}
+
+.sort-menu.sort-menu-10>ul>li:first-child {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.sort-menu.sort-menu-10>ul>li>p {
+    height: 75px;
+}
+
+.sub-sort-menu {
+    position: absolute;
+    left: 0;
+    top: 120%;
+    background-color: #1a1a1a;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    width: 260px;
+    padding: 30px 0;
+    -webkit-box-shadow: 0px 1px 24px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 1px 24px 0px rgba(0, 0, 0, 0.09);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sub-sort-menu>li {
+    position: relative;
+    padding: 0px 40px;
+    color: #B4B4B4;
+    list-style: none;
+}
+
+.sub-sort-menu>li>p {
+    color: #B4B4B4;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 0px;
+    line-height: 20px;
+    display: block;
+}
+
+.sub-sort-menu>li.has-dropdown>p::after {
+    content: "";
+    font-family: Fontawesome;
+    line-height: 20px;
+    float: right;
+}
+
+.sub-sort-menu>li.active>p {
+    color: #1A1A1A;
+}
+
+.sub-sort-menu>li .sub-sort-menu {
+    left: 100%;
+    top: 0;
+}
+
+.sub-sort-menu>li:hover>p {
+    color: #ffffff;
+}
+
+.sub-sort-menu>li:hover>.sub-sort-menu {
+    margin-top: -3px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+}
+
+.sub-sort-menu>li .sub-sort-menu {
+    left: 100%;
+    margin-left: 0;
+    top: 0;
+}
+
+.sub-sort-menu>li .sub-sort-menu .sub-sort-menu {
+    left: auto;
+    right: 100%;
+}
+
+.sub-sort-menu>li .sub-sort-menu .sub-sort-menu .sub-sort-menu {
+    left: 100%;
+    right: auto;
+}
