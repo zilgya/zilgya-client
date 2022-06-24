@@ -16,7 +16,7 @@ import OrderTrack from './page/OrderTrack';
 import Blog from './page/Blog';
 import Faq from './page/Faq';
 import PageNotFound from './page/PageNotFound';
-import ComingSoon from './page/CommingSoon';
+import ComingSoon from './page/ComingSoon';
 import MyProduct from './page/MyProduct';
 import SellProduct from './page/SellProduct';
 import MyOrder from './page/MyOrder';

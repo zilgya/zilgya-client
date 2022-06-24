@@ -175,8 +175,8 @@
 .sp-photo-preview{
   width: 110px;
   height: 110px;
-  background-color: red;
   margin: 10px;
+  cursor: pointer;
 }
 
 .sp-photo-container{
@@ -186,4 +186,11 @@
 
 .sp-photo-preview-row{
   display: flex;
+}
+
+.sp-photo-preview-img{
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
