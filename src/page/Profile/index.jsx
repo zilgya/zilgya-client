@@ -16,7 +16,7 @@ import {
 } from "../../redux/actionCreator/user";
 
 import { logoutAction } from "../../redux/actionCreator/auth";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -127,12 +127,18 @@ class Profile extends Component {
           </div>
           {role === 2 ? (
             <div className="profile-seller-navbar">
-              <div className="profile-seller-navbar-active">Profile</div>
-              <div className="profile-seller-navbar-inactive">My Product</div>
-              <div className="profile-seller-navbar-inactive">
-                Selling Product
-              </div>
-              <div className="profile-seller-navbar-inactive">My Order</div>
+              <Link to="/profile">
+                <div className="profile-seller-navbar-active">Profile</div>
+              </Link>
+              <Link to="/seller/myproduct">
+                <div className="profile-seller-navbar-inactive">My Product</div>
+              </Link>
+              <Link to="/seller/sellproduct">
+                <div className="profile-seller-navbar-inactive">Selling Product</div>
+              </Link>
+              <Link to="/seller/myorder">
+                <div className="profile-seller-navbar-inactive">My Order</div>
+              </Link>
             </div>
           ) : (
             <></>

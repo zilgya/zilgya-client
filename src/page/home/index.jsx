@@ -18,7 +18,7 @@ import FooterImgFour from '../../assets/img/home-img-footer-4.png'
 
 
 // import css
-import './home.css'
+import './Home.css'
 
 class Home extends Component {
     render() {
