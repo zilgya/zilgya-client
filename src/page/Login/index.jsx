@@ -31,8 +31,8 @@ class Login extends Component {
 
   }
   render() {
-    const { isSuccess } = this.props
-    if (isSuccess === true)
+    const { userInfo } = this.props
+    if (userInfo)
       return <Navigate to="/" />
     return (
       <>
@@ -161,7 +161,7 @@ class Login extends Component {
 }
 const mapStateToProps = (reduxState) => {
   const { auth: { userInfo, isSuccess, err } } = reduxState
-  return { userInfo, isSuccess, err }
+  return { userInfo, isSuccess, err  }
 }
 
 export default connect(mapStateToProps)(Login)
