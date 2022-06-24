@@ -1,11 +1,15 @@
-import { GET_USER_INFO, PATCH_UPDATE_USER, DEL_USER_INFO } from "../actionCreator/actionString";
+import {
+  GET_USER_INFO,
+  PATCH_UPDATE_USER,
+  DEL_USER_INFO,
+} from "../actionCreator/actionString";
 
 const initialState = {
   userResult: [],
-  userInfo: null,
+  userInfo: false,
   isLoading: false,
-  err: null,
-  isSuccess: null,
+  err: false,
+  isSuccess: false,
 
   updateResult: false,
 };

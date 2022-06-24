@@ -8,12 +8,12 @@ import Home from "./page/Home";
 import Profile from "./page/Profile";
 import Product from "./page/Product";
 import Cart from "./page/Cart";
-import ConfirmEmail from "./page/Auth/ConfirmEmail";
 import Checkout from "./page/Checkout";
 import ProductDetail from "./page/ProductDetail";
 import Wishlist from "./page/Wishlist";
 import Favorite from "./page/Favorite";
 import OrderTrack from "./page/OrderTrack";
+import Faq from "./page/Faq";
 
 function App() {
   return (
@@ -23,15 +23,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Login />} />
-            <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/productdetail/" element={<ProductDetail />} />
             <Route path="/product" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/product" element={<Product />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/favorite" element={<Favorite />} />
             <Route path="/track" element={<OrderTrack />} />
+            <Route path="/faq" element={<Faq />} />
           </Routes>
         </Router>
       </PersistGate>
