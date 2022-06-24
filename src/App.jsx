@@ -3,12 +3,6 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 // import './App.css';
-<<<<<<< HEAD
-import Login from "./page/Login";
-import Footer from "./component/Footer";
-import Home from "./page/Home";
-import Profile from "./page/Profile";
-=======
 import Login from './page/Login';
 import Home from './page/Home';
 import Profile from './page/Profile';
@@ -22,7 +16,6 @@ import OrderTrack from './page/OrderTrack';
 
 
 
->>>>>>> bc6006c0ad7378de9b692180ea25e9059524b6e3
 
 function App() {
   return (
