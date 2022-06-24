@@ -7,11 +7,13 @@ import Logout from "../../assets/img/logout.png";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import { connect } from "react-redux";
+
 import {
   getUserInfo,
   logOutFromServer,
   updateUser,
 } from "../../redux/actionCreator/user";
+
 import { logoutAction } from "../../redux/actionCreator/auth";
 
 const mapStateToProps = (state) => {
