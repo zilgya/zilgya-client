@@ -7,6 +7,7 @@ import Login from './page/Login';
 import Home from './page/Home';
 import Profile from './page/Profile';
 import Product from './page/Product';
+import Cart from './page/Cart';
 import Checkout from './page/Checkout';
 import ProductDetail from './page/ProductDetail';
 import Wishlist from './page/Wishlist';
@@ -26,6 +27,8 @@ function App() {
             <Route path='/auth' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/productdetail/' element={<ProductDetail />} />
+            <Route path='/product' element={<Product />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='/product' element={<Product />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/wishlist' element={<Wishlist />} />
