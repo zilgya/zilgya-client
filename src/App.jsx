@@ -12,6 +12,7 @@ import ProductDetail from './page/ProductDetail';
 import Wishlist from './page/Wishlist';
 import Favorite from './page/Favorite';
 import OrderTrack from './page/OrderTrack';
+import Blog from './page/Blog';
 
 
 
@@ -25,7 +26,8 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/auth' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/productdetail/' element={<ProductDetail />} />
+            <Route path='/productdetail' element={<ProductDetail />} />
+            <Route path='/blog' element={<Blog />} />
             <Route path='/product' element={<Product />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/wishlist' element={<Wishlist />} />
