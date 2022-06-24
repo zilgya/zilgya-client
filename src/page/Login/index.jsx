@@ -35,74 +35,76 @@ class Login extends Component {
     return (
       <>
         <Navbar />
-        <main className="login-global-container">
-          <div className="login-header">
-            <div className="login-header-title">My Account</div>
-            <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
-          </div>
-          <div className="login-main-container">
-            <div className="login-login-section">
-              <div className="login-register-title">Login</div>
-              <input
-                type="text"
-                className="login-input"
-                placeholder="User name or email address"
-                onChange={(e) => {
-                  this.setState({
-                    email: e.target.value,
-                  });
-                }}
-              />
-              <div className="login-input-pass-container">
+        <>
+          <main className="login-global-container">
+            <div className="login-header">
+              <div className="login-header-title">My Account</div>
+              <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
+            </div>
+            <div className="login-main-container">
+              <form className="login-login-section">
+                <div className="login-register-title">Login</div>
                 <input
-                  type={this.state.isLoginPassShown ? "text" : "password"}
-                  className="login-input-pass"
-                  placeholder="Password"
+                  type="text"
+                  className="login-input"
+                  placeholder="User name or email address"
                   onChange={(e) => {
                     this.setState({
-                      password: e.target.value,
+                      email: e.target.value,
                     });
                   }}
                 />
-                {this.state.isLoginPassShown ? (
-                  <Eye
-                    className="login-eye"
-                    onClick={() => {
+                <div className="login-input-pass-container">
+                  <input
+                    type={this.state.isLoginPassShown ? "text" : "password"}
+                    className="login-input-pass"
+                    placeholder="Password"
+                    onChange={(e) => {
                       this.setState({
-                        isLoginPassShown: false,
+                        password: e.target.value,
                       });
                     }}
                   />
-                ) : (
-                  <EyeSlash
-                    className="login-eye"
-                    onClick={() => {
-                      this.setState({
-                        isLoginPassShown: true,
-                      });
-                    }}
-                  />
-                )}
-              </div>
-              <div
-                className="login-button"
-                onClick={() => {
-                  const { email, password } = this.state;
-                  const body = { email, password };
-                  this.props.dispatch(loginAction(body));
-                }}
-              >
-                Login
-              </div>
-              <div className="login-checkbox">
-                <label htmlFor="remember-me" className="login-customer">
-                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
-                  Remember me
-                </label>
-                <div className="login-forgot">Forget your password?</div>
-              </div>
+                  {this.state.isLoginPassShown ? (
+                    <Eye
+                      className="login-eye"
+                      onClick={() => {
+                        this.setState({
+                          isLoginPassShown: false,
+                        });
+                      }}
+                    />
+                  ) : (
+                    <EyeSlash
+                      className="login-eye"
+                      onClick={() => {
+                        this.setState({
+                          isLoginPassShown: true,
+                        });
+                      }}
+                    />
+                  )}
+                </div>
+                <div
+                  className="login-button"
+                  onClick={() => {
+                    const { email, password } = this.state;
+                    const body = { email, password };
+                    this.props.dispatch(loginAction(body));
+                  }}
+                >
+                  Login
+                </div>
+                <div className="login-checkbox">
+                  <label htmlFor="remember-me" className="login-customer">
+                    <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
+                    Remember me
+                  </label>
+                  <div className="login-forgot">Forget your password?</div>
+                </div>
+              </form>
             </div>
-            <div className="login-register-section">
+            <form className="login-register-section">
               <div className="login-register-title">Create Account</div>
               <input
                 type="text"
@@ -171,9 +173,12 @@ class Login extends Component {
                   I'm Seller
                 </label>
               </div>
-              <div
+              <input
+                type="submit"
                 className="login-button"
-                onClick={() => {
+                value="Register"
+                onClick={(e) => {
+                  e.preventDefault();
                   const { email, password, roles_id } = this.state;
                   const body = { email, password, roles_id };
                   axios
@@ -196,10 +201,10 @@ class Login extends Component {
                 }}
               >
                 Register
-              </div>
-            </div>
-          </div>
-        </main>
+              </input>
+            </form>
+          </main>
+        </>
         <Footer />
       </>
     );

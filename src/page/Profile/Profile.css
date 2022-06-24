@@ -14,6 +14,10 @@
   text-align: left;
 }
 
+.profile-seller-navbar a:hover{
+  text-decoration: none;
+}
+
 .profile-seller-navbar-active {
   color: #1a1a1a;
   border-bottom: 1px solid #c2c2c2;
@@ -235,7 +239,7 @@
   -o-user-select: none;
 }
 .profile-save-button:hover {
-  background: #1a1a1a;
+  background: #2b2b2b;
 }
 
 .profile-save-button:active {

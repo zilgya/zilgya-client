@@ -49,7 +49,7 @@ export class DescTab extends Component {
                               </span>
                             </li>
                           </ul>
-                          <p className="p-4">
+                          <p className="py-4">
                             Nunc lacus elit, faucibus ac laoreet sed, dapibus ac
                             mi. Maecenas eu ante a elit tempus fermentum.
                             Aliquam commodo tincidunt semper. Phasellus
@@ -72,7 +72,7 @@ export class DescTab extends Component {
                           <img src={CusSatu} alt="Draven Images" />
                         </div>
 
-                        <div className="flex-row p-2">
+                        <div className="flex-row p-2 review-rspn">
                           <p>
                             “Theme is very flexible and easy to use. Perfect for
                             us. Customer support has been excellent and answered
@@ -88,7 +88,7 @@ export class DescTab extends Component {
                           <img src={CusSatu} alt="Draven Images" />
                         </div>
 
-                        <div className="flex-row p-2">
+                        <div className="flex-row p-2 review-rspn">
                           <p>
                             “Theme is very flexible and easy to use. Perfect for
                             us. Customer support has been excellent and answered

@@ -1,0 +1,30 @@
+
+.sp-delete-button {
+  font-family: Arimo;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+  background: #d94141;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.sp-delete-button:hover {
+  background: #d63030;
+}
+
+.sp-delete-button:active {
+  background: #d94141;
+}

@@ -160,6 +160,30 @@ export class ProductDetail extends Component {
                 </li>
               </ul>
               <DescTab />
+              <section>
+                <h1 className="text-center title-related ">Related Product</h1>
+                <div className="d-flex d-flex justify-content-around">
+                  <div className="flex-row d-flex justify-content-center related-content">
+                    <div className="col-md-4">
+                      <img src={ProductSmallEnam} alt="related-product" />
+                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <p className="p-related">$765.99</p>
+                    </div>
+                    <div className="p-2 padd-rspn"></div>
+                    <div className="col-md-4">
+                      <img src={ProductSmallEnam} alt="related-product" />
+                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <p className="p-related">$765.99</p>
+                    </div>
+                    <div className="p-2 padd-rspn"></div>
+                    <div className="col-md-4">
+                      <img src={ProductSmallEnam} alt="related-product" />
+                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <p className="p-related">$765.99</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           </section>
         </main>
