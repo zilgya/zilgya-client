@@ -14,6 +14,8 @@ import Wishlist from './page/Wishlist';
 import Favorite from './page/Favorite';
 import OrderTrack from './page/OrderTrack';
 import Faq from './page/Faq';
+import PageNotFound from './page/PageNotFound';
+import ComingSoon from './page/CommingSoon';
 
 
 
@@ -36,6 +38,9 @@ function App() {
             <Route path='/favorite' element={<Favorite />} />
             <Route path='/track' element={<OrderTrack />} />
             <Route path='/faq' element={<Faq />} />
+            <Route path='/pnf' element={<PageNotFound />} />
+            <Route path='/comingsoon' element={<ComingSoon />} />
+
           </Routes>
         </Router>
       </PersistGate>
