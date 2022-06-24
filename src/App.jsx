@@ -17,6 +17,7 @@ import Blog from './page/Blog';
 import Faq from './page/Faq';
 import MyProduct from './page/MyProduct';
 import SellProduct from './page/SellProduct';
+import MyOrder from './page/MyOrder';
 
 
 
@@ -42,6 +43,7 @@ function App() {
             <Route path='/faq' element={<Faq />} />
             <Route path='/seller/myproduct' element={<MyProduct />} />
             <Route path='/seller/sellproduct' element={<SellProduct />} />
+            <Route path='/seller/myorder' element={<MyOrder />} />
           </Routes>
         </Router>
       </PersistGate>
