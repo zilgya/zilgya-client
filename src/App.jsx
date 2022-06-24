@@ -30,13 +30,6 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Routes>
-<<<<<<< HEAD
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/footer" element={<Footer />} />
-            {/* <Route path='/navbar' element={<Navbar />} /> */}
-=======
             <Route path='/' element={<Home />} />
             <Route path='/auth' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
@@ -48,7 +41,6 @@ function App() {
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/favorite' element={<Favorite />} />
             <Route path='/track' element={<OrderTrack />} />
->>>>>>> bc6006c0ad7378de9b692180ea25e9059524b6e3
           </Routes>
         </Router>
       </PersistGate>
