@@ -9,7 +9,7 @@ import MenuAfterLogin from "./MenuAfterLogin";
 import MenuDefault from "./MenuDefault";
 
 const Navbar = () => {
-  const loginInfo = useSelector((state) => state.auth.userInfo);
+  const token = useSelector((state)=> state.auth.token)
  
   return (
     <>
@@ -140,7 +140,7 @@ const Navbar = () => {
                         <div className="meat"></div>
                         <div className="bottom"></div>
                       </label>
-                      {loginInfo ? (
+                      {token ? (
                         <MenuAfterLogin/>
                       ) : (
                         <MenuDefault/>

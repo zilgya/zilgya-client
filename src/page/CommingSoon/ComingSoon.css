@@ -7,7 +7,7 @@
 .black-theme{
     background-color: black;
     color: white;
-    height: 800px;
+    /* height: 100%; */
 }
 
 .cs-wrapper{

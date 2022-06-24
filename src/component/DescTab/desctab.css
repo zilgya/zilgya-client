@@ -100,6 +100,7 @@
 }
 
 .submit-btn-send {
+    cursor: pointer;
     width: 58px;
     line-height: 0px;
     font-size: 16px;
@@ -128,4 +129,37 @@
 
 .tab-item-wrapper {
     margin: 0 50px;
+}
+
+
+/*Responsive*/
+
+@media (max-width: 1024px) {
+    .nav-tabs .nav-link {
+        font-size: 20px;
+    }
+    .nav-tabs .nav-link.active {
+        padding-bottom: 15px;
+    }
+    .banner>img {
+        width: 400px;
+        height: 255px;
+    }
+    .decription-content {
+        line-height: 19px;
+        padding: 0 34px 0 30px;
+        font-size: 12px;
+    }
+    .list-container {
+        margin: 0 80px 0 33px !important;
+    }
+    .review-rspn {
+        padding: 0px 55px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        font-size: 15px;
+    }
 }
