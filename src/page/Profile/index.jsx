@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import {
   getUserInfo,
   logOutFromServer,
+  resetUserState,
   updateUser,
 } from "../../redux/actionCreator/user";
 
@@ -20,7 +21,7 @@ import { Navigate } from "react-router-dom";
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.userInfo,
-    token: state.auth.userInfo.token,
+    token: state.auth.token,
     role: Number(state.auth.userInfo.roles_id),
     userData: state.user.userResult,
     userUpdate: state.user.updateResult,
@@ -40,6 +41,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     logOutServer: (data) => {
       dispatch(logOutFromServer(data));
+    },
+    resetUser: () => {
+      dispatch(resetUserState());
     },
   };
 };
@@ -93,24 +97,20 @@ class Profile extends Component {
   };
 
   handleLogout = async () => {
-    try {
-      const token = await this.props.token;
-      if (token) {
-        this.props.logOutServer({ token: token });
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
+    const token = await this.props.token;
+    await Promise.all([this.props.logOutServer({ token: token })]);
+    setTimeout(() => {
       this.props.logOutPersist();
-    }
+      this.props.resetUser();
+    }, 3000);
   };
 
   render() {
     console.log(this.state);
-    const { role, userData, auth } = this.props;
+    const { role, userData, token } = this.props;
     const { isEdit } = this.state;
 
-    if (auth === false) {
+    if (!token) {
       return <Navigate to="/" />;
     }
     // role 1 = cust

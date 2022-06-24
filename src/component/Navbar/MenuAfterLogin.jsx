@@ -1,29 +1,36 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo, logOutFromServer } from "../../redux/actionCreator/user";
+import {
+  getUserInfo,
+  logOutFromServer,
+  resetUserState,
+} from "../../redux/actionCreator/user";
 import { logoutAction } from "../../redux/actionCreator/auth";
 
 function MenuAfterLogin() {
   const loginInfo = useSelector((state) => state.auth.userInfo);
+  const loginFail = useSelector((state) => state.user.err);
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    try {
-      const token = await loginInfo.token;
-      if (token) {
-        dispatch(logOutFromServer());
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
+    await Promise.all([dispatch(logOutFromServer({ token: token }))]).then(
+      setTimeout(() => {
+        dispatch(logoutAction());
+        dispatch(resetUserState());
+      }, 3000)
+    );
+  };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserInfo({ token: token }));
+    }
+    if (loginFail === "You need to Sign in again") {
       dispatch(logoutAction());
     }
-  };
-  useEffect(() => {
-    const token = loginInfo.token;
-    dispatch(getUserInfo({ token: token }));
-  }, [dispatch, loginInfo.token]);
+  }, [dispatch, loginFail, loginInfo.token, token]);
   return (
     <>
       <nav className="menu1 menu-after-login">

@@ -2,6 +2,7 @@ import {
   GET_USER_INFO,
   PATCH_UPDATE_USER,
   DEL_USER_INFO,
+  RESET_USER_STATE,
 } from "../actionCreator/actionString";
 
 const initialState = {
@@ -43,6 +44,10 @@ const UserReducer = (prevState = initialState, action) => {
         isSuccess: action.payload.errorMessage,
         err: action.payload.errorMessage,
       };
+      case RESET_USER_STATE:
+        return{
+          ...initialState
+        }
     default:
       return prevState;
   }

@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   userInfo: false,
+  token: false,
   isLoading: false,
   err: false,
   isSuccess: false,
@@ -24,6 +25,7 @@ const authReducer = (prevState = initialState, action) => {
         ...prevState,
         isLoading: false,
         userInfo: action.payload.data.data,
+        token: action.payload.data.data.token,
         isSuccess: true,
         isLoggedIn: true,
       };
@@ -37,7 +39,7 @@ const authReducer = (prevState = initialState, action) => {
       };
 
     case logoutString:
-      return { ...initialState };
+      return { ...initialState }
 
     default:
       return prevState;
