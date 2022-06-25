@@ -134,7 +134,9 @@ class Profile extends Component {
                 <div className="profile-seller-navbar-inactive">My Product</div>
               </Link>
               <Link to="/seller/sellproduct">
-                <div className="profile-seller-navbar-inactive">Selling Product</div>
+                <div className="profile-seller-navbar-inactive">
+                  Selling Product
+                </div>
               </Link>
               <Link to="/seller/myorder">
                 <div className="profile-seller-navbar-inactive">My Order</div>

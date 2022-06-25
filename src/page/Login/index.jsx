@@ -8,11 +8,12 @@ import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import withLocation from "../../helper/withLocation";
 
 //axios
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -24,10 +25,27 @@ class Login extends Component {
       isSuccess: false,
       isLoggedin: false,
       isShow: false,
+      errorMsgone: "",
+      isDuplicate: false,
+      message: "",
     };
   }
   componentDidMount() {
     document.title = "Authentication";
+    const { state } = this.props.location;
+    this.setState({
+      message: null,
+    });
+    if (state) {
+      this.setState({
+        message: state,
+      });
+      let x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 8000);
+    }
   }
   render() {
     const { userInfo } = this.props;
@@ -92,7 +110,37 @@ class Login extends Component {
                   e.preventDefault();
                   const { email, password } = this.state;
                   const body = { email, password };
-                  this.props.dispatch(loginAction(body));
+                  this.props
+                    .dispatch(loginAction(body))
+                    .then((result) => {
+                      console.log(result);
+                      let x = document.getElementById("snackbar");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
+                      this.setState({
+                        isSuccess: true,
+                        isError: false,
+                        errorMsg: "",
+                        message: null,
+                      });
+                      delete this.props.location.state;
+                      window.history.replaceState({ ...this.props.location.state }, "");
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                      let x = document.getElementById("toast");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
+
+                      this.setState({
+                        isError: true,
+                        errorMsg: error.response.data.err.msg,
+                      });
+                    });
                 }}
               />
 
@@ -185,17 +233,32 @@ class Login extends Component {
                     .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                     .then((result) => {
                       console.log(result);
+                      let x = document.getElementById("snackbar");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
+
                       this.setState({
                         isSuccess: true,
                         isError: false,
                         errorMsg: "",
+                        message: null,
                       });
+                      delete this.props.location.state;
+                      window.history.replaceState({ ...this.props.location.state }, "");
                     })
                     .catch((error) => {
-                      // console.log(error)
+                      console.log(error);
+                      let x = document.getElementById("toast");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
+
                       this.setState({
                         isError: true,
-                        errorMsg: error.response.data.err,
+                        errorMsg: error.response.data.err.msg,
                       });
                     });
                 }}
@@ -204,6 +267,13 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
+        <div id="snackbar">{this.state.message ? this.state.message : "Register success, please check email for verification"}</div>
+        {/* <div id="toast">Register Error</div> */}
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{this.state.isError ? `${this.state.errorMsg}` : "Register success, please check email for verification"}</div>
+          </div>
+        </div>
       </>
     );
   }
@@ -215,4 +285,4 @@ const mapStateToProps = (reduxState) => {
   return { userInfo, isSuccess, err };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(withLocation(Login));
