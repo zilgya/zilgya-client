@@ -110,9 +110,9 @@ class Profile extends Component {
     const { role, userData, token } = this.props;
     const { isEdit } = this.state;
 
-    if (!token) {
-      return <Navigate to="/" />;
-    }
+    // if (!token) {
+    //   return <Navigate to="/" />;
+    // }
     // role 1 = cust
     // role 2 seller
     return (
