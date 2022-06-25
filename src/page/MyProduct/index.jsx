@@ -32,6 +32,7 @@ function MyProduct() {
   useEffect(() => {
     document.title = "My Product";
     handleGetProduct(token);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

@@ -55,6 +55,7 @@ const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, ma
         setTotalCat(meta.totalCategory);
 
         const { data } = result.data;
+        console.log(data)
         setError(null);
         setProduct(data);
       } catch (err) {

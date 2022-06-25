@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Pencil } from "react-bootstrap-icons";
 import "./Profile.css";
 
-// import Profpict from "../../assets/img/profpict.png";
+import Profpict from "../../assets/img/profpict.png";
 import Logout from "../../assets/img/logout.png";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
@@ -185,7 +185,7 @@ class Profile extends Component {
                     />
                   ) : (
                     <img
-                      src={userData.photo}
+                      src={userData.photo ? userData.photo : Profpict}
                       alt="profpict"
                       className="profile-picture"
                     />
@@ -194,7 +194,7 @@ class Profile extends Component {
                 <div className="profle-name-container">
                   {!isEdit ? (
                     <div className="profile-name d-flex">
-                      {userData.username}{" "}
+                      {userData.username ? userData.username : "Username"}{" "}
                       <div
                         onClick={(e) => {
                           e.preventDefault();
@@ -213,7 +213,10 @@ class Profile extends Component {
                         type="text"
                         name="username"
                         id="username"
-                        defaultValue={userData.username}
+                        defaultValue={
+                          userData.username ? userData.username : "Username"
+                        }
+                        placeholder="Username"
                         onChange={(e) => {
                           this.setState({ username: e.target.value });
                         }}
@@ -253,6 +256,7 @@ class Profile extends Component {
                       id="gender"
                       className="profile-input"
                       defaultValue={userData.gender}
+                      placeholder="Gender"
                       disabled={!isEdit ? true : false}
                       onChange={(e) => {
                         this.setState({ gender: e.target.value });
