@@ -26,7 +26,7 @@ export const getUserInfo = ({ token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      timeout: 3000,
+      timeout: 10000,
     })
       .then((result) => {
         //success get api
@@ -49,7 +49,7 @@ export const getUserInfo = ({ token }) => {
           payload: {
             loading: false,
             data: false,
-            errorMessage: error.response,
+            errorMessage: error.response.data.err.msg,
             isSuccess: false,
             isUpdate: false,
           },
@@ -163,16 +163,25 @@ export const logOutFromServer = ({ token }) => {
         });
       })
       .catch((error) => {
+        console.log(error)
         dispatch({
           type: GET_USER_INFO,
           payload: {
             loading: false,
             data: false,
-            errorMessage: error.response,
+            errorMessage: error.response.data.err,
             isSuccess: false,
             isUpdate: false,
           },
         });
       });
+  };
+};
+
+export const resetUserState = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "RESET_USER_STATE",
+    });
   };
 };

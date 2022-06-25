@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Open+Sans:ital,wght@0,400;1,700&family=Playfair+Display&display=swap');
+
+*{
+    font-family: 'Arimo', sans-serif;;
+}
+
+.black-theme{
+    background-color: black;
+    color: white;
+    /* height: 100%; */
+}
+
+.cs-wrapper{
+    width: 50%;
+    margin: 5%;
+    
+}
+
+.cs-title{
+    font-size: 68px;
+}
+
+.cs-body-wrapper{
+    display: flex;
+    margin: 5% 0;
+}
+
+.cs-number{
+    font-size: 49px;
+    margin: 0 50px;
+}
+
+.cs-desc{
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.cs-footer{
+    display: flex;
+    justify-content: space-between;
+    margin: 5% 10%;
+    border-bottom:  2px solid white;
+}
+
+.cs-wrapper-footer{
+    margin: 5%;
+    display: flex;
+    align-items: center;
+}
+
+.cs-logo-footer{
+    font-size: 40px;
+    margin-right: 1%;
+}
+
+.cs-footer-desc{
+    width: 330px;
+    font-size: 11px;
+    
+}

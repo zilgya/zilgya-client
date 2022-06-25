@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Open+Sans:ital,wght@0,400;1,700&family=Playfair+Display&display=swap');
+
+*{
+    font-family: 'Arimo', sans-serif;;
+}
+
+.pnf-wrapper{
+    display: flex;
+    margin: 10%;
+}
+
+.pnf-title{
+    font-size: 86px;
+    font-weight: 700;
+}
+
+.pnf-body-one{
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.pnf-body-two{
+    font-size: 16px;
+    line-height: 37px;
+    margin: 1% 0;
+}
+
+.pnf-footer-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.underline{
+    width: 150px;
+    border-bottom: 3px solid black;
+    margin-right: 2%;
+}
+
+.pnf-footer{
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pnf-circle{
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: #D8D8D8;
+    margin: 0 10%;
+}
+
+@media (max-width:768px){
+    .pnf-wrapper{
+        display: flex;
+        flex-direction: column;
+        margin: 10%;
+    }
+    .pnf-circle{
+        width: 0px;
+        height: 0px;
+    }
+}

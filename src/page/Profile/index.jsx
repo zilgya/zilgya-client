@@ -11,14 +11,17 @@ import { connect } from "react-redux";
 import {
   getUserInfo,
   logOutFromServer,
+  resetUserState,
   updateUser,
 } from "../../redux/actionCreator/user";
 
 import { logoutAction } from "../../redux/actionCreator/auth";
+import { Link, Navigate } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
-    token: state.auth.userInfo.token,
+    auth: state.auth.userInfo,
+    token: state.auth.token,
     role: Number(state.auth.userInfo.roles_id),
     userData: state.user.userResult,
     userUpdate: state.user.updateResult,
@@ -39,21 +42,24 @@ const mapDispatchToProps = (dispatch) => {
     logOutServer: (data) => {
       dispatch(logOutFromServer(data));
     },
+    resetUser: () => {
+      dispatch(resetUserState());
+    },
   };
 };
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isEdit: false,
-      username: null,
-      email: null,
-      gender: null,
-      address: null,
-      description: null,
+      username: this.props.userData.username,
+      email: this.props.userData.email,
+      gender: this.props.userData.gender,
+      address: this.props.userData.address,
+      description: this.props.userData.description,
+      store_name: this.props.userData.store_name,
       photo: null,
-      store_name: null,
     };
   }
   handleImage = (e) => {
@@ -90,39 +96,23 @@ class Profile extends Component {
     });
   };
 
-  handleGetuserinfo = () => {
-    const { token } = this.props;
-    this.props.getUser({ token });
-    this.setState({
-      username: this.props.userData.username,
-      email: this.props.userData.email,
-      gender: this.props.userData.gender,
-      address: this.props.userData.address,
-      description: this.props.userData.description,
-      store_name: this.props.userData.store_name,
-    });
-  };
   handleLogout = async () => {
-    try {
-      const token = await this.props.token;
-      if (token) {
-        this.props.logOutServer({ token: token });
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
+    const token = await this.props.token;
+    await Promise.all([this.props.logOutServer({ token: token })]);
+    setTimeout(() => {
       this.props.logOutPersist();
-    }
+      this.props.resetUser();
+    }, 3000);
   };
 
-  componentDidMount() {
-    this.handleGetuserinfo();
-  }
   render() {
     console.log(this.state);
-    const { role, userData } = this.props;
+    const { role, userData, token } = this.props;
     const { isEdit } = this.state;
 
+    if (!token) {
+      return <Navigate to="/" />;
+    }
     // role 1 = cust
     // role 2 seller
     return (
@@ -137,12 +127,18 @@ class Profile extends Component {
           </div>
           {role === 2 ? (
             <div className="profile-seller-navbar">
-              <div className="profile-seller-navbar-active">Profile</div>
-              <div className="profile-seller-navbar-inactive">My Product</div>
-              <div className="profile-seller-navbar-inactive">
-                Selling Product
-              </div>
-              <div className="profile-seller-navbar-inactive">My Order</div>
+              <Link to="/profile">
+                <div className="profile-seller-navbar-active">Profile</div>
+              </Link>
+              <Link to="/seller/myproduct">
+                <div className="profile-seller-navbar-inactive">My Product</div>
+              </Link>
+              <Link to="/seller/sellproduct">
+                <div className="profile-seller-navbar-inactive">Selling Product</div>
+              </Link>
+              <Link to="/seller/myorder">
+                <div className="profile-seller-navbar-inactive">My Order</div>
+              </Link>
             </div>
           ) : (
             <></>

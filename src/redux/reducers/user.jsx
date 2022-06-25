@@ -1,11 +1,16 @@
-import { GET_USER_INFO, PATCH_UPDATE_USER, DEL_USER_INFO } from "../actionCreator/actionString";
+import {
+  GET_USER_INFO,
+  PATCH_UPDATE_USER,
+  DEL_USER_INFO,
+  RESET_USER_STATE,
+} from "../actionCreator/actionString";
 
 const initialState = {
   userResult: [],
-  userInfo: null,
+  userInfo: false,
   isLoading: false,
-  err: null,
-  isSuccess: null,
+  err: false,
+  isSuccess: false,
 
   updateResult: false,
 };
@@ -39,6 +44,10 @@ const UserReducer = (prevState = initialState, action) => {
         isSuccess: action.payload.errorMessage,
         err: action.payload.errorMessage,
       };
+      case RESET_USER_STATE:
+        return{
+          ...initialState
+        }
     default:
       return prevState;
   }

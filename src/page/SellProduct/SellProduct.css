@@ -1,0 +1,196 @@
+.sp-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 10%;
+}
+
+.sp-inventory-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.sp-inventory-title {
+  font-family: Arimo;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin: 20px 0;
+}
+
+.sp-inventory-name-input {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  height: 35px;
+  padding: 0 10px;
+  border: 1px solid #CECECE;
+  margin: 5px 0;
+}
+
+.sp-inventory-name-input:focus,
+.sp-inventory-desc-input:focus,
+.sp-inventory-stock-input:focus {
+  outline: none;
+}
+
+.sp-inventory-desc-input {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  height: 100px;
+  padding: 0 10px;
+
+  margin: 5px 0;
+  border: 1px solid #CECECE;
+}
+
+.sp-item-stock-input-container {
+  display: flex;
+  border: 1px solid #CECECE;
+
+  margin: 5px 0;
+  height: 35px;
+}
+
+.sp-inventory-stock-input {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  padding: 0 10px;
+  border: none;
+  width: 90%;
+}
+
+.sp-item-stock-pcs {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-stock-condition {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-top: 15px;
+
+}
+
+.sp-stock-label {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-right: 20px;
+
+}
+
+.sp-stock-radio {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+
+.sp-sell-button {
+  margin-top: 20px;
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  width: 120px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.sp-sell-button:hover {
+  background: #2b2b2b;
+}
+
+.sp-sell-button:active {
+  background: #1a1a1a;
+}
+
+.sp-photo-select{
+  width: 110px;
+  height: 110px;
+  border: 3px dashed #CECECE;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.sp-photo-plus{
+  width: 70px;
+  height: 70px;
+  color: #CECECE;
+}
+
+.sp-photo-select-info{
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #4D4D4D;
+}
+
+.sp-photo-select-input{
+  display: none;
+}
+
+.sp-photo-preview{
+  width: 110px;
+  height: 110px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.sp-photo-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-photo-preview-row{
+  display: flex;
+}
+
+.sp-photo-preview-img{
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
