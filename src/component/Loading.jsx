@@ -3,12 +3,34 @@ import { Spinner } from "react-bootstrap";
 
 function Loading() {
   return (
-    <>
-      <div className="d-flex" style={{ gap: "10px" }}>
-        <Spinner animation="border" />
-        <h3> Loading . . . </h3>
+    <React.Fragment>
+      <div
+        className="loading-wrapper d-flex"
+        style={{
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "fixed",
+          zIndex: '200',
+          backdropFilter: "contrast(0.5)"
+        }}
+      >
+        <div
+          className=" d-flex"
+          style={{
+            padding: "10px",
+            gap: "10px",
+            justifyContent: "center",
+            // backgroundColor: "#fff",
+            // borderRadius: "20px",
+          }}
+        >
+          <Spinner animation="border" />
+          <h3> Loading . . . </h3>
+        </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

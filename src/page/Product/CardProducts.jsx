@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 
-const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, maxPrice, filterPrice, category, sort, order }) => {
+const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, maxPrice, filterPrice, category, sort, order, setloading }) => {
   const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
   const [mta, setMta] = useState({});
@@ -48,24 +48,27 @@ const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, ma
   useEffect(() => {
     (async () => {
       try {
+        setloading(true)
         const result = await axios.get(baseUrl);
         const { meta } = result.data;
         setMta(meta);
         setTotalProduct(meta.totalProduct);
         setTotalCat(meta.totalCategory);
+        setloading(false)
 
         const { data } = result.data;
         console.log(data)
         setError(null);
         setProduct(data);
       } catch (err) {
+        setloading(false)
         setTotalProduct(0);
         setError(err.response ? err.response.data.error : err.message);
       }
     })();
     let paramsUrl = baseUrl.toLowerCase().split("?")[1];
     setSearchParams(paramsUrl);
-  }, [baseUrl, setTotalCat, setSearchParams, setTotalProduct]);
+  }, [baseUrl, setTotalCat, setSearchParams, setTotalProduct, setloading]);
 
   return (
     <React.Fragment>

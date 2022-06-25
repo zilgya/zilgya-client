@@ -9,6 +9,7 @@ import { Eye, EyeSlash } from "react-bootstrap-icons";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import withLocation from "../../helper/withLocation";
+import Loading from "../../component/Loading";
 
 //axios
 class Login extends Component {
@@ -28,6 +29,7 @@ class Login extends Component {
       errorMsgone: "",
       isDuplicate: false,
       message: "",
+      loadingRegister: false,
     };
   }
   componentDidMount() {
@@ -48,15 +50,20 @@ class Login extends Component {
     }
   }
   render() {
-    const { userInfo } = this.props;
+    const { userInfo, isLoading } = this.props;
     if (userInfo) return <Navigate to="/" />;
     return (
       <>
+        {isLoading && <Loading />}
+        {this.state.loadingRegister && <Loading />}
+
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
             <div className="login-header-title">My Account</div>
-            <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
+            <div className="login-header-info">
+              Register and log in with your account to be able to shop at will
+            </div>
           </div>
           <div className="login-main-container">
             <form className="login-login-section">
@@ -126,7 +133,10 @@ class Login extends Component {
                         message: null,
                       });
                       delete this.props.location.state;
-                      window.history.replaceState({ ...this.props.location.state }, "");
+                      window.history.replaceState(
+                        { ...this.props.location.state },
+                        ""
+                      );
                     })
                     .catch((error) => {
                       console.log(error);
@@ -146,7 +156,12 @@ class Login extends Component {
 
               <div className="login-checkbox">
                 <label htmlFor="remember-me" className="login-customer">
-                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
+                  <input
+                    type="checkbox"
+                    name="remember-me"
+                    id="remember-me"
+                    className="login-customer-input"
+                  />
                   Remember me
                 </label>
                 <div className="login-forgot">Forget your password?</div>
@@ -229,6 +244,9 @@ class Login extends Component {
                   e.preventDefault();
                   const { email, password, roles_id } = this.state;
                   const body = { email, password, roles_id };
+                  this.setState({
+                    loadingRegister: true,
+                  });
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                     .then((result) => {
@@ -244,9 +262,13 @@ class Login extends Component {
                         isError: false,
                         errorMsg: "",
                         message: null,
+                        loadingRegister: false,
                       });
                       delete this.props.location.state;
-                      window.history.replaceState({ ...this.props.location.state }, "");
+                      window.history.replaceState(
+                        { ...this.props.location.state },
+                        ""
+                      );
                     })
                     .catch((error) => {
                       console.log(error);
@@ -259,6 +281,7 @@ class Login extends Component {
                       this.setState({
                         isError: true,
                         errorMsg: error.response.data.err.msg,
+                        loadingRegister: false,
                       });
                     });
                 }}
@@ -267,11 +290,25 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
-        <div id="snackbar">{this.state.message ? this.state.message : "Register success, please check email for verification"}</div>
+        <div id="snackbar">
+          {this.state.message
+            ? this.state.message
+            : "Register success, please check email for verification"}
+        </div>
         {/* <div id="toast">Register Error</div> */}
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
-          <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div className="toast-body">{this.state.isError ? `${this.state.errorMsg}` : "Register success, please check email for verification"}</div>
+          <div
+            id="toast"
+            className="toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-body">
+              {this.state.isError
+                ? `${this.state.errorMsg}`
+                : "Register success, please check email for verification"}
+            </div>
           </div>
         </div>
       </>
@@ -280,9 +317,9 @@ class Login extends Component {
 }
 const mapStateToProps = (reduxState) => {
   const {
-    auth: { userInfo, isSuccess, err },
+    auth: { userInfo, isSuccess, err, isLoading },
   } = reduxState;
-  return { userInfo, isSuccess, err };
+  return { userInfo, isSuccess, err, isLoading };
 };
 
 export default connect(mapStateToProps)(withLocation(Login));

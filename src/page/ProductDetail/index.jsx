@@ -11,12 +11,21 @@ import ProductSmallSatu from "../../assets/img/home-product-1.png";
 import Delivery from "../../assets/icons/delivery-fast.png";
 import Size from "../../assets/icons/measurement.png";
 import Store from "../../assets/icons/pin-check.png";
+import Loading from "../../component/Loading";
+import { connect } from "react-redux";
 
-export class ProductDetail extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
+class ProductDetail extends Component {
   render() {
     return (
       <>
         <Navbar />
+        {this.props.loadingRedux && <Loading />}
         <main>
           <section>
             <div className="col-md-6 nav-title">
@@ -166,19 +175,25 @@ export class ProductDetail extends Component {
                   <div className="flex-row d-flex justify-content-center related-content">
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                     <div className="p-2 padd-rspn"></div>
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                     <div className="p-2 padd-rspn"></div>
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                   </div>
@@ -193,4 +208,4 @@ export class ProductDetail extends Component {
   }
 }
 
-export default ProductDetail;
+export default connect(mapStateToProps)(ProductDetail);

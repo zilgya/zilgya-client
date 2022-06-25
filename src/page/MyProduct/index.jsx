@@ -8,13 +8,18 @@ import ProductItemSeller from "./ProductItemSeller";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
+import Loading from "../../component/Loading";
+
 function MyProduct() {
   const [products, setProducts] = useState([]);
+  const [isloading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
+  const { isLoading} = useSelector((state)=> state.user)
   // console.log(token)
 
   const handleGetProduct = (token) => {
+    setLoading(true);
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_HOST_API}/product/seller`,
@@ -23,19 +28,27 @@ function MyProduct() {
       },
     })
       .then((result) => {
+        setLoading(false);
         // console.log(result.data.data);
         setProducts(result.data.data);
         console.log(products, "ini dah masok");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   };
+  console.log(isloading)
   useEffect(() => {
     document.title = "My Product";
     handleGetProduct(token);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
+    {isloading && <Loading />}
+    {isLoading && <Loading/>}
       <Navbar />
       <main className="login-global-container">
         <div className="login-header">
@@ -67,6 +80,7 @@ function MyProduct() {
             <div className="wl-col-price">Price</div>
           </div>
           <div className="wl-product-container">
+            
             {products ? (
               products.map((result) => (
                 <ProductItemSeller key={result.id} products={result} />

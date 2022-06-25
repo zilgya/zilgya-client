@@ -8,6 +8,15 @@ import CartProductOne from '../../assets/img/cart-product-1.png'
 // import CartProductTwo from '../../assets/img/cart-product-2.png'
 
 import './Cart.css'
+import Loading from '../../component/Loading';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
 class Cart extends Component {
   constructor() {
     super();
@@ -18,6 +27,7 @@ class Cart extends Component {
   render() {
     return (
       <React.Fragment>
+        {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <div className='login-global-container'>
           <div className="co-header">
@@ -111,4 +121,4 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+export default connect(mapStateToProps)(Cart)

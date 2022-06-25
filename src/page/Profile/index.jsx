@@ -17,6 +17,7 @@ import {
 
 import { logoutAction } from "../../redux/actionCreator/auth";
 import { Link, Navigate } from "react-router-dom";
+import Loading from "../../component/Loading";
 
 const mapStateToProps = (state) => {
   return {
@@ -25,6 +26,7 @@ const mapStateToProps = (state) => {
     role: Number(state.auth.userInfo.roles_id),
     userData: state.user.userResult,
     userUpdate: state.user.updateResult,
+    isloadingUser: state.user.isLoading,
   };
 };
 
@@ -107,7 +109,7 @@ class Profile extends Component {
 
   render() {
     console.log(this.state);
-    const { role, userData, token } = this.props;
+    const { role, userData, token, isloadingUser } = this.props;
     const { isEdit } = this.state;
 
     if (!token) {
@@ -117,6 +119,7 @@ class Profile extends Component {
     // role 2 seller
     return (
       <>
+      {isloadingUser&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">

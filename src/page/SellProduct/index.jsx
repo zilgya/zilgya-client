@@ -7,8 +7,15 @@ import { Link } from "react-router-dom";
 import "./SellProduct.css";
 import PictPreview from "./PictPreview";
 import PictInput from "./PictInput";
+import { connect } from "react-redux";
 
-export default class SellProduct extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
+class SellProduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -157,3 +164,5 @@ export default class SellProduct extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps)(SellProduct)
