@@ -1,16 +1,20 @@
 import React from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
-import { useSelector, } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import BannerNav from "../../assets/img/banner-nav.png";
 
 import MenuAfterLogin from "./MenuAfterLogin";
 import MenuDefault from "./MenuDefault";
+import { getKeyword } from "../../redux/actionCreator/search";
 
 const Navbar = () => {
-  const token = useSelector((state)=> state.auth.token)
- 
+  const token = useSelector((state) => state.auth.token);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="container">
@@ -110,7 +114,19 @@ const Navbar = () => {
                           </p>
                           <ul className="sub-search-menu">
                             <li>
-                              <input type="text" placeholder="Search" />
+                              <input
+                                type="text"
+                                placeholder="Search"
+                                onKeyUp={(e) => {
+                                  e.preventDefault();
+                                  if (e.key === "Enter") {
+                                    const { value } = e.target;
+                                    dispatch(getKeyword(value));
+                                    navigate("/product", { replace: true });
+                                  }
+                                }}
+                                autoFocus
+                              />
                             </li>
                           </ul>
                         </li>
@@ -132,19 +148,12 @@ const Navbar = () => {
                   <div className="col-md-4">
                     <nav id="navbar" className="navigation" role="navigation">
                       <input id="toggle1" type="checkbox" />
-                      <label
-                        className="hamburger1 navbar-label"
-                        htmlFor="toggle1"
-                      >
+                      <label className="hamburger1 navbar-label" htmlFor="toggle1">
                         <div className="top"></div>
                         <div className="meat"></div>
                         <div className="bottom"></div>
                       </label>
-                      {token ? (
-                        <MenuAfterLogin/>
-                      ) : (
-                        <MenuDefault/>
-                      )}
+                      {token ? <MenuAfterLogin /> : <MenuDefault />}
                     </nav>
                   </div>
                 </div>
