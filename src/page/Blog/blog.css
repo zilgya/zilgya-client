@@ -84,6 +84,11 @@ h5 {
     padding: 0;
 }
 
+.img-content-blog>img {
+    object-fit: cover;
+    width: 71vw;
+}
+
 .sidebar-banner-blog>img {
     display: block;
     position: relative;
@@ -105,6 +110,10 @@ h5 {
     background-color: #000;
     z-index: 9;
     opacity: 0;
+}
+
+.recent-content>img {
+    object-fit: cover;
 }
 
 .sidebar-banner-content-blog {
@@ -140,7 +149,7 @@ h5 {
 
 .card-quotes-blog {
     background: #F6ECEF;
-    height: 33vh;
+    height: 45vh;
     width: 57vw;
 }
 
@@ -177,6 +186,10 @@ h5 {
 /*Responsive*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+    .img-content-blog>img {
+        object-fit: cover;
+        width: 100vw;
+    }
     .blog-container {
         flex-direction: column !important;
     }
@@ -204,7 +217,7 @@ h5 {
         margin: 0 30px -30px;
     }
     .card-quotes-blog {
-        width: 110vw;
+        width: 100vw;
     }
     .quotes-content-blog {
         padding: 25px 40px 0 27px;
@@ -217,14 +230,8 @@ h5 {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1234px) {
-    .img-content-blog {
-        padding: 0 30px;
-    }
     .recent-content {
         flex-direction: column !important;
-    }
-    .img-content-blog {
-        margin: 0 35px;
     }
     .title-detail-blog {
         padding: 0 35px;
@@ -250,6 +257,7 @@ h5 {
     .recent-content>img {
         width: 50%;
         margin: 0px 17px;
+        object-fit: cover;
     }
     .recent-tag {
         font-size: 12px;

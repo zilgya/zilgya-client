@@ -76,7 +76,7 @@ export class Blog extends Component {
                   <img src={RecentOne} alt="Recent Images" />
                   <div className="flex-row pl-3">
                     <strong className="pl-3 recent-tag-title">
-                      How To Put Movies On Iphone
+                      How To Put Movies Iphone
                     </strong>
                     <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
