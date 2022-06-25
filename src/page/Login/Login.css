@@ -193,7 +193,7 @@
 }
 
 #toast-success {
-  color: rgb(0, 146, 19);
+  /* color: rgb(0, 146, 19); */
   font-family: Arimo;
   font-weight: 600;
   text-align: center;
@@ -232,14 +232,14 @@
 
 #snackbar {
   visibility: hidden;
-  min-width: 250px;
+  min-width: 350px;
   margin-left: -125px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 146, 19);
-  font-family: Rubik;
+  background-color: rgb(254, 254, 254);
+  /* color: rgb(255, 0, 0); */
+  font-family: Arimo;
   font-weight: 600;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 12px;
   padding: 16px;
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

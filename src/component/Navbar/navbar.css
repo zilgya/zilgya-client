@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");
 .container {
   max-width: 1440px !important;
+  display: inline-block;
 }
 
 .logo a {
@@ -454,14 +455,13 @@ label span {
 
 #toggle1:checked ~ .menu1 {
   height: 335px;
-  margin: 43px -157px;
 }
 
 .menu1 {
   width: 16vw;
   position: absolute;
   background-color: #1a1a1a;
-  margin: 0;
+  margin: 43px -157px;
   display: -ms-grid;
   display: grid;
   grid-row-gap: 25px;

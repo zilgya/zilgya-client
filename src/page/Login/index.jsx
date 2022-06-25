@@ -95,32 +95,32 @@ class Login extends Component {
                   const { email, password } = this.state;
                   const body = { email, password };
                   this.props.dispatch(loginAction(body))
-                  .then((result) => {
-                    console.log(result);
-                    let x = document.getElementById("snackbar");
-                    x.className = "show";
-                    setTimeout(function () {
-                      x.className = x.className.replace("show", "");
-                    }, 8000);
-                    this.setState({
-                      isSuccess: true,
-                      isError: false,
-                      errorMsg: "",
-                    });
-                  })
-                  .catch((error) => {
-                    console.log(error)
-                    let x = document.getElementById("toast");
-                    x.className = "show";
-                    setTimeout(function () {
-                      x.className = x.className.replace("show", "");
-                    }, 8000);
+                    .then((result) => {
+                      console.log(result);
+                      let x = document.getElementById("snackbar");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
+                      this.setState({
+                        isSuccess: true,
+                        isError: false,
+                        errorMsg: "",
+                      });
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                      let x = document.getElementById("toast");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 8000);
 
-                    this.setState({
-                      isError: true,
-                      errorMsg: error.response.data.err.msg,
+                      this.setState({
+                        isError: true,
+                        errorMsg: error.response.data.err.msg,
+                      });
                     });
-                  });
                 }}
               />
 
@@ -242,12 +242,19 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
-        <div id="snackbar">Register success, please check email for verification</div>
+        {/* <div id="snackbar">Register success, please check email for verification</div> */}
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="snackbar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+              Register success, please check email for verification
+            </div>
+          </div>
+        </div>
         {/* <div id="toast">Register Error</div> */}
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
           <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-body">
-              {this.state.isError ? `${this.state.errorMsg}` : "Register success, please check email for verification"}
+              {this.state.isError ? `${this.state.errorMsg}` : null}
             </div>
           </div>
         </div>

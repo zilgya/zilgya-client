@@ -9,7 +9,7 @@ const ConfirmEmail = () => {
     (async () => {
       setMsg(null);
       try {
-        const result = await axios.get(`https://zilgya-api.herokuapp.com/auth/confirm/${token}`);
+        const result = await axios.get(`${process.env.REACT_APP_HOST_API}/auth/confirm/${token}`);
         const { message } = result.data;
         setMsg(message);
       } catch (error) {
