@@ -174,16 +174,16 @@
 }
 /* TOAST */
 
-#toast {
+ #toast {
   visibility: hidden;
-  min-width: 250px;
+  min-width: 350px;
   margin-left: -125px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(255, 0, 0);
-  font-family: Rubik;
+  background-color: rgb(254, 254, 254);
+  /* color: rgb(255, 0, 0); */
+  font-family: Arimo;
   font-weight: 600;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 12px;
   padding: 16px;
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -194,7 +194,7 @@
 
 #toast-success {
   color: rgb(0, 146, 19);
-  font-family: Rubik;
+  font-family: Arimo;
   font-weight: 600;
   text-align: center;
   border-radius: 2px;
@@ -207,8 +207,8 @@
 }
 
 #toast-failed {
-  color: rgb(255, 0, 0);
-  font-family: Rubik;
+  /* color: rgb(255, 0, 0); */
+  font-family: "Rubik";
   font-weight: 600;
   text-align: center;
   border-radius: 2px;
@@ -218,6 +218,9 @@
   z-index: 999;
   left: 50%;
   bottom: 30px;
+}
+.toast-header{
+  background: #fcfcfc;
 }
 
 #toast.show,
@@ -250,7 +253,7 @@
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
+} 
 @media (max-width: 640px) {
   .login-main-container {
     flex-direction: column;

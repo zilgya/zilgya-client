@@ -24,6 +24,8 @@ class Login extends Component {
       isSuccess: false,
       isLoggedin: false,
       isShow: false,
+      errorMsgone: "",
+      isDuplicate: false,
     };
   }
   componentDidMount() {
@@ -94,7 +96,33 @@ class Login extends Component {
                   e.preventDefault()
                   const { email, password } = this.state;
                   const body = { email, password };
-                  this.props.dispatch(loginAction(body));
+                  this.props.dispatch(loginAction(body))
+                  .then((result) => {
+                    console.log(result);
+                    let x = document.getElementById("snackbar");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+                    this.setState({
+                      isSuccess: true,
+                      isError: false,
+                      errorMsg: "",
+                    });
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                    let x = document.getElementById("toast");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+
+                    this.setState({
+                      isError: true,
+                      errorMsg: error.response.data.err.msg,
+                    });
+                  });
                 }}
               />
 
@@ -195,12 +223,7 @@ class Login extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 80000);
-                      this.setState({
-                        isSuccess: true,
-                        isError: false,
-                        errorMsg: "",
-                      });
+                      }, 8000);
                       this.setState({
                         isSuccess: true,
                         isError: false,
@@ -208,15 +231,16 @@ class Login extends Component {
                       });
                     })
                     .catch((error) => {
-                      console.log(error.response.data.error)
+                      console.log(error)
                       let x = document.getElementById("toast");
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 5000);
+                      }, 8000);
+
                       this.setState({
                         isError: true,
-                        errorMsg: error.response.data.err,
+                        errorMsg: error.response.data.err.msg,
                       });
                     });
                 }}
@@ -225,8 +249,15 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
-        <div id="snackbar">Sign Up berhasil,Silahkan Login</div>
-        <div id="toast">Register Error</div>;
+        <div id="snackbar">Register success, please check email for verification</div>
+        {/* <div id="toast">Register Error</div> */}
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+              {this.state.isError ? `${this.state.errorMsg}` : "Register success, please check email for verification"}
+            </div>
+          </div>
+        </div>
       </>
     );
   }
