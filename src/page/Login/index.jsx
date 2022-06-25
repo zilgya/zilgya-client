@@ -59,7 +59,44 @@ class Login extends Component {
             <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
           </div>
           <div className="login-main-container">
-            <form className="login-login-section">
+            <form
+              className="login-login-section"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const { email, password } = this.state;
+                const body = { email, password };
+                this.props
+                  .dispatch(loginAction(body))
+                  .then((result) => {
+                    console.log(result);
+                    let x = document.getElementById("snackbar");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+                    this.setState({
+                      isSuccess: true,
+                      isError: false,
+                      errorMsg: "",
+                      message: null,
+                    });
+                    delete this.props.location.state;
+                    window.history.replaceState({ ...this.props.location.state }, "");
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    let x = document.getElementById("toast");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+                    this.setState({
+                      isError: true,
+                      errorMsg: error.response.data.err.msg,
+                    });
+                  });
+              }}
+            >
               <div className="login-register-title">Login</div>
               <input
                 type="text"
@@ -102,47 +139,7 @@ class Login extends Component {
                   />
                 )}
               </div>
-              <input
-                type="submit"
-                className="login-button"
-                value="Login"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const { email, password } = this.state;
-                  const body = { email, password };
-                  this.props
-                    .dispatch(loginAction(body))
-                    .then((result) => {
-                      console.log(result);
-                      let x = document.getElementById("snackbar");
-                      x.className = "show";
-                      setTimeout(function () {
-                        x.className = x.className.replace("show", "");
-                      }, 8000);
-                      this.setState({
-                        isSuccess: true,
-                        isError: false,
-                        errorMsg: "",
-                        message: null,
-                      });
-                      delete this.props.location.state;
-                      window.history.replaceState({ ...this.props.location.state }, "");
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      let x = document.getElementById("toast");
-                      x.className = "show";
-                      setTimeout(function () {
-                        x.className = x.className.replace("show", "");
-                      }, 8000);
-
-                      this.setState({
-                        isError: true,
-                        errorMsg: error.response.data.err.msg,
-                      });
-                    });
-                }}
-              />
+              <input type="submit" className="login-button" value="Login" />
 
               <div className="login-checkbox">
                 <label htmlFor="remember-me" className="login-customer">
@@ -152,7 +149,46 @@ class Login extends Component {
                 <div className="login-forgot">Forget your password?</div>
               </div>
             </form>
-            <form className="login-register-section">
+            <form
+              className="login-register-section"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const { email, password, roles_id } = this.state;
+                const body = { email, password, roles_id };
+                axios
+                  .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
+                  .then((result) => {
+                    console.log(result);
+                    let x = document.getElementById("snackbar");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+
+                    this.setState({
+                      isSuccess: true,
+                      isError: false,
+                      errorMsg: "",
+                      message: null,
+                    });
+                    delete this.props.location.state;
+                    window.history.replaceState({ ...this.props.location.state }, "");
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    let x = document.getElementById("toast");
+                    x.className = "show";
+                    setTimeout(function () {
+                      x.className = x.className.replace("show", "");
+                    }, 8000);
+
+                    this.setState({
+                      isError: true,
+                      errorMsg: error.response.data.err.msg,
+                    });
+                  });
+              }}
+            >
               <div className="login-register-title">Create Account</div>
               <input
                 type="text"
@@ -215,54 +251,13 @@ class Login extends Component {
                     id="seller"
                     className="login-customer-input"
                     onClick={() => {
-                      this.setState({ roles_id: 1 });
+                      this.setState({ roles_id: 2 });
                     }}
                   />
                   I'm Seller
                 </label>
               </div>
-              <input
-                type="submit"
-                className="login-button"
-                value="Register"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const { email, password, roles_id } = this.state;
-                  const body = { email, password, roles_id };
-                  axios
-                    .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
-                    .then((result) => {
-                      console.log(result);
-                      let x = document.getElementById("snackbar");
-                      x.className = "show";
-                      setTimeout(function () {
-                        x.className = x.className.replace("show", "");
-                      }, 8000);
-
-                      this.setState({
-                        isSuccess: true,
-                        isError: false,
-                        errorMsg: "",
-                        message: null,
-                      });
-                      delete this.props.location.state;
-                      window.history.replaceState({ ...this.props.location.state }, "");
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      let x = document.getElementById("toast");
-                      x.className = "show";
-                      setTimeout(function () {
-                        x.className = x.className.replace("show", "");
-                      }, 8000);
-
-                      this.setState({
-                        isError: true,
-                        errorMsg: error.response.data.err.msg,
-                      });
-                    });
-                }}
-              />
+              <input type="submit" className="login-button" value="Register" />
             </form>
           </div>
         </main>

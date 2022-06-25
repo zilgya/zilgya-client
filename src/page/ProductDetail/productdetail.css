@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+
 p {
     font-family: 'Arimo';
 }
@@ -14,9 +15,19 @@ p {
     object-fit: cover;
     margin: 24px 50px;
     height: 139px;
+    cursor: pointer;
 }
 
 .product-big>img {
+    margin: 46px 0;
+    width: calc(100% - 192px);
+    padding-left: 30px;
+    float: left;
+    object-fit: cover;
+    height: 705px;
+}
+
+.product-big-prev {
     margin: 46px 0;
     width: calc(100% - 192px);
     padding-left: 30px;
@@ -119,6 +130,7 @@ p {
 
 .product-desc {
     margin: 10px 80px;
+    min-height: 120px;
 }
 
 .pro-details-quality {
@@ -144,6 +156,12 @@ p {
     color: #1a1a1a;
     width: 100%;
     height: 100%;
+    line-height: 50px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 }
 
 .quantity .qtybutton {
@@ -157,6 +175,11 @@ p {
     font-size: 14px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 }
 
 .quantity .qtybutton.inc {
@@ -323,24 +346,30 @@ p {
     .product-big>img {
         padding-left: 70px;
     }
+
     .product-label {
         top: 21vw;
         right: 150px;
     }
+
     .sale {
         line-height: 50px;
     }
+
     .related-content img {
         width: 250px;
         height: 320px;
     }
+
     .padd-rspn {
         margin: 2px;
     }
+
     .font-related {
         padding-top: 5px;
         font-size: 17px;
     }
+
     .p-related {
         font-size: 13px;
     }
@@ -350,49 +379,63 @@ p {
     .nav-title {
         margin: 3% 12%;
     }
+
     .product-big>img {
         padding-left: 100px;
         width: 575px;
     }
+
     .product-small>img {
         margin: 24px 18px;
     }
+
     .product-label {
         top: 25vw;
         right: 69px;
     }
+
     .title-product {
         margin: 0 8px;
     }
+
     .product-rating-stock {
         margin: 0 41px;
     }
+
     .product-price {
         margin: 0 57px;
     }
+
     .product-desc {
         margin: 10px 54px;
         font-size: 14px;
     }
+
     .pro-details-quality {
         margin: 40px 49px 0;
     }
+
     .details-sku {
         margin: 0 50px;
     }
+
     .product-icon-custom {
         margin: 0 50px;
     }
+
     .pro-details-social ul {
         margin: 0 62px 0 4px;
     }
+
     .padd-rspn {
         margin: -20px;
     }
+
     .related-content img {
         width: 190px;
         height: 220px;
     }
+
     .title-related {
         font-size: 20px;
     }

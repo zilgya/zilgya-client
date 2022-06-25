@@ -12,3 +12,9 @@ export const RESET_USER_STATE = "RESET_USER_STATE";
 
 export const GET_KEYWORD = "GET_KEYWORD";
 export const REMOVE_KEYWORD = "REMOVE_KEYWORD";
+
+export const ADD_TO_CART = "ADD_TO_CART"
+export const DELETE_FROM_CART = "DELETE_FROM_CART"
+export const DELETE_CART = "DELETE_CART"
+export const COUNTER_UP = "COUNTER_UP"
+export const COUNTER_DOWN = "COUNTER_DOWN"

@@ -45,7 +45,7 @@ function App() {
                   <Profile />
                 </PrivateElement>
               } />
-            <Route path="/productdetail" element={<ProductDetail />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/product" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
