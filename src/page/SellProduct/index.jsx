@@ -2,24 +2,44 @@ import React, { Component } from 'react'
 import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
 import { Link } from 'react-router-dom'
-import { PlusLg } from 'react-bootstrap-icons'
+// import { PlusLg } from 'react-bootstrap-icons'
 
 import './SellProduct.css'
+import PictPreview from './PictPreview'
+import PictInput from './PictInput'
 
 export default class SellProduct extends Component {
   constructor() {
     super();
     this.state = {
       pict: [],
-      file: []
+      pictPrev: []
     }
   }
 
   // coba coba
-  inputPictHandler = (pict) => {
+  inputPictHandler = (e) => {
+    e.preventDefault();
     let newPict = [...this.state.pict]
-    newPict.push(pict)
-    this.setState({ pict: newPict })
+    const file = e.target.files[0]
+    newPict.push(file)
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        let newPictPrev = [...this.state.pictPrev]
+        const filePrev = reader.result
+        newPictPrev.push(filePrev)
+        this.setState({ pictPrev: newPictPrev, pict: newPict })
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  deletePictHandler = (index) => {
+    // let newPict = [...this.state.pict]
+    let newPict = this.state.pict.filter((value, idx) => idx !== index)
+    let newPictPrev = this.state.pictPrev.filter((value, idx) => idx !== index)
+    this.setState({ pictPrev: newPictPrev, pict: newPict })
   }
 
   render() {
@@ -75,59 +95,57 @@ export default class SellProduct extends Component {
               <div className="sp-photo-container">
                 {this.state.pict.length === 1 ?
                   <><div className="sp-photo-preview-row">
-
-                    <div className="sp-photo-preview"><img src={this.state.pict[0]} alt="preview" /></div>
+                    <PictPreview pictPrev={this.state.pictPrev} index={0} deletePictHandler={this.deletePictHandler} />
+                    <PictInput inputPictHandler={this.inputPictHandler} />
                   </div>
                   </>
                   : this.state.pict.length === 2 ?
                     <>
                       <div className="sp-photo-preview-row">
-                        <div className="sp-photo-preview"><img src={this.state.pict[0]} alt="preview" /></div>
-                        <div className="sp-photo-preview"><img src={this.state.pict[1]} alt="preview" /></div>
+                        <PictPreview pictPrev={this.state.pictPrev} index={0} deletePictHandler={this.deletePictHandler} />
+                        <PictPreview pictPrev={this.state.pictPrev} index={1} deletePictHandler={this.deletePictHandler} />
+                        <PictInput inputPictHandler={this.inputPictHandler} />
                       </div>
                     </>
                     : this.state.pict.length === 3 ?
                       <>
                         <div className="sp-photo-preview-row">
-                          <div className="sp-photo-preview"><img src={this.state.pict[0]} alt="preview" /></div>
-                          <div className="sp-photo-preview"><img src={this.state.pict[1]} alt="preview" /></div>
-                          <div className="sp-photo-preview"><img src={this.state.pict[2]} alt="preview" /></div>
+                          <PictPreview pictPrev={this.state.pictPrev} index={0} deletePictHandler={this.deletePictHandler} />
+                          <PictPreview pictPrev={this.state.pictPrev} index={1} deletePictHandler={this.deletePictHandler} />
+                          <PictPreview pictPrev={this.state.pictPrev} index={2} deletePictHandler={this.deletePictHandler} />
                         </div>
+                        <PictInput inputPictHandler={this.inputPictHandler} />
                       </>
                       : this.state.pict.length === 4 ?
                         <>
                           <div className="sp-photo-preview-row">
-                            <div className="sp-photo-preview"><img src={this.state.pict[0]} alt="preview" /></div>
-                            <div className="sp-photo-preview"><img src={this.state.pict[1]} alt="preview" /></div>
-                            <div className="sp-photo-preview"><img src={this.state.pict[2]} alt="preview" /></div>
+                            <PictPreview pictPrev={this.state.pictPrev} index={0} deletePictHandler={this.deletePictHandler} />
+                            <PictPreview pictPrev={this.state.pictPrev} index={1} deletePictHandler={this.deletePictHandler} />
+                            <PictPreview pictPrev={this.state.pictPrev} index={2} deletePictHandler={this.deletePictHandler} />
                           </div>
                           <div className="sp-photo-preview-row">
-                            <div className="sp-photo-preview"><img src={this.state.pict[3]} alt="preview" /></div>
+                            <PictPreview pictPrev={this.state.pictPrev} index={3} deletePictHandler={this.deletePictHandler} />
+                            <PictInput inputPictHandler={this.inputPictHandler} />
                           </div>
                         </>
                         : this.state.pict.length === 5 ?
                           <>
                             <div className="sp-photo-preview-row">
-                              <div className="sp-photo-preview"><img src={this.state.pict[0]} alt="preview" /></div>
-                              <div className="sp-photo-preview"><img src={this.state.pict[1]} alt="preview" /></div>
-                              <div className="sp-photo-preview"><img src={this.state.pict[2]} alt="preview" /></div>
+                              <PictPreview pictPrev={this.state.pictPrev} index={0} deletePictHandler={this.deletePictHandler} />
+                              <PictPreview pictPrev={this.state.pictPrev} index={1} deletePictHandler={this.deletePictHandler} />
+                              <PictPreview pictPrev={this.state.pictPrev} index={2} deletePictHandler={this.deletePictHandler} />
                             </div>
                             <div className="sp-photo-preview-row">
-                              <div className="sp-photo-preview"><img src={this.state.pict[3]} alt="preview" /></div>
-                              <div className="sp-photo-preview"><img src={this.state.pict[4]} alt="preview" /></div>
+                              <PictPreview pictPrev={this.state.pictPrev} index={3} deletePictHandler={this.deletePictHandler} />
+                              <PictPreview pictPrev={this.state.pictPrev} index={4} deletePictHandler={this.deletePictHandler} />
                             </div>
                           </>
                           : <></>
                 }
-                {this.state.pict.length === 5 ?
+                {this.state.pict.length !== 0 ?
                   <></>
                   :
-                  <label htmlFor='pict1' className="sp-photo-select"
-                    onClick={() => this.inputPictHandler(1)}>
-                    {/* <input type="file" name="pict1" id="pict1" className='sp-photo-select-input' /> */}
-                    <PlusLg className='sp-photo-plus' />
-                    <div className="sp-photo-select-info">Add more image</div>
-                  </label>
+                  <PictInput inputPictHandler={this.inputPictHandler} />
                 }
 
 

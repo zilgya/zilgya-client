@@ -40,9 +40,7 @@ class Login extends Component {
         <main className="login-global-container">
           <div className="login-header">
             <div className="login-header-title">My Account</div>
-            <div className="login-header-info">
-              Register and log in with your account to be able to shop at will
-            </div>
+            <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
           </div>
           <div className="login-main-container">
             <form className="login-login-section">
@@ -128,12 +126,7 @@ class Login extends Component {
 
               <div className="login-checkbox">
                 <label htmlFor="remember-me" className="login-customer">
-                  <input
-                    type="checkbox"
-                    name="remember-me"
-                    id="remember-me"
-                    className="login-customer-input"
-                  />
+                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
                   Remember me
                 </label>
                 <div className="login-forgot">Forget your password?</div>
