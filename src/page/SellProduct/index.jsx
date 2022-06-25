@@ -25,7 +25,6 @@ class SellProduct extends Component {
       categories_id: "",
       brands_id: "",
       colors_id: "",
-      image: null,
       message: "",
       error: "",
     };
@@ -49,7 +48,6 @@ class SellProduct extends Component {
       this.setState({
         pictPrev: [...this.state.pictPrev, ...res],
         pict: [...this.state.pict, ...file],
-        image: file[0],
       });
     }
   };
@@ -288,7 +286,7 @@ class SellProduct extends Component {
               <div
                 className="sp-sell-button"
                 onClick={() => {
-                  const { name, description, price, stock, stock_condition, image, categories_id, brands_id, colors_id } = this.state;
+                  const { name, description, price, stock, stock_condition, pict, categories_id, brands_id, colors_id } = this.state;
                   const { token } = this.props;
                   const body = {
                     name,
@@ -296,15 +294,21 @@ class SellProduct extends Component {
                     price,
                     stock,
                     stock_condition,
-                    photo: image,
+                    photo: pict,
                     categories_id,
                     brands_id,
                     colors_id,
                   };
                   const formData = new FormData();
                   for (const key in body) {
+                    if (key === "photo") {
+                      body[key].map((image) => {
+                        return formData.append(key, image);
+                      });
+                    }
                     formData.append(key, body[key]);
                   }
+
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/product`, formData, { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } })
                     .then((result) => {
