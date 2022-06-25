@@ -3,7 +3,6 @@ import "./Login.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import { loginAction } from "../../redux/actionCreator/auth";
-import { Navigate } from "react-router-dom";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 import Footer from "../../component/Footer";
@@ -18,6 +17,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      emailReg: "",
+      passwordReg: "",
       roles_id: "",
       isRegisPassShown: false,
       isLoginPassShown: false,
@@ -50,8 +51,7 @@ class Login extends Component {
     }
   }
   render() {
-    const { userInfo, isLoading } = this.props;
-    if (userInfo) return <Navigate to="/" />;
+    const { isLoading } = this.props;
     return (
       <>
         {isLoading && <Loading />}
@@ -80,7 +80,7 @@ class Login extends Component {
                     x.className = "show";
                     setTimeout(function () {
                       x.className = x.className.replace("show", "");
-                    }, 8000);
+                    }, 5000);
                     this.setState({
                       isSuccess: true,
                       isError: false,
@@ -96,7 +96,7 @@ class Login extends Component {
                     x.className = "show";
                     setTimeout(function () {
                       x.className = x.className.replace("show", "");
-                    }, 8000);
+                    }, 5000);
                     this.setState({
                       isError: true,
                       errorMsg: error.response.data.err.msg,
@@ -162,7 +162,7 @@ class Login extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 8000);
+                      }, 5000);
                       this.setState({
                         isSuccess: true,
                         isError: false,
@@ -181,7 +181,7 @@ class Login extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 8000);
+                      }, 5000);
 
                       this.setState({
                         isError: true,
@@ -208,8 +208,8 @@ class Login extends Component {
               className="login-register-section"
               onSubmit={(e) => {
                 e.preventDefault();
-                const { email, password, roles_id } = this.state;
-                const body = { email, password, roles_id };
+                const { emailReg, passwordReg, roles_id } = this.state;
+                const body = { email: emailReg, password: passwordReg, roles_id: roles_id };
                 axios
                   .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                   .then((result) => {
@@ -218,7 +218,7 @@ class Login extends Component {
                     x.className = "show";
                     setTimeout(function () {
                       x.className = x.className.replace("show", "");
-                    }, 8000);
+                    }, 5000);
 
                     this.setState({
                       isSuccess: true,
@@ -235,7 +235,7 @@ class Login extends Component {
                     x.className = "show";
                     setTimeout(function () {
                       x.className = x.className.replace("show", "");
-                    }, 8000);
+                    }, 5000);
 
                     this.setState({
                       isError: true,
@@ -251,7 +251,7 @@ class Login extends Component {
                 placeholder="Email address"
                 onChange={(e) => {
                   this.setState({
-                    email: e.target.value,
+                    emailReg: e.target.value,
                   });
                 }}
               />
@@ -262,7 +262,7 @@ class Login extends Component {
                   placeholder="Password"
                   onChange={(e) => {
                     this.setState({
-                      password: e.target.value,
+                      passwordReg: e.target.value,
                     });
                   }}
                 />
@@ -318,8 +318,8 @@ class Login extends Component {
                 value="Register"
                 onClick={(e) => {
                   e.preventDefault();
-                  const { email, password, roles_id } = this.state;
-                  const body = { email, password, roles_id };
+                  const { emailReg, passwordReg, roles_id } = this.state;
+                  const body = { email: emailReg, password: passwordReg, roles_id };
                   this.setState({
                     loadingRegister: true,
                   });
@@ -331,7 +331,7 @@ class Login extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 8000);
+                      }, 5000);
 
                       this.setState({
                         isSuccess: true,
@@ -352,7 +352,7 @@ class Login extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                      }, 8000);
+                      }, 5000);
 
                       this.setState({
                         isError: true,
@@ -366,13 +366,15 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
+        <div className="snackbar-wrapper">
         <div id="snackbar">
           {this.state.message
             ? this.state.message
             : "Register success, please check email for verification"}
         </div>
+        </div>
         {/* <div id="toast">Register Error</div> */}
-        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+        <div className="toast-container">
           <div
             id="toast"
             className="toast"
