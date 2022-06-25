@@ -17,18 +17,19 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="container">
+      <nav>
+        <div className="container">
         <div className="header-absolute">
-          <div className="header-default menu-right height-150 d-flex align-items-center">
+          <div className="header-default d-flex align-items-center">
             <div className="container-fluid">
-              <div className="row align-items-center">
-                <div className="col-xl-3 col-lg-6 col-md-6 col-4">
+              <div className="row align-items-center nav-rspsv">
+                <div className="col-xl-4 col-lg-6 col-md-6 col-4 pl-5">
                   <div className="logo">
                     {/* <Link to="/"><img src=" " alt="logo"/></Link> */}
-                    <h1>ZILGYA</h1>
+                    <h1 className="text-logo-nav">ZILGYA</h1>
                   </div>
                 </div>
-                <div className="col-xl-6 d-none d-xl-block">
+                <div className="col-xl-4 d-none d-xl-block">
                   <div className="menu-center d-flex justify-content-center">
                     <nav className="main-menu">
                       <ul>
@@ -48,14 +49,14 @@ const Navbar = () => {
                               <Link to="/about ">About Us</Link>
                             </li>
                             <li>
-                              <Link to="#">404 Page</Link>
+                              <Link to="/404">404 Page</Link>
                             </li>
 
                             <li className="has-dropdown">
                               <Link to="# ">Coming soon</Link>
                               <ul className="sub-menu">
                                 <li>
-                                  <Link to="# ">Coming soon 1</Link>
+                                  <Link to="/comingsoon">Coming soon 1</Link>
                                 </li>
                                 <li>
                                   <Link to="# ">Coming soon 2</Link>
@@ -103,8 +104,8 @@ const Navbar = () => {
                     </nav>
                   </div>
                 </div>
-
-                <div className="col-xl-3 col-lg-6 col-md-6 col-8 d-flex justify-content-end">
+                
+                <div className="col-xl-4 pl-5 col-lg-4 col-md-4 col-4 d-flex icon-nav-group">
                   <div className="header-icon search ">
                     <nav className="search-menu">
                       <ul>
@@ -115,6 +116,7 @@ const Navbar = () => {
                           <ul className="sub-search-menu">
                             <li>
                               <input
+                              id="search"
                                 type="text"
                                 placeholder="Search"
                                 onKeyUp={(e) => {
@@ -161,7 +163,8 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </header>
+        </div>
+      </nav>
     </>
   );
 };
