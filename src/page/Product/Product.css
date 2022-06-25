@@ -138,6 +138,7 @@
 .card-product {
   margin: 10px 0;
   border: none;
+  cursor: pointer;
 }
 
 .card-product-img img {

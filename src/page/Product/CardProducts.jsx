@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 
@@ -9,6 +9,8 @@ const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, ma
   const [error, setError] = useState(null);
   const [mta, setMta] = useState({});
   const [pageUrl, setPageUrl] = useState(null);
+
+  const navigate = useNavigate();
 
   const { keyword } = useSelector((state) => state.search);
   let baseUrl = `${process.env.REACT_APP_HOST_API}/product?`;
@@ -72,7 +74,7 @@ const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, ma
         ) : (
           product.map((items, i) => (
             <div className="col-md-4">
-              <div className="card col card-product" key={i}>
+              <div className="card col card-product" key={i} onClick={() => navigate(`/product/${items.id}`)}>
                 <div className="card-product-img">
                   <img src={items.image} alt="" />
                 </div>
