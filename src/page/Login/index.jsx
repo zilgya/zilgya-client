@@ -251,7 +251,7 @@ class Login extends Component {
                     id="seller"
                     className="login-customer-input"
                     onClick={() => {
-                      this.setState({ roles_id: 1 });
+                      this.setState({ roles_id: 2 });
                     }}
                   />
                   I'm Seller
