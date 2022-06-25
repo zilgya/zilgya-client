@@ -4,9 +4,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Router from "./helper/Router";
 // import './App.css';
 
-
 function App() {
-  
   return (
     <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>

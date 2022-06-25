@@ -9,9 +9,9 @@ import {
 import { logoutAction } from "../../redux/actionCreator/auth";
 
 function MenuAfterLogin() {
-  const loginInfo = useSelector((state) => state.auth.userInfo);
   const loginFail = useSelector((state) => state.user.err);
   const token = useSelector((state) => state.auth.token);
+  const { updateResult } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -24,13 +24,14 @@ function MenuAfterLogin() {
   };
 
   useEffect(() => {
-    if (token) {
+    dispatch(getUserInfo({ token: token }));
+    if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
     if (loginFail === "You need to Sign in again") {
       dispatch(logoutAction());
     }
-  }, [dispatch, loginFail, loginInfo.token, token]);
+  }, [dispatch, loginFail, token, updateResult]);
   return (
     <>
       <nav className="menu1 menu-after-login">

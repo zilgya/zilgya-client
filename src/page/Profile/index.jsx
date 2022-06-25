@@ -16,7 +16,7 @@ import {
 } from "../../redux/actionCreator/user";
 
 import { logoutAction } from "../../redux/actionCreator/auth";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "../../component/Loading";
 
 const mapStateToProps = (state) => {
@@ -109,12 +109,9 @@ class Profile extends Component {
 
   render() {
     console.log(this.state);
-    const { role, userData, token, isloadingUser } = this.props;
+    const { role, userData, isloadingUser } = this.props;
     const { isEdit } = this.state;
 
-    if (!token) {
-      return <Navigate to="/" />;
-    }
     // role 1 = cust
     // role 2 seller
     return (
