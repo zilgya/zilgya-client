@@ -58,19 +58,20 @@ class Login extends Component {
                       password: e.target.value,
                     });
                   }} />
-                  {this.state.isLoginPassShown ? 
+                {this.state.isLoginPassShown ?
                   <Eye className='login-eye'
-                  onClick={()=>{
-                    this.setState({
-                      isLoginPassShown: false
-                    })
-                  }}/> : 
-                  <EyeSlash className='login-eye'onClick={()=>{
+                    onClick={() => {
+                      this.setState({
+                        isLoginPassShown: false
+                      })
+                    }} /> :
+                  <EyeSlash className='login-eye' onClick={() => {
                     this.setState({
                       isLoginPassShown: true
                     })
-                  }}/>}
+                  }} />}
               </div>
+              {/* {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>} */}
               <div className="login-button"
                 onClick={() => {
                   const { email, password } = this.state;
@@ -100,18 +101,18 @@ class Login extends Component {
                       password: e.target.value,
                     });
                   }} />
-                  {this.state.isRegisPassShown ? 
+                {this.state.isRegisPassShown ?
                   <Eye className='login-eye'
-                  onClick={()=>{
-                    this.setState({
-                      isRegisPassShown: false
-                    })
-                  }}/> : 
-                  <EyeSlash className='login-eye'onClick={()=>{
+                    onClick={() => {
+                      this.setState({
+                        isRegisPassShown: false
+                      })
+                    }} /> :
+                  <EyeSlash className='login-eye' onClick={() => {
                     this.setState({
                       isRegisPassShown: true
                     })
-                  }}/>}
+                  }} />}
               </div>
               <div className="login-checkbox-register">
                 <label htmlFor="customer" className="login-customer">
@@ -124,7 +125,7 @@ class Login extends Component {
                 <label htmlFor="seller" className="login-customer">
                   <input type="radio" name="role" id="seller" className="login-customer-input"
                     onClick={() => {
-                      this.setState({ roles_id: 1 })
+                      this.setState({ roles_id: 2 })
                     }} />
                   I'm Seller
                 </label>
@@ -137,6 +138,16 @@ class Login extends Component {
                     .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                     .then((result) => {
                       console.log(result);
+                      let x = document.getElementById("snackbar");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 80000);
+                      this.setState({
+                        isSuccess: true,
+                        isError: false,
+                        errorMsg: "",
+                      });
                       this.setState({
                         isSuccess: true,
                         isError: false,
@@ -144,7 +155,12 @@ class Login extends Component {
                       });
                     })
                     .catch((error) => {
-                      // console.log(error)
+                      console.log(error.response.data.error)
+                      let x = document.getElementById("toast");
+                      x.className = "show";
+                      setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                      }, 5000);
                       this.setState({
                         isError: true,
                         errorMsg: error.response.data.err,
@@ -155,13 +171,15 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
+        <div id="snackbar">Sign Up berhasil,Silahkan Login</div>
+        <div id="toast">Register Error</div>;
       </>
     )
   }
 }
 const mapStateToProps = (reduxState) => {
   const { auth: { userInfo, isSuccess, err } } = reduxState
-  return { userInfo, isSuccess, err  }
+  return { userInfo, isSuccess, err }
 }
 
 export default connect(mapStateToProps)(Login)
