@@ -45,17 +45,14 @@ function Router() {
             </PrivateElement>
           }
         />
-        <Route
-          path="/auth/forgot"
-          element={
-              <Forgot />
-          }
-        />
+        <Route path="/auth/forgot">
+          <Route path="" element={<Forgot />} />
+          <Route path=":email" element={<Forgot />} />
+        </Route>
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
         <Route
           path="/checkout"
           element={
