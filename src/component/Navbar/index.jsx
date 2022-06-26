@@ -22,8 +22,8 @@ const Navbar = () => {
         <div className="header-absolute">
           <div className="header-default d-flex align-items-center">
             <div className="container-fluid">
-              <div className="row align-items-center nav-rspsv">
-                <div className="col-xl-4 col-lg-6 col-md-6 col-4 pl-5">
+              <div className="row align-items-center nav-rspsv nav-row-custom">
+                <div className="col-xl-4 col-lg-6 col-md-6 col-4 pl-5 nav-col-custom">
                   <div className="logo">
                     {/* <Link to="/"><img src=" " alt="logo"/></Link> */}
                     <h1 className="text-logo-nav">ZILGYA</h1>
@@ -105,7 +105,7 @@ const Navbar = () => {
                   </div>
                 </div>
                 
-                <div className="col-xl-4 pl-5 col-lg-4 col-md-4 col-4 d-flex icon-nav-group">
+                <div className="col-xl-4 pl-5 col-lg-4 col-md-4 col-4 d-flex icon-nav-group nav-icon-custom">
                   <div className="header-icon search ">
                     <nav className="search-menu">
                       <ul>

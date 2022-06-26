@@ -8,8 +8,18 @@ import { Form } from "react-bootstrap";
 import "./SellProduct.css";
 import PictPreview from "./PictPreview";
 import PictInput from "./PictInput";
-import axios from "axios";
 import { connect } from "react-redux";
+import axios from "axios";
+import Loading from '../../component/Loading'
+
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+    token: state.auth.token,
+  };
+};
+
+
 
 class SellProduct extends Component {
   constructor() {
@@ -27,6 +37,7 @@ class SellProduct extends Component {
       colors_id: "",
       message: "",
       error: "",
+      loadingPost: false,
     };
   }
 
@@ -62,6 +73,8 @@ class SellProduct extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
+      {this.state.loadingPost&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
@@ -308,6 +321,7 @@ class SellProduct extends Component {
                     }
                     formData.append(key, body[key]);
                   }
+                  this.setState({loadingPost: true})
 
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/product`, formData, { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } })
@@ -321,6 +335,7 @@ class SellProduct extends Component {
                       this.setState({
                         error: "",
                         message: result.data.message,
+                        loadingPost: false,
                       });
                     })
                     .catch((error) => {
@@ -333,6 +348,7 @@ class SellProduct extends Component {
                       this.setState({
                         error: error.response ? error.response.data.error : error.message,
                         message: "",
+                        loadingPost: false,
                       });
                     });
                 }}
@@ -354,10 +370,5 @@ class SellProduct extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    token: state.auth.token,
-  };
-};
 
-export default connect(mapStateToProps)(SellProduct);
+export default connect(mapStateToProps)(SellProduct)

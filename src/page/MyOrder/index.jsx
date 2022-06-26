@@ -6,11 +6,20 @@ import Navbar from '../../component/Navbar'
 
 import './MyOrder.css'
 import Product from '../../assets/img/cart-product-1.png'
+import { connect } from 'react-redux'
+import Loading from '../../component/Loading'
 
-export default class MyOrder extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
+class MyOrder extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
@@ -70,3 +79,5 @@ export default class MyOrder extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(MyOrder)

@@ -11,13 +11,23 @@ import ProductSmallEnam from "../../assets/img/home-product-6.png";
 import Delivery from "../../assets/icons/delivery-fast.png";
 import Size from "../../assets/icons/measurement.png";
 import Store from "../../assets/icons/pin-check.png";
+import Loading from "../../component/Loading";
+import { connect } from "react-redux";
 import withParams from "../../helper/withParams";
 import axios from "axios";
 import { currencyFormatter } from "../../helper/currencyFormatter";
-import { connect } from "react-redux";
 import { addToCartAction } from "../../redux/actionCreator/cart";
 
-export class ProductDetail extends Component {
+
+const mapStateToProps = (state) => {
+  const { cart: { cartItem } } = state
+  return {
+    loadingRedux: state.user.isLoading,
+    cartItem
+  };
+};
+
+class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
@@ -59,6 +69,7 @@ export class ProductDetail extends Component {
     return (
       <>
         <Navbar />
+        {this.props.loadingRedux && <Loading />}
         <main>
           <section>
             <div className="col-md-6 nav-title">
@@ -218,19 +229,25 @@ export class ProductDetail extends Component {
                   <div className="flex-row d-flex justify-content-center related-content">
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                     <div className="p-2 padd-rspn"></div>
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                     <div className="p-2 padd-rspn"></div>
                     <div className="col-md-4">
                       <img src={ProductSmallEnam} alt="related-product" />
-                      <h4 className="font-related">Coaster 506222-CO Loveseat</h4>
+                      <h4 className="font-related">
+                        Coaster 506222-CO Loveseat
+                      </h4>
                       <p className="p-related">$765.99</p>
                     </div>
                   </div>
@@ -245,11 +262,5 @@ export class ProductDetail extends Component {
   }
 }
 
-const mapStateToProps = (reduxState) => {
-  const { cart: { cartItem } } = reduxState
-  return {
-    cartItem
-  }
-}
 
 export default connect(mapStateToProps)(withParams(ProductDetail));
