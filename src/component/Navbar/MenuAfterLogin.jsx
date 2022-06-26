@@ -10,7 +10,7 @@ import {
 import { logoutAction } from "../../redux/actionCreator/auth";
 
 function MenuAfterLogin() {
-  const loginFail = useSelector((state) => state.user.err);
+  const getUserFail = useSelector((state) => state.user.err);
   const token = useSelector((state) => state.auth.token);
   const { updateResult } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -31,10 +31,10 @@ function MenuAfterLogin() {
     if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
-    if (loginFail === "You need to Sign in again") {
+    if (getUserFail) {
       dispatch(logoutAction());
     }
-  }, [dispatch, loginFail, token, updateResult]);
+  }, [dispatch, getUserFail, token, updateResult]);
   return (
     <>
       <nav className="menu1 menu-after-login">

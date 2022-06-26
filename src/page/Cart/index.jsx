@@ -131,7 +131,9 @@ class Cart extends Component {
                         <div
                           className="cart-main-content-plus-minus"
                           onClick={() => {
-                            this.props.dispatch(counterDownByIdAction(cart.id));
+                            if(cart.quantity > 1){
+                              this.props.dispatch(counterDownByIdAction(cart.id));
+                            }
                           }}
                         >
                           -

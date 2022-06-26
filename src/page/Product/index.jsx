@@ -5,7 +5,8 @@ import CardProducts from "./CardProducts";
 
 import "./Product.css";
 import Loading from "../../component/Loading";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeKeyword } from "../../redux/actionCreator/search";
 const init = {
   brown: true,
   yellow: true,
@@ -18,27 +19,30 @@ const Product = () => {
   const [sort, setSort] = useState("");
   const [order, setOrder] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(20000000);
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState(init);
+  const [filterColor, setFilterColor] = useState(false);
   const [totalCategory, setTotalCat] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
   const [filterPrice, setFilterPrice] = useState(false);
-  const [isloading, setloading] = useState(false)
+  const [isloading, setloading] = useState(false);
+  const [pageUrl, setPageUrl] = useState(null);
 
-  const {isLoading} =useSelector((state)=>state.user)
+  const { isLoading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 });
   return (
     <React.Fragment>
-      {isloading&& <Loading/>}
-      {isLoading&& <Loading/>}
+      {isloading && <Loading />}
+      {isLoading && <Loading />}
       <Navbar />
       <header className="pd-banner-wrapper">
         <section className="pd-banner-img-background">
           <div className="pd-banner-content-header">
-            <p>Shop {">"} Shop Right Sidebar</p>
+            <p>Shop {">"}</p>
           </div>
           <div className="pd-banner-content-body">
             <h1>Let's Shopping</h1>
@@ -57,6 +61,11 @@ const Product = () => {
                     className={category === val.category ? "pd-main-content-category-value-right-active" : "pd-main-content-category-value-right"}
                     onClick={() => {
                       setCategory(val.category);
+                      dispatch(removeKeyword());
+                      setPageUrl(null);
+                      setSort("");
+                      setOrder("");
+                      setFilterPrice(false);
                     }}
                   >
                     {val.category}
@@ -75,12 +84,17 @@ const Product = () => {
               type="range"
               name="price-range"
               id="price-range"
-              max="20000000"
+              max={maxPrice}
               min="0"
               step="1000"
-              defaultValue="0"
+              value={minPrice}
               onChange={(e) => {
                 setMinPrice(e.target.value);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
               }}
             />
             <br />
@@ -93,22 +107,114 @@ const Product = () => {
               name="price-range"
               id="price-range"
               max="20000000"
-              min="0"
+              min={minPrice}
               step="1000"
-              defaultValue="0"
+              value={maxPrice}
               onChange={(e) => {
                 setMaxPrice(e.target.value);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
               }}
             />
           </div>
           <div className="pd-price-left-content">
             <div className="pd-category-title">Colors</div>
-            <input type="checkbox" name="brown" id="brown" checked={color.brown} onClick={() => setColor({ ...color, brown: true, purple: false, black: false, yellow: false, blue: false, green: false })} />
-            <input type="checkbox" name="purple" id="purple" className="mx-3" checked={color.purple} onClick={() => setColor({ ...color, brown: false, purple: true, black: false, yellow: false, blue: false, green: false })} />
-            <input type="checkbox" name="black" id="black" checked={color.black} onClick={() => setColor({ ...color, brown: false, purple: false, black: true, yellow: false, blue: false, green: false })} />
-            <input type="checkbox" name="yellow" id="yellow" className="mx-3" checked={color.yellow} onClick={() => setColor({ ...color, brown: false, purple: false, black: false, yellow: true, blue: false, green: false })} />
-            <input type="checkbox" name="blue" id="blue" checked={color.blue} onClick={() => setColor({ ...color, brown: false, purple: false, black: false, yellow: false, blue: true, green: false })} />
-            <input type="checkbox" name="green" id="green" className="mx-3" checked={color.green} onClick={() => setColor({ ...color, brown: false, purple: false, black: false, yellow: false, blue: false, green: true })} />
+            <input
+              type="checkbox"
+              name="brown"
+              id="brown"
+              checked={color.brown}
+              onClick={() => {
+                setFilterColor(true);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+                setColor({ ...color, brown: true, purple: false, black: false, yellow: false, blue: false, green: false });
+              }}
+            />
+            <input
+              type="checkbox"
+              name="purple"
+              id="purple"
+              className="mx-3"
+              checked={color.purple}
+              onClick={() => {
+                setFilterColor(true);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+                setColor({ ...color, brown: false, purple: true, black: false, yellow: false, blue: false, green: false });
+              }}
+            />
+            <input
+              type="checkbox"
+              name="black"
+              id="black"
+              checked={color.black}
+              onClick={() => {
+                setFilterColor(true);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+                setColor({ ...color, brown: false, purple: false, black: true, yellow: false, blue: false, green: false });
+              }}
+            />
+            <input
+              type="checkbox"
+              name="yellow"
+              id="yellow"
+              className="mx-3"
+              checked={color.yellow}
+              onClick={() => {
+                setFilterColor(true);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+                setColor({ ...color, brown: false, purple: false, black: false, yellow: true, blue: false, green: false });
+              }}
+            />
+            <input
+              type="checkbox"
+              name="blue"
+              id="blue"
+              checked={color.blue}
+              onClick={() => {
+                setFilterColor(true);
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+                setColor({ ...color, brown: false, purple: false, black: false, yellow: false, blue: true, green: false });
+              }}
+            />
+            <input
+              type="checkbox"
+              name="green"
+              id="green"
+              className="mx-3"
+              checked={color.green}
+              onClick={() => {
+                setFilterColor(true);
+                setColor({ ...color, brown: false, purple: false, black: false, yellow: false, blue: false, green: true });
+                dispatch(removeKeyword());
+                setPageUrl(null);
+                setSort("");
+                setOrder("");
+                setFilterPrice(false);
+              }}
+            />
           </div>
           <div className="pd-brand-left-content">
             <div className="pd-category-title">Brands</div>
@@ -121,6 +227,11 @@ const Product = () => {
                 checked={brand === "ikea"}
                 onClick={() => {
                   setBrand("ikea");
+                  dispatch(removeKeyword());
+                  setPageUrl(null);
+                  setSort("");
+                  setOrder("");
+                  setFilterPrice(false);
                 }}
               />
               <label htmlFor="ikea" className="product-brand-label">
@@ -136,6 +247,11 @@ const Product = () => {
                 checked={brand === "mr. royal"}
                 onClick={() => {
                   setBrand("mr. royal");
+                  dispatch(removeKeyword());
+                  setPageUrl(null);
+                  setSort("");
+                  setOrder("");
+                  setFilterPrice(false);
                 }}
               />
               <label htmlFor="mr-royal" className="product-brand-label">
@@ -151,6 +267,11 @@ const Product = () => {
                 checked={brand === "sweet house"}
                 onClick={() => {
                   setBrand("sweet house");
+                  dispatch(removeKeyword());
+                  setPageUrl(null);
+                  setSort("");
+                  setOrder("");
+                  setFilterPrice(false);
                 }}
               />
               <label htmlFor="sweet-house" className="product-brand-label">
@@ -166,6 +287,11 @@ const Product = () => {
                 checked={brand === "north oxford"}
                 onClick={() => {
                   setBrand("north oxford");
+                  dispatch(removeKeyword());
+                  setPageUrl(null);
+                  setSort("");
+                  setOrder("");
+                  setFilterPrice(false);
                 }}
               />
               <label htmlFor="north-oxford" className="product-brand-label">
@@ -181,6 +307,11 @@ const Product = () => {
                 checked={brand === "mr. poppin 1929"}
                 onClick={() => {
                   setBrand("mr. poppin 1929");
+                  dispatch(removeKeyword());
+                  setPageUrl(null);
+                  setSort("");
+                  setOrder("");
+                  setFilterPrice(false);
                 }}
               />
               <label htmlFor="mr-poppin" className="product-brand-label">
@@ -191,15 +322,24 @@ const Product = () => {
               className="pd-button-filter mt-3"
               onClick={() => {
                 setFilterPrice(true);
-                setloading(false)
+                setloading(false);
               }}
             >
               FILTER
             </button>
+
             <button
               className="pd-button-reset mt-3"
               onClick={() => {
-                window.location.reload();
+                setCategory("");
+                setMinPrice(0);
+                setMaxPrice(20000000);
+                setColor("");
+                setBrand("");
+                dispatch(removeKeyword());
+                setSort("");
+                setOrder("");
+                setPageUrl(null);
               }}
             >
               RESET
@@ -249,11 +389,25 @@ const Product = () => {
             </nav>
           </header>
 
-          <CardProducts sort={sort} order={order} brand={brand} setTotalCat={setTotalCat} category={category} minPrice={minPrice} maxPrice={maxPrice} filterPrice={filterPrice} setTotalProduct={setTotalProduct} color={color} setloading={setloading} />
+          <CardProducts
+            sort={sort}
+            order={order}
+            brand={brand}
+            setTotalCat={setTotalCat}
+            category={category}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            filterPrice={filterPrice}
+            setTotalProduct={setTotalProduct}
+            color={color}
+            setloading={setloading}
+            pageUrl={pageUrl}
+            setPageUrl={setPageUrl}
+            filterColor={filterColor}
+          />
         </aside>
       </main>
       <Footer />
-      
     </React.Fragment>
   );
 };

@@ -36,7 +36,7 @@ const Navbar = () => {
                         <li>
                           <Link to="/">Home</Link>
                         </li>
-                        <li>
+                        <li className="li-dropdown">
                           <Link to="#">Pages</Link>
                           <ul className="sub-menu">
                             <li>
@@ -68,7 +68,7 @@ const Navbar = () => {
                             </li>
                           </ul>
                         </li>
-                        <li>
+                        <li className="li-dropdown">
                           <Link to="/product ">Shop</Link>
                           <ul className="mega-menu">
                             <li className="col-md-6 pl-0">

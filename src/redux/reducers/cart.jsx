@@ -6,7 +6,10 @@ const initialState = {
 
 export const cartReducer = (prevState = initialState, action) => {
   let prevCart = [...prevState.cartItem]
-  let filterCart = prevCart.findIndex(item => item.id === action.payload.id)
+  let filterCart
+  if (action.payload) {
+    filterCart = prevCart.findIndex(item => item.id === action.payload.id)
+  }
   switch (action.type) {
     case ADD_TO_CART:
       if (filterCart > -1) {
@@ -22,7 +25,7 @@ export const cartReducer = (prevState = initialState, action) => {
     case COUNTER_UP:
       prevCart[filterCart].quantity += 1
       return { ...prevState, cartItem: prevCart }
-      
+
     case COUNTER_DOWN:
       prevCart[filterCart].quantity -= 1
       return { ...prevState, cartItem: prevCart }
