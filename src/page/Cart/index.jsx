@@ -51,18 +51,12 @@ class Cart extends Component {
       return;
     }
 
-    // const product_id = cartItem.length > -1 && cartItem[0].id
-    const quantity = cartItem.length > -1 && cartItem[0].quantity;
-    const price = cartItem.length > -1 && cartItem[0].price;
-    // console.log(product_id, product_qty, product_price)
-
-    const sub_total = price * quantity;
-    const total_price = sub_total + Number(shipping);
+    const total_price = this.state.sub_total + Number(shipping);
 
     const users_id = this.props.token;
     const config = { headers: { Authorization: `Bearer ${users_id}` } };
 
-    const body = { sub_total, shipping, total_price, product: cartItem };
+    const body = { sub_total: this.state.sub_total, shipping, total_price, product: cartItem };
     // console.log(users_id)
     axios
       .post(`${process.env.REACT_APP_HOST_API}/transactions`, body, config)
@@ -83,48 +77,29 @@ class Cart extends Component {
       });
   };
   componentDidMount() {
-<<<<<<< HEAD
     const { cartItem } = this.props;
-    const sub_total = cartItem.length && cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
-    this.setState({ sub_total });
-  }
-  componentDidUpdate() {
-    if (this.state.qty) {
-      const { cartItem } = this.props;
+    if (cartItem.length > 0) {
       const sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
       this.setState({ sub_total });
-      this.setState({
-        qty: false,
-      });
-=======
-    const { cartItem } = this.props
-    if (cartItem.length > 0) {
-      const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
-      this.setState({ sub_total })
     }
   }
   componentDidUpdate() {
     if (this.state.qty) {
-      const { cartItem } = this.props
+      const { cartItem } = this.props;
       if (cartItem.length > 0) {
-        const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
-        this.setState({ sub_total })
+        const sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
+        this.setState({ sub_total });
         this.setState({
           qty: false,
-        })
+        });
       }
->>>>>>> a942dc22790c8a74139e6f67f6dc53f7b52be76d
     }
   }
   render() {
     //console.log(this.state.sub_total)
     // const { cartItem } = this.props
     if (this.state.isPost) {
-<<<<<<< HEAD
       return <Navigate to="/checkout" />;
-=======
-      return <Navigate to="/checkout" />
->>>>>>> a942dc22790c8a74139e6f67f6dc53f7b52be76d
     }
     return (
       <React.Fragment>
