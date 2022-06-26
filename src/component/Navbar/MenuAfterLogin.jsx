@@ -12,7 +12,7 @@ import { logoutAction } from "../../redux/actionCreator/auth";
 function MenuAfterLogin() {
   const getUserFail = useSelector((state) => state.user.err);
   const token = useSelector((state) => state.auth.token);
-  const { updateResult } = useSelector((state) => state.user);
+  const { updateResult, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -31,10 +31,10 @@ function MenuAfterLogin() {
     if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
-    if (getUserFail) {
+    if (getUserFail & !userInfo) {
       dispatch(logoutAction());
     }
-  }, [dispatch, getUserFail, token, updateResult]);
+  }, [dispatch, getUserFail, token, updateResult, userInfo]);
   return (
     <>
       <nav className="menu1 menu-after-login">

@@ -6,7 +6,7 @@ import {
 } from "../actionCreator/actionString";
 
 const initialState = {
-  userResult: [],
+  userResult: false,
   userInfo: false,
   isLoading: false,
   err: false,
