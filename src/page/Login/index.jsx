@@ -185,12 +185,8 @@ class Login extends Component {
 
                       this.setState({
                         isError: true,
-                        errorMsg: error.response ? error.response.data.err.msg : error.message,
-                        // email: "",
-                        // password: "",
+                        errorMsg: error.response.data.err.msg,
                       });
-                      delete this.props.location.state;
-                      window.history.replaceState({ ...this.props.location.state }, "");
                     });
                 }}
               />

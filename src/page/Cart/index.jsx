@@ -294,6 +294,7 @@ class Cart extends Component {
           >
             <div className="toast-body">
               Please input shipping !
+              {/* nambah komen buat push */}
             </div>
           </div>
         </div>
