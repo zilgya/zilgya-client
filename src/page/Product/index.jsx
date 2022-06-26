@@ -38,7 +38,7 @@ const Product = () => {
       <header className="pd-banner-wrapper">
         <section className="pd-banner-img-background">
           <div className="pd-banner-content-header">
-            <p>Shop {">"} Shop Right Sidebar</p>
+            <p>Shop {">"}</p>
           </div>
           <div className="pd-banner-content-body">
             <h1>Let's Shopping</h1>
@@ -75,7 +75,7 @@ const Product = () => {
               type="range"
               name="price-range"
               id="price-range"
-              max="20000000"
+              max={maxPrice}
               min="0"
               step="1000"
               defaultValue="0"
@@ -93,7 +93,7 @@ const Product = () => {
               name="price-range"
               id="price-range"
               max="20000000"
-              min="0"
+              min={minPrice}
               step="1000"
               defaultValue="0"
               onChange={(e) => {
