@@ -39,14 +39,14 @@ class Cart extends Component {
     const { shipping } = this.state;
     const { cartItem } = this.props
 
-    if(!shipping){
+    if (!shipping) {
       let x = document.getElementById("toast");
-        x.className = "show";
-        setTimeout(function () {
-          x.className = x.className.replace("show", "");
-        }, 10000);
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 10000);
 
-        return;
+      return;
     }
 
     // const product_id = cartItem.length > -1 && cartItem[0].id
@@ -82,24 +82,28 @@ class Cart extends Component {
   }
   componentDidMount() {
     const { cartItem } = this.props
-    const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
-    this.setState({ sub_total })
+    if (cartItem.length > 0) {
+      const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+      this.setState({ sub_total })
+    }
   }
   componentDidUpdate() {
     if (this.state.qty) {
       const { cartItem } = this.props
-      const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
-      this.setState({ sub_total })
-      this.setState({
-        qty: false,
-      })
+      if (cartItem.length > 0) {
+        const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+        this.setState({ sub_total })
+        this.setState({
+          qty: false,
+        })
+      }
     }
   }
   render() {
     //console.log(this.state.sub_total)
     // const { cartItem } = this.props
-    if(this.state.isPost){
-     return <Navigate to="/checkout"/>
+    if (this.state.isPost) {
+      return <Navigate to="/checkout" />
     }
     return (
       <React.Fragment>
