@@ -116,7 +116,7 @@ class Profile extends Component {
     // role 2 seller
     return (
       <>
-      {isloadingUser&& <Loading/>}
+        {isloadingUser && <Loading />}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
@@ -143,7 +143,14 @@ class Profile extends Component {
               </Link>
             </div>
           ) : (
-            <></>
+            <div className="profile-seller-navbar">
+              <Link to="/profile">
+                <div className="profile-seller-navbar-active">Profile</div>
+              </Link>
+              <Link to="/seller/myorder">
+                <div className="profile-seller-navbar-inactive">My Order</div>
+              </Link>
+            </div>
           )}
           <div className="profile-main-container">
             <div className="non-editable-wrapper">

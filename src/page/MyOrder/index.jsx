@@ -12,14 +12,16 @@ import Loading from '../../component/Loading'
 const mapStateToProps = (state) => {
   return {
     loadingRedux: state.user.isLoading,
+    role: Number(state.auth.userInfo.roles_id),
   };
 };
 
 class MyOrder extends Component {
   render() {
+    const {role} = this.props
     return (
       <>
-      {this.props.loadingRedux&& <Loading/>}
+      {this.props.loadingRedux && <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
@@ -28,20 +30,33 @@ class MyOrder extends Component {
               See your notifications for the latest updates
             </div>
           </div>
-          <div className="profile-seller-navbar">
-            <Link to="/profile">
-              <div className="profile-seller-navbar-inactive">Profile</div>
-            </Link>
-            <Link to="/seller/myproduct">
-              <div className="profile-seller-navbar-inactive">My Product</div>
-            </Link>
-            <Link to="/seller/sellproduct">
-              <div className="profile-seller-navbar-inactive">Selling Product</div>
-            </Link>
-            <Link to="/seller/myorder">
-              <div className="profile-seller-navbar-active">My Order</div>
-            </Link>
-          </div>
+          {role === 2 ? (
+            <div className="profile-seller-navbar">
+              <Link to="/profile">
+                <div className="profile-seller-navbar-inactive">Profile</div>
+              </Link>
+              <Link to="/seller/myproduct">
+                <div className="profile-seller-navbar-inactive">My Product</div>
+              </Link>
+              <Link to="/seller/sellproduct">
+                <div className="profile-seller-navbar-inactive">
+                  Selling Product
+                </div>
+              </Link>
+              <Link to="/seller/myorder">
+                <div className="profile-seller-navbar-active">My Order</div>
+              </Link>
+            </div>
+          ) : (
+            <div className="profile-seller-navbar">
+              <Link to="/profile">
+                <div className="profile-seller-navbar-inactive">Profile</div>
+              </Link>
+              <Link to="/seller/myorder">
+                <div className="profile-seller-navbar-active">My Order</div>
+              </Link>
+            </div>
+          )}
           <div className="mo-main-content">
             <div className="mo-col-name">
               <div className="mo-col-product">PRODUCTS</div>

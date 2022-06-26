@@ -1,9 +1,9 @@
 import React from "react";
 
-const Pagination = ({ setPageUrl, meta }) => {
-  const { currentPage, totalPage } = meta;
+const Pagination = ({ setPageUrl, currentPage, totalPage }) => {
   const getPaginationGroup = () => {
-    let start = currentPage || totalPage ? Math.floor((currentPage - 1) / totalPage) * totalPage : 1;
+    let start = currentPage || totalPage ? Math.floor((currentPage - 1) / totalPage) * totalPage : 0;
+
     return new Array(totalPage).fill().map((_, i) => start + i + 1);
   };
   //   const nextPageHandler = () => {

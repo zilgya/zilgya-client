@@ -21,6 +21,7 @@ import Wishlist from "../page/Wishlist";
 import PrivateElement from "../component/PrivateElement/PrivateElement";
 import PrivateElementAfterLogin from "../component/PrivateElement/PrivateElementAfterLogin";
 import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateElementAfterLoginSeller";
+import Forgot from "../page/Forgot";
 
 function Router() {
   return (
@@ -44,11 +45,14 @@ function Router() {
             </PrivateElement>
           }
         />
+        <Route path="/auth/forgot">
+          <Route path="" element={<Forgot />} />
+          <Route path=":email" element={<Forgot />} />
+        </Route>
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
         <Route
           path="/checkout"
           element={
@@ -88,9 +92,7 @@ function Router() {
         <Route
           path="/seller/myorder"
           element={
-            <PrivateElementAfterLoginSeller>
               <MyOrder />
-            </PrivateElementAfterLoginSeller>
           }
         />
         <Route path="*" element={<PageNotFound />} />
