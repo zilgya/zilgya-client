@@ -29,7 +29,7 @@
   list-style: none;
 }
 
-.main-menu > ul > li::before {
+.main-menu > ul > .li-dropdown::before {
   content: "";
   font-family: "FontAwesome";
   font-size: 18px;

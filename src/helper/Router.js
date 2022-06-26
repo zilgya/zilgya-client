@@ -92,9 +92,7 @@ function Router() {
         <Route
           path="/seller/myorder"
           element={
-            <PrivateElementAfterLoginSeller>
               <MyOrder />
-            </PrivateElementAfterLoginSeller>
           }
         />
         <Route path="*" element={<PageNotFound />} />
