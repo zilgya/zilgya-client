@@ -4,6 +4,8 @@ import Footer from "../../component/Footer/index";
 import CardProducts from "./CardProducts";
 
 import "./Product.css";
+import Loading from "../../component/Loading";
+import { useSelector } from "react-redux";
 const init = {
   brown: true,
   yellow: true,
@@ -23,10 +25,15 @@ const Product = () => {
   const [totalCategory, setTotalCat] = useState([]);
   const [totalProduct, setTotalProduct] = useState(0);
   const [filterPrice, setFilterPrice] = useState(false);
+  const [isloading, setloading] = useState(false)
+
+  const {isLoading} =useSelector((state)=>state.user)
 
   const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 });
   return (
     <React.Fragment>
+      {isloading&& <Loading/>}
+      {isLoading&& <Loading/>}
       <Navbar />
       <header className="pd-banner-wrapper">
         <section className="pd-banner-img-background">
@@ -184,6 +191,7 @@ const Product = () => {
               className="pd-button-filter mt-3"
               onClick={() => {
                 setFilterPrice(true);
+                setloading(false)
               }}
             >
               FILTER
@@ -241,10 +249,11 @@ const Product = () => {
             </nav>
           </header>
 
-          <CardProducts sort={sort} order={order} brand={brand} setTotalCat={setTotalCat} category={category} minPrice={minPrice} maxPrice={maxPrice} filterPrice={filterPrice} setTotalProduct={setTotalProduct} color={color} />
+          <CardProducts sort={sort} order={order} brand={brand} setTotalCat={setTotalCat} category={category} minPrice={minPrice} maxPrice={maxPrice} filterPrice={filterPrice} setTotalProduct={setTotalProduct} color={color} setloading={setloading} />
         </aside>
       </main>
       <Footer />
+      
     </React.Fragment>
   );
 };

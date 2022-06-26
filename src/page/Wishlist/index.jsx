@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
-import Footer from '../../component/Footer'
-import Navbar from '../../component/Navbar'
+import Footer from '../../../component/Footer'
+import Navbar from '../../../component/Navbar'
 import { CheckCircle } from 'react-bootstrap-icons'
 import './Wishlist.css'
 
 import Product from '../../assets/img/product.png'
+import { connect } from 'react-redux'
+import Loading from '../../../component/Loading'
 
-export default class Wishlist extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
+class Wishlist extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="co-header">
@@ -73,3 +82,4 @@ export default class Wishlist extends Component {
     )
   }
 }
+export default connect(mapStateToProps)(Wishlist)

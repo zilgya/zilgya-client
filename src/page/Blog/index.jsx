@@ -15,11 +15,20 @@ import BlogImgThree from "../../assets/img//blog-image-three.png";
 import BlogImgFour from "../../assets/img/blog-image-four.png";
 import Clock from "../../assets/icons/clock.png";
 import Tag from "../../assets/icons/tag.png";
+import Loading from "../../component/Loading";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
 
 export class Blog extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <main>
           <div className="co-header">
@@ -76,7 +85,7 @@ export class Blog extends Component {
                   <img src={RecentOne} alt="Recent Images" />
                   <div className="flex-row pl-3">
                     <strong className="pl-3 recent-tag-title">
-                      How To Put Movies On Iphone
+                      How To Put Movies Iphone
                     </strong>
                     <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
@@ -273,4 +282,4 @@ export class Blog extends Component {
   }
 }
 
-export default Blog;
+export default connect(mapStateToProps)(Blog) 

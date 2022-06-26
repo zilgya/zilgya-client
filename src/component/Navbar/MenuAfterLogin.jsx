@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { NavDropdown, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserInfo,
@@ -9,9 +10,9 @@ import {
 import { logoutAction } from "../../redux/actionCreator/auth";
 
 function MenuAfterLogin() {
-  const loginInfo = useSelector((state) => state.auth.userInfo);
   const loginFail = useSelector((state) => state.user.err);
   const token = useSelector((state) => state.auth.token);
+  const { updateResult } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -24,13 +25,14 @@ function MenuAfterLogin() {
   };
 
   useEffect(() => {
-    if (token) {
+    dispatch(getUserInfo({ token: token }));
+    if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
     if (loginFail === "You need to Sign in again") {
       dispatch(logoutAction());
     }
-  }, [dispatch, loginFail, loginInfo.token, token]);
+  }, [dispatch, loginFail, token, updateResult]);
   return (
     <>
       <nav className="menu1 menu-after-login">
@@ -43,13 +45,61 @@ function MenuAfterLogin() {
         <Link className="link1" to="/notif ">
           Notification
         </Link>
+        
+        <div className="d-block d-xl-none link-dropdown">
+          <Link className="link1" to="/">
+            Home
+          </Link>
+        </div>
+        <div className="d-block d-xl-none link-dropdown">
+          <NavDropdown className="link1-nav-dropdown" title="Pages">
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/about ">About us</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/contact ">Contact us</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/faq ">FAQ</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/comingsoon ">Coming soon 1</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/404 ">404 page</Link>
+            </Dropdown.Item>
+          </NavDropdown>
+          <NavDropdown className="link1-nav-dropdown" title="Shop">
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/cart">Shopping Cart</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              {" "}
+              <Link to="/checkout">Checkout</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/profile">My account</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/track ">Order Tracking</Link>
+            </Dropdown.Item>
+            <Dropdown.Item as="button" className="link1">
+              <Link to="/404 ">404 page</Link>
+            </Dropdown.Item>
+          </NavDropdown>
+        </div>
+        <div className="d-block d-xl-none link-dropdown">
+          <Link className="link1" to="/blog ">
+            Blog
+          </Link>
+        </div>
         <div
           className="link1"
           style={{ cursor: "pointer" }}
           onClick={handleLogout}
         >
           Logout
-        </div>
+        </div>        
       </nav>
     </>
   );

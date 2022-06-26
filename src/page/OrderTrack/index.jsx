@@ -3,11 +3,19 @@ import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
 import './OrderTrack.css'
 import Map from '../../assets/img/trackmap.png'
+import { connect } from 'react-redux'
+import Loading from '../../component/Loading'
 
-export default class OrderTrack extends Component {
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+class OrderTrack extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="co-header">
@@ -34,3 +42,5 @@ export default class OrderTrack extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(OrderTrack)

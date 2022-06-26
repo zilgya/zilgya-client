@@ -4,12 +4,20 @@ import Navbar from '../../component/Navbar'
 import { CheckCircle, HeartFill } from 'react-bootstrap-icons'
 import './Favorite.css'
 import Product from '../../assets/img/product.png'
+import { connect } from 'react-redux'
+import Loading from '../../component/Loading'
 
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
 
-export default class Favorite extends Component {
+ class Favorite extends Component {
   render() {
     return (
       <>
+      {this.props.loadingRedux&& <Loading/>}
         <Navbar />
         <main className="login-global-container">
           <div className="co-header">
@@ -76,3 +84,5 @@ export default class Favorite extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(Favorite)
