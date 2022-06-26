@@ -4,11 +4,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useSelector } from "react-redux";
 
-const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, maxPrice, filterPrice, category, sort, order, setloading }) => {
+const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, maxPrice, filterPrice, category, sort, order, setloading, setPageUrl, pageUrl }) => {
   const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
   const [mta, setMta] = useState({});
-  const [pageUrl, setPageUrl] = useState(null);
+  // const [pageUrl, setPageUrl] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const CardProducts = ({ color, setTotalProduct, brand, setTotalCat, minPrice, ma
     if (brand) {
       baseUrl += `brand=${brand}&`;
     }
-    if (minPrice || maxPrice) {
+    if (minPrice || maxPrice !== 20000000) {
       baseUrl += `minPrice=${minPrice}&maxPrice=${maxPrice}&`;
     }
     if (color) {

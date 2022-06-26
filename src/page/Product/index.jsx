@@ -5,7 +5,9 @@ import CardProducts from "./CardProducts";
 
 import "./Product.css";
 import Loading from "../../component/Loading";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { removeKeyword } from "../../redux/actionCreator/search";
 const init = {
   brown: true,
   yellow: true,
@@ -18,7 +20,7 @@ const Product = () => {
   const [sort, setSort] = useState("");
   const [order, setOrder] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(20000000);
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState(init);
@@ -26,8 +28,11 @@ const Product = () => {
   const [totalProduct, setTotalProduct] = useState(0);
   const [filterPrice, setFilterPrice] = useState(false);
   const [isloading, setloading] = useState(false)
+  const [pageUrl, setPageUrl] = useState(null);
 
   const {isLoading} =useSelector((state)=>state.user)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 });
   return (
@@ -38,7 +43,7 @@ const Product = () => {
       <header className="pd-banner-wrapper">
         <section className="pd-banner-img-background">
           <div className="pd-banner-content-header">
-            <p>Shop {">"} Shop Right Sidebar</p>
+            <p>Shop {">"}</p>
           </div>
           <div className="pd-banner-content-body">
             <h1>Let's Shopping</h1>
@@ -75,12 +80,13 @@ const Product = () => {
               type="range"
               name="price-range"
               id="price-range"
-              max="20000000"
+              max={maxPrice}
               min="0"
               step="1000"
               defaultValue="0"
               onChange={(e) => {
-                setMinPrice(e.target.value);
+                setTimeout(()=> setMinPrice(e.target.value), 1000)
+                ;
               }}
             />
             <br />
@@ -93,11 +99,12 @@ const Product = () => {
               name="price-range"
               id="price-range"
               max="20000000"
-              min="0"
+              min={minPrice}
               step="1000"
-              defaultValue="0"
+              defaultValue="20000000"
               onChange={(e) => {
-                setMaxPrice(e.target.value);
+                setTimeout(() => setMaxPrice(e.target.value), 1000)
+                ;
               }}
             />
           </div>
@@ -199,7 +206,17 @@ const Product = () => {
             <button
               className="pd-button-reset mt-3"
               onClick={() => {
-                window.location.reload();
+                // window.location.reload();
+                navigate('/product')
+                setCategory("")
+                setMinPrice(0)
+                setMaxPrice(20000000)
+                setColor("")
+                setBrand("")
+                dispatch(removeKeyword())
+                setSort("")
+                setOrder("")
+                setPageUrl(null)
               }}
             >
               RESET
@@ -249,7 +266,7 @@ const Product = () => {
             </nav>
           </header>
 
-          <CardProducts sort={sort} order={order} brand={brand} setTotalCat={setTotalCat} category={category} minPrice={minPrice} maxPrice={maxPrice} filterPrice={filterPrice} setTotalProduct={setTotalProduct} color={color} setloading={setloading} />
+          <CardProducts sort={sort} order={order} brand={brand} setTotalCat={setTotalCat} category={category} minPrice={minPrice} maxPrice={maxPrice} filterPrice={filterPrice} setTotalProduct={setTotalProduct} color={color} setloading={setloading} pageUrl={pageUrl} setPageUrl={setPageUrl}/>
         </aside>
       </main>
       <Footer />
