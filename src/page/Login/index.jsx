@@ -8,14 +8,17 @@ import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import withLocation from "../../helper/withLocation";
 
 //axios
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
+      emailRegister: "",
+      passwordRegister: "",
       roles_id: "",
       isRegisPassShown: false,
       isLoginPassShown: false,
@@ -26,12 +29,28 @@ class Login extends Component {
       isShow: false,
       errorMsgone: "",
       isDuplicate: false,
+      message: "",
     };
   }
   componentDidMount() {
     document.title = "Authentication";
+    const { state } = this.props.location;
+    this.setState({
+      message: null,
+    });
+    if (state) {
+      this.setState({
+        message: state,
+      });
+      let x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 8000);
+    }
   }
   render() {
+    //console.log(this.state);
     const { userInfo } = this.props;
     if (userInfo) return <Navigate to="/" />;
     return (
@@ -94,7 +113,8 @@ class Login extends Component {
                   e.preventDefault();
                   const { email, password } = this.state;
                   const body = { email, password };
-                  this.props.dispatch(loginAction(body))
+                  this.props
+                    .dispatch(loginAction(body))
                     .then((result) => {
                       console.log(result);
                       let x = document.getElementById("snackbar");
@@ -106,10 +126,13 @@ class Login extends Component {
                         isSuccess: true,
                         isError: false,
                         errorMsg: "",
-                      });
+                        message: null,
+                        // email: "",
+                        // password: "",
+                      });            
                     })
                     .catch((error) => {
-                      console.log(error)
+                      console.log(error);
                       let x = document.getElementById("toast");
                       x.className = "show";
                       setTimeout(function () {
@@ -118,8 +141,12 @@ class Login extends Component {
 
                       this.setState({
                         isError: true,
-                        errorMsg: error.response.data.err.msg,
+                        errorMsg: error.response ? error.response.data.err.msg : error.message,
+                        // email: "",
+                        // password: "",
                       });
+                      delete this.props.location.state;
+                      window.history.replaceState({ ...this.props.location.state }, "");
                     });
                 }}
               />
@@ -140,7 +167,7 @@ class Login extends Component {
                 placeholder="Email address"
                 onChange={(e) => {
                   this.setState({
-                    email: e.target.value,
+                    emailRegister: e.target.value,
                   });
                 }}
               />
@@ -151,7 +178,7 @@ class Login extends Component {
                   placeholder="Password"
                   onChange={(e) => {
                     this.setState({
-                      password: e.target.value,
+                      passwordRegister: e.target.value,
                     });
                   }}
                 />
@@ -206,8 +233,8 @@ class Login extends Component {
                 value="Register"
                 onClick={(e) => {
                   e.preventDefault();
-                  const { email, password, roles_id } = this.state;
-                  const body = { email, password, roles_id };
+                  const { emailRegister, passwordRegister, roles_id } = this.state;
+                  const body = { email: emailRegister, password: passwordRegister, roles_id };
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/auth/new`, body)
                     .then((result) => {
@@ -221,10 +248,13 @@ class Login extends Component {
                         isSuccess: true,
                         isError: false,
                         errorMsg: "",
+                        message: null,
                       });
+                      delete this.props.location.state;
+                      window.history.replaceState({ ...this.props.location.state }, "");
                     })
                     .catch((error) => {
-                      console.log(error)
+                      console.log(error);
                       let x = document.getElementById("toast");
                       x.className = "show";
                       setTimeout(function () {
@@ -242,20 +272,16 @@ class Login extends Component {
           </div>
         </main>
         <Footer />
-        {/* <div id="snackbar">Register success, please check email for verification</div> */}
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-          <div id="snackbar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-body">
-              Register success, please check email for verification
-            </div>
+        {/* <div id="snackbar"></div> */}
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="snackbar" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{this.state.message ? this.state.message : "Register success, check email for verification"}</div>
           </div>
         </div>
         {/* <div id="toast">Register Error</div> */}
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-          <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-body">
-              {this.state.isError ? `${this.state.errorMsg}` : null}
-            </div>
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{this.state.isError ? `${this.state.errorMsg}` : "error"}</div>
           </div>
         </div>
       </>
@@ -269,4 +295,4 @@ const mapStateToProps = (reduxState) => {
   return { userInfo, isSuccess, err };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(withLocation(Login));

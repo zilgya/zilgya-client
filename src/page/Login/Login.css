@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");
 
 .login-global-container {
   display: flex;
@@ -21,9 +21,8 @@
   line-height: 64px;
   letter-spacing: 0px;
   text-align: center;
-  color: #1A1A1A;
+  color: #1a1a1a;
   margin-bottom: 15px;
-
 }
 
 .login-header-info {
@@ -33,8 +32,7 @@
   line-height: 18px;
   letter-spacing: 0px;
   text-align: center;
-  color: #1A1A1A;
-
+  color: #1a1a1a;
 }
 
 .login-main-container {
@@ -57,8 +55,7 @@
   line-height: 37px;
   letter-spacing: 0px;
   text-align: left;
-  color: #1A1A1A;
-
+  color: #1a1a1a;
 }
 
 .login-input {
@@ -68,37 +65,38 @@
   line-height: 16px;
   letter-spacing: 0px;
   text-align: left;
-  color: #4D4D4D;
+  color: #4d4d4d;
   margin: 10px 0;
   height: 40px;
   padding: 10px 15px;
-  border: 1px solid #CECECE;
+  border: 1px solid #cecece;
 }
 
-.login-input-pass-container{
+.login-input-pass-container {
   font-family: Arimo;
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0px;
   text-align: left;
-  color: #4D4D4D;
+  color: #4d4d4d;
   margin: 10px 0;
   height: 40px;
   padding: 10px 15px;
-  border: 1px solid #CECECE;
+  border: 1px solid #cecece;
 }
 
-.login-input-pass{
+.login-input-pass {
   border: none;
   width: 90%;
 }
 
-.login-input:focus, .login-input-pass:focus {
+.login-input:focus,
+.login-input-pass:focus {
   outline: none;
 }
 
-.login-eye{
+.login-eye {
   height: 20px;
   width: 20px;
   cursor: pointer;
@@ -112,7 +110,6 @@
   line-height: 28px;
   letter-spacing: 0px;
   text-align: left;
-
 }
 
 .login-customer {
@@ -126,7 +123,6 @@
   margin-right: 20px;
 }
 
-
 #remember-me {
   height: 15px;
   width: 15px;
@@ -138,7 +134,7 @@
 }
 
 .login-forgot {
-  color: #D25B5B;
+  color: #d25b5b;
   cursor: pointer;
 }
 
@@ -149,10 +145,10 @@
   line-height: 16px;
   letter-spacing: 0px;
   text-align: center;
-  background: #1A1A1A;
+  background: #1a1a1a;
   width: 100px;
   height: 40px;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,7 +166,88 @@
 }
 
 .login-button:active {
-  background: #1A1A1A;
+  background: #1a1a1a;
+}
+
+/* TOAST */
+
+#toast {
+  visibility: hidden;
+  min-width: 350px;
+  margin-left: -125px;
+  background-color: rgb(254, 254, 254);
+  /* color: rgb(255, 0, 0); */
+  font-family: Arimo;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px;
+  padding: 16px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+}
+
+#toast-success {
+  color: rgb(0, 146, 19);
+  font-family: Arimo;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+}
+
+#toast-failed {
+  /* color: rgb(255, 0, 0); */
+  font-family: "Rubik";
+  font-weight: 600;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+}
+.toast-header {
+  background: #fcfcfc;
+}
+
+#toast.show,
+#toast-failed {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: rgb(255, 255, 255);
+  /* color: rgb(0, 146, 19); */
+  font-family: Rubik;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+}
+#snackbar.show,
+#toast-failed {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 /* TOAST */
 
