@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { XLg, Cart as CartIcon } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 
@@ -19,7 +19,8 @@ const mapStateToProps = (state) => {
   return {
     loadingRedux: state.user.isLoading,
     cartItem,
-    users: state.user.userResult
+    users: state.user.userResult,
+    token: state.auth.token,
   };
 };
 
@@ -28,44 +29,78 @@ class Cart extends Component {
     super();
     this.state = {
       shipping: "",
+      sub_total: 0,
+      total_price: 0,
+      qty: false,
+      isPost: false,
     };
   }
   handlePostTransaction = () => {
     const { shipping } = this.state;
     const { cartItem } = this.props
-    const product_id = cartItem.length > -1 && cartItem[0].id
+
+    if(!shipping){
+      let x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 10000);
+
+        return;
+    }
+
+    // const product_id = cartItem.length > -1 && cartItem[0].id
     const quantity = cartItem.length > -1 && cartItem[0].quantity
     const price = cartItem.length > -1 && cartItem[0].price
     // console.log(product_id, product_qty, product_price)
 
     const sub_total = (price * quantity)
-    const total_price = sub_total + (shipping === "Flat rate" ? 10000 : 0)
-    // const users_id = this.state.users.id
+    const total_price = sub_total + Number(shipping)
 
-    const users_id = this.props.users.id
+    const users_id = this.props.token
     const config = { headers: { Authorization: `Bearer ${users_id}` } }
 
-    const body = { users_id, sub_total, shipping, total_price, quantity, product_id }
+    const body = { sub_total, shipping, total_price, product: cartItem }
     // console.log(users_id)
     axios
       .post(`${process.env.REACT_APP_HOST_API}/transactions`, body, config)
       .then(result => {
         console.log(result)
+        this.props.dispatch(deleteCartAction());
         this.setState({
           isPost: true
         });
-        let x = document.getElementById("better");
-        x.className = "show";
-        setTimeout(function () {
-          x.className = x.className.replace("show", "");
-        }, 10000);
+        // let x = document.getElementById("better");
+        // x.className = "show";
+        // setTimeout(function () {
+        //   x.className = x.className.replace("show", "");
+        // }, 10000);
       })
       .catch(error => {
         console.log(error)
       })
   }
+  componentDidMount() {
+    const { cartItem } = this.props
+    const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+    this.setState({ sub_total })
+  }
+  componentDidUpdate() {
+    if (this.state.qty) {
+      const { cartItem } = this.props
+      const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+      this.setState({ sub_total })
+      this.setState({
+        qty: false,
+      })
+    }
+  }
   render() {
-     const { cartItem } = this.props
+    //console.log(this.state.sub_total)
+    // const { cartItem } = this.props
+    if(this.state.isPost){
+     return <Navigate to="/checkout"/>
+    }
     return (
       <React.Fragment>
         {this.props.loadingRedux && <Loading />}
@@ -113,6 +148,9 @@ class Cart extends Component {
                           className="cart-main-content-delete"
                           onClick={() => {
                             this.props.dispatch(deleteFromCartAction(cart.id));
+                            this.setState({
+                              qty: true,
+                            })
                           }}
                         />
                         <img
@@ -131,8 +169,11 @@ class Cart extends Component {
                         <div
                           className="cart-main-content-plus-minus"
                           onClick={() => {
-                            if(cart.quantity > 1){
+                            if (cart.quantity > 1) {
                               this.props.dispatch(counterDownByIdAction(cart.id));
+                              this.setState({
+                                qty: true,
+                              })
                             }
                           }}
                         >
@@ -145,6 +186,9 @@ class Cart extends Component {
                           className="cart-main-content-plus-minus"
                           onClick={() => {
                             this.props.dispatch(counterUpByIdAction(cart.id));
+                            this.setState({
+                              qty: true,
+                            })
                           }}
                         >
                           +
@@ -186,7 +230,7 @@ class Cart extends Component {
                   <div className="cart-right-item">
                     <div className="cart-right-title">Subtotal</div>
                     <div className="cart-subtotal-body">
-                      {currencyFormatter.format((cartItem.length > -1 && cartItem[0].price) * (cartItem.length > -1 && cartItem[0].quantity))}</div>
+                      {currencyFormatter.format(this.state.sub_total)}</div>
                   </div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Shipping</div>
@@ -198,8 +242,8 @@ class Cart extends Component {
                           id="rate"
                           className="cart-right-input"
                           onChange={() => {
-                            this.setState({ shipping: "Flat Rate" })
-                        }}
+                            this.setState({ shipping: "100000" })
+                          }}
                         />
                         Flat rate: $10
                       </label>
@@ -209,6 +253,9 @@ class Cart extends Component {
                           name="shipping"
                           id="free"
                           className="cart-right-input"
+                          onChange={() => {
+                            this.setState({ shipping: "0" })
+                          }}
                         />
                         Free Shipping
                       </label>
@@ -218,6 +265,9 @@ class Cart extends Component {
                           name="shipping"
                           id="pickup"
                           className="cart-right-input"
+                          onChange={() => {
+                            this.setState({ shipping: "0" })
+                          }}
                         />
                         Local pickup
                       </label>
@@ -225,7 +275,7 @@ class Cart extends Component {
                   </div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Total Price</div>
-                    <div className="cart-subtotal-body">{currencyFormatter.format((cartItem.length > -1 && cartItem[0].price) * (cartItem.length > -1 && cartItem[0].quantity) + (this.state.shipping === "Flat rate" ? 14000 : 0))}</div>
+                    <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total + Number(this.state.shipping))}</div>
                   </div>
                 </div>
                 <div className="cart-checkout-button" onClick={this.handlePostTransaction}>Proceed To Check Out</div>
@@ -234,6 +284,19 @@ class Cart extends Component {
           )}
         </div>
         <Footer />
+        <div className="toast-container">
+          <div
+            id="toast"
+            className="toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-body">
+              Please input shipping !
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
