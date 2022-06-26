@@ -48,7 +48,6 @@ function Router() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
         <Route
           path="/checkout"
           element={
