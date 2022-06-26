@@ -83,6 +83,7 @@ class Cart extends Component {
       });
   };
   componentDidMount() {
+<<<<<<< HEAD
     const { cartItem } = this.props;
     const sub_total = cartItem.length && cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
     this.setState({ sub_total });
@@ -95,13 +96,35 @@ class Cart extends Component {
       this.setState({
         qty: false,
       });
+=======
+    const { cartItem } = this.props
+    if (cartItem.length > 0) {
+      const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+      this.setState({ sub_total })
+    }
+  }
+  componentDidUpdate() {
+    if (this.state.qty) {
+      const { cartItem } = this.props
+      if (cartItem.length > 0) {
+        const sub_total = cartItem.map(item => item.quantity * item.price).reduce((b, a) => b + a);
+        this.setState({ sub_total })
+        this.setState({
+          qty: false,
+        })
+      }
+>>>>>>> a942dc22790c8a74139e6f67f6dc53f7b52be76d
     }
   }
   render() {
     //console.log(this.state.sub_total)
     // const { cartItem } = this.props
     if (this.state.isPost) {
+<<<<<<< HEAD
       return <Navigate to="/checkout" />;
+=======
+      return <Navigate to="/checkout" />
+>>>>>>> a942dc22790c8a74139e6f67f6dc53f7b52be76d
     }
     return (
       <React.Fragment>
