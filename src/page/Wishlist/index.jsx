@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import Footer from '../../../component/Footer'
-import Navbar from '../../../component/Navbar'
+import Footer from '../../component/Footer'
+import Navbar from '../../component/Navbar'
 import { CheckCircle } from 'react-bootstrap-icons'
 import './Wishlist.css'
 
 import Product from '../../assets/img/product.png'
 import { connect } from 'react-redux'
-import Loading from '../../../component/Loading'
+import Loading from '../../component/Loading'
 
 const mapStateToProps = (state) => {
   return {

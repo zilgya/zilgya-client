@@ -11,12 +11,12 @@ import ProductSmallEnam from "../../assets/img/home-product-6.png";
 import Delivery from "../../assets/icons/delivery-fast.png";
 import Size from "../../assets/icons/measurement.png";
 import Store from "../../assets/icons/pin-check.png";
-import Loading from "../../../component/Loading";
+import Loading from "../../component/Loading";
 import { connect } from "react-redux";
-import withParams from "../../../helper/withParams";
+import withParams from "../../helper/withParams";
 import axios from "axios";
 import { currencyFormatter } from "../../helper/currencyFormatter";
-import { addToCartAction } from "../actionCreator/cart";
+import { addToCartAction } from "../../redux/actionCreator/cart";
 
 
 const mapStateToProps = (state) => {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { XLg, Cart as CartIcon } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import Footer from "../../component/Footer";
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
   return {
     loadingRedux: state.user.isLoading,
     cartItem,
+    users: state.user.userResult
   };
 };
 
@@ -25,10 +27,45 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = {
-      cartItem: [1],
+      shipping: "",
     };
   }
+  handlePostTransaction = () => {
+    const { shipping } = this.state;
+    const { cartItem } = this.props
+    const product_id = cartItem.length > -1 && cartItem[0].id
+    const quantity = cartItem.length > -1 && cartItem[0].quantity
+    const price = cartItem.length > -1 && cartItem[0].price
+    // console.log(product_id, product_qty, product_price)
+
+    const sub_total = (price * quantity)
+    const total_price = sub_total + (shipping === "Flat rate" ? 10000 : 0)
+    // const users_id = this.state.users.id
+
+    const users_id = this.props.users.id
+    const config = { headers: { Authorization: `Bearer ${users_id}` } }
+
+    const body = { users_id, sub_total, shipping, total_price, quantity, product_id }
+    // console.log(users_id)
+    axios
+      .post(`${process.env.REACT_APP_HOST_API}/transactions`, body, config)
+      .then(result => {
+        console.log(result)
+        this.setState({
+          isPost: true
+        });
+        let x = document.getElementById("better");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 10000);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   render() {
+     const { cartItem } = this.props
     return (
       <React.Fragment>
         {this.props.loadingRedux && <Loading />}
@@ -146,7 +183,8 @@ class Cart extends Component {
                   <div className="cart-right-title">Cart Total</div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Subtotal</div>
-                    <div className="cart-subtotal-body">$125</div>
+                    <div className="cart-subtotal-body">
+                      {currencyFormatter.format((cartItem.length > -1 && cartItem[0].price) * (cartItem.length > -1 && cartItem[0].quantity))}</div>
                   </div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Shipping</div>
@@ -157,6 +195,9 @@ class Cart extends Component {
                           name="shipping"
                           id="rate"
                           className="cart-right-input"
+                          onChange={() => {
+                            this.setState({ shipping: "Flat Rate" })
+                        }}
                         />
                         Flat rate: $10
                       </label>
@@ -182,10 +223,10 @@ class Cart extends Component {
                   </div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Total Price</div>
-                    <div className="cart-subtotal-body">$125</div>
+                    <div className="cart-subtotal-body">{currencyFormatter.format((cartItem.length > -1 && cartItem[0].price) * (cartItem.length > -1 && cartItem[0].quantity) + (this.state.shipping === "Flat rate" ? 14000 : 0))}</div>
                   </div>
                 </div>
-                <div className="cart-checkout-button">Proceed To Check Out</div>
+                <div className="cart-checkout-button" onClick={this.handlePostTransaction}>Proceed To Check Out</div>
               </div>
             </main>
           )}
