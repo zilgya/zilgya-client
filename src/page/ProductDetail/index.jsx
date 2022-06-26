@@ -160,6 +160,11 @@ class ProductDetail extends Component {
                 onClick={() => {
                   const { product, pict, quantity } = this.state
                   this.props.dispatch(addToCartAction(this.props.params.id, product.name, pict[0], quantity, product.price))
+                  let x = document.getElementById("snackbar");
+                  x.className = "show";
+                  setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                  }, 2000);
                 }}>
                 <p className="btn-hover">Add To Cart</p>
               </div>
@@ -257,6 +262,11 @@ class ProductDetail extends Component {
           </section>
         </main>
         <Footer />
+        <div className="snackbar-wrapper">
+          <div id="snackbar">
+            Product added
+          </div>
+        </div>
       </>
     );
   }
