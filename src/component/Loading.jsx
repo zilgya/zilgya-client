@@ -12,8 +12,8 @@ function Loading() {
           justifyContent: "center",
           alignItems: "center",
           position: "fixed",
-          zIndex: '200',
-          backdropFilter: "contrast(0.5)"
+          zIndex: "200",
+          background: "rgba(6, 6, 6, 0.5)",
         }}
       >
         <div
@@ -22,8 +22,7 @@ function Loading() {
             padding: "10px",
             gap: "10px",
             justifyContent: "center",
-            // backgroundColor: "#fff",
-            // borderRadius: "20px",
+            color: "#fff",
           }}
         >
           <Spinner animation="border" />

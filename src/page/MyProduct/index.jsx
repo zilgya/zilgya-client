@@ -82,7 +82,8 @@ function MyProduct() {
           <div className="wl-product-container">
             
             {products ? (
-              products.map((result) => (
+              products.map((result) => 
+                (
                 <ProductItemSeller key={result.id} products={result} />
               ))
             ) : (

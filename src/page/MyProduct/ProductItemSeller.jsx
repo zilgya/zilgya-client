@@ -3,14 +3,13 @@ import React from "react";
 import { CheckCircle } from "react-bootstrap-icons";
 
 
-function ProductItemSeller({ products }) {
-  
+function ProductItemSeller({ products}) {
   return (
     <>
-      <div className="wl-product-item">
+      <div className="wl-product-item"  >
         <div className="wl-img-name-container">
           <div className="wl-product-img-container">
-            <img src={products.images_url} alt="product" className="wl-product-img" />
+            <img src={products.images_url} alt="product" className="wl-product-img"/>
           </div>
           <div className="wl-product-name">{products.name}</div>
         </div>

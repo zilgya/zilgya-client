@@ -48,32 +48,6 @@ class Wishlist extends Component {
                   <div className="wl-addcart-button">Add to cart</div>
                   </div>
               </div>
-              <div className="wl-product-item">
-                <div className="wl-img-name-container">
-                  <div className="wl-product-img-container"><img src={Product} alt="product" className='wl-product-img' /></div>
-                  <div className="wl-product-name">Dining Side Chair in Beige</div>
-                </div>
-                <div className="wl-product-stock"><CheckCircle /> In Stock</div>
-                <div className="wl-product-price-container">
-                  <div className="wl-product-price">
-                  $765.99
-                  </div>
-                  <div className="wl-addcart-button">Add to cart</div>
-                  </div>
-              </div>
-              <div className="wl-product-item">
-                <div className="wl-img-name-container">
-                  <div className="wl-product-img-container"><img src={Product} alt="product" className='wl-product-img' /></div>
-                  <div className="wl-product-name">Dining Side Chair in Beige</div>
-                </div>
-                <div className="wl-product-stock"><CheckCircle /> In Stock</div>
-                <div className="wl-product-price-container">
-                  <div className="wl-product-price">
-                  $765.99
-                  </div>
-                  <div className="wl-addcart-button">Add to cart</div>
-                  </div>
-              </div>
             </div>
           </div>
         </main>

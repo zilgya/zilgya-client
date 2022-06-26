@@ -8,8 +8,7 @@ function PrivateElementAfterLoginSeller({
     isRouteReplaced = true,
     extraData = undefined,
 }) {
-    const { roles_id } = useSelector((state) => state.auth);
-
+    const { roles_id } = useSelector((state) => state.auth.userInfo);
     if (roles_id !== "2") {
         return (
             <Navigate to={redirectTo} replace={isRouteReplaced} state={extraData} />
