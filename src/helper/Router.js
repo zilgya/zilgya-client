@@ -21,6 +21,7 @@ import Wishlist from "../page/Wishlist";
 import PrivateElement from "../component/PrivateElement/PrivateElement";
 import PrivateElementAfterLogin from "../component/PrivateElement/PrivateElementAfterLogin";
 import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateElementAfterLoginSeller";
+import Forgot from "../page/Forgot";
 
 function Router() {
   return (
@@ -42,6 +43,12 @@ function Router() {
             <PrivateElement>
               <Profile />
             </PrivateElement>
+          }
+        />
+        <Route
+          path="/auth/forgot"
+          element={
+              <Forgot />
           }
         />
         <Route path="/product/:id" element={<ProductDetail />} />
