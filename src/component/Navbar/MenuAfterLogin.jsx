@@ -25,7 +25,9 @@ function MenuAfterLogin() {
   };
 
   useEffect(() => {
-    dispatch(getUserInfo({ token: token }));
+    if (token) {
+      dispatch(getUserInfo({ token: token }));
+    }
     if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
@@ -45,7 +47,7 @@ function MenuAfterLogin() {
         <Link className="link1" to="/notif ">
           Notification
         </Link>
-        
+
         <div className="d-block d-xl-none link-dropdown">
           <Link className="link1" to="/">
             Home
@@ -99,7 +101,7 @@ function MenuAfterLogin() {
           onClick={handleLogout}
         >
           Logout
-        </div>        
+        </div>
       </nav>
     </>
   );
