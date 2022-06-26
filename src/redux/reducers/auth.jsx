@@ -35,7 +35,7 @@ const authReducer = (prevState = initialState, action) => {
         ...prevState,
         isLoading: false,
         isSuccess: false,
-        err: action.payload.response.data.err.msg,
+        err: action.payload.response.data.err,
       };
 
     case logoutString:
