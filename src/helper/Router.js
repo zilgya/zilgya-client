@@ -26,123 +26,6 @@ import Forgot from "../page/Forgot";
 import About from "../page/About"
 
 function Router() {
-<<<<<<< HEAD
-    return ( <
-        BrowserRouter >
-        <
-        Routes >
-        <
-        Route path = "/"
-        element = { < Home / > }
-        /> <
-        Route path = "/auth"
-        element = { <
-            PrivateElementAfterLogin >
-            <
-            Login / >
-            <
-            /PrivateElementAfterLogin>
-        }
-        /> <
-        Route path = "/auth/confirm/:token"
-        element = { < ConfirmEmail / > }
-        /> <
-        Route path = "/profile"
-        element = { <
-            PrivateElement >
-            <
-            Profile / >
-            <
-            /PrivateElement>
-        }
-        /> <
-        Route path = "/auth/forgot" >
-        <
-        Route path = ""
-        element = { < Forgot / > }
-        /> <
-        Route path = ":email"
-        element = { < Forgot / > }
-        /> <
-        /Route> <
-        Route path = "/product/:id"
-        element = { < ProductDetail / > }
-        /> <
-        Route path = "/blog"
-        element = { < Blog / > }
-        /> <
-        Route path = "/blogdetail"
-        element = { < BlogDetail / > }
-        /> <
-        Route path = "/about"
-        element = { < About / > }
-        /> <
-        Route path = "/product"
-        element = { < Product / > }
-        /> <
-        Route path = "/cart"
-        element = { < Cart / > }
-        /> <
-        Route path = "/checkout"
-        element = { <
-            PrivateElement >
-            <
-            Checkout / >
-            <
-            /PrivateElement>
-        }
-        /> <
-        Route path = "/wishlist"
-        element = { <
-            PrivateElement >
-            <
-            Wishlist / >
-            <
-            /PrivateElement>
-        }
-        /> <
-        Route path = "/favorite"
-        element = { < Favorite / > }
-        /> <
-        Route path = "/track"
-        element = { < OrderTrack / > }
-        /> <
-        Route path = "/faq"
-        element = { < Faq / > }
-        /> <
-        Route path = "/comingsoon"
-        element = { < ComingSoon / > }
-        /> <
-        Route path = "/seller/myproduct"
-        element = { <
-            PrivateElementAfterLoginSeller >
-            <
-            MyProduct / >
-            <
-            /PrivateElementAfterLoginSeller>
-        }
-        /> <
-        Route path = "/seller/sellproduct"
-        element = { <
-            PrivateElementAfterLoginSeller >
-            <
-            SellProduct / >
-            <
-            /PrivateElementAfterLoginSeller>
-        }
-        /> <
-        Route path = "/seller/myorder"
-        element = { <
-            MyOrder / >
-        }
-        /> <
-        Route path = "*"
-        element = { < PageNotFound / > }
-        /> <
-        /Routes> <
-        /BrowserRouter>
-    );
-=======
   return (
     <BrowserRouter>
       <Routes>
@@ -224,11 +107,12 @@ function Router() {
               <MyOrder />
           }
         />
+        <Route path="/blog/detail" element={<BlogDetail />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
->>>>>>> 9d07d0cea4614eab79f45c7132beda4f1878757a
 }
 
 export default Router;
