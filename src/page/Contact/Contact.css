@@ -1,0 +1,28 @@
+.contact-button {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+  background: #262626;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.contact-button:hover {
+  background: #2b2b2b;
+}
+
+.contact-button:active {
+  background: #1A1A1A;
+}

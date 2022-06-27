@@ -13,6 +13,9 @@ const mapStateToProps = (state) => {
   };
 };
 class OrderTrack extends Component {
+  componentDidMount() { 
+    document.title = "Order Tracking"
+   }
   render() {
     return (
       <>

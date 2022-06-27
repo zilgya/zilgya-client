@@ -19,6 +19,9 @@ const mapStateToProps = (state) => {
 };
 
 class Faq extends Component {
+  componentDidMount() { 
+    document.title = "FaQ"
+   }
   render() {
     return (
       <React.Fragment>

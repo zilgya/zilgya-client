@@ -28,6 +28,9 @@ const mapStateToProps = (state) => {
 };
 
 class Home extends Component {
+  componentDidMount() { 
+    document.title = "Zilgya Furniture"
+   }
   render() {
     return (
       <React.Fragment>
