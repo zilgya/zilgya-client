@@ -14,13 +14,13 @@ function MenuAfterLogin() {
   const token = useSelector((state) => state.auth.token);
   const { updateResult, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  console.log(token);
   const handleLogout = async () => {
     await Promise.all([dispatch(logOutFromServer({ token: token }))]).then(
       setTimeout(() => {
         dispatch(logoutAction());
         dispatch(resetUserState());
-      }, 3000)
+      }, 2000)
     );
   };
 
@@ -31,8 +31,11 @@ function MenuAfterLogin() {
     if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
-    if (getUserFail & !userInfo) {
+    if ((getUserFail && !userInfo) || getUserFail) {
       dispatch(logoutAction());
+      setTimeout(() => {
+        dispatch(resetUserState());
+      }, 2000);
     }
   }, [dispatch, getUserFail, token, updateResult, userInfo]);
   return (
