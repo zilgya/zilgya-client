@@ -79,14 +79,20 @@ class Cart extends Component {
   handleShow = () => {
     const { shipping } = this.state;
     if (!shipping) {
+      this.setState({
+        error: 'Please Select Shipping'
+      })
       let x = document.getElementById("toast");
       x.className = "show";
       setTimeout(function () {
         x.className = x.className.replace("show", "");
-      }, 10000);
+      }, 1000);
       return;
     }
-    this.setState({ setShow: true, show: true });
+    this.setState({
+      setShow: true,
+      show: true,
+    });
   };
 
   componentDidMount() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 // import { PlusLg } from 'react-bootstrap-icons'
 
 import "./SellProduct.css";
@@ -38,10 +38,31 @@ class SellProduct extends Component {
       message: "",
       error: "",
       loadingPost: false,
+      show: false,
+      setShow: false,
     };
   }
 
-  
+  //modal prompt sell product
+  handleClose = () => this.setState({ setShow: false, show: false });
+  handleReload = () => window.location.reload();
+  // handleReset = () => {
+  //   this.setState({
+  //     pict: [],
+  //     pictPrev: [],
+  //     name: "",
+  //     description: "",
+  //     price: "",
+  //     stock: "",
+  //     stock_condition: "",
+  //     categories_id: "",
+  //     brands_id: "",
+  //     colors_id: "",
+  //     setShow: false,
+  //     show: false
+  //   })
+  // }
+
   inputPictHandler = async (e) => {
     e.preventDefault();
 
@@ -73,8 +94,8 @@ class SellProduct extends Component {
   render() {
     return (
       <>
-      {this.props.loadingRedux&& <Loading/>}
-      {this.state.loadingPost&& <Loading/>}
+        {this.props.loadingRedux && <Loading />}
+        {this.state.loadingPost && <Loading />}
         <Navbar />
         <main className="login-global-container">
           <div className="login-header">
@@ -321,7 +342,7 @@ class SellProduct extends Component {
                     }
                     formData.append(key, body[key]);
                   }
-                  this.setState({loadingPost: true})
+                  this.setState({ loadingPost: true })
 
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/product`, formData, { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } })
@@ -330,12 +351,13 @@ class SellProduct extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                        window.location.reload();
+
                       }, 5000);
                       this.setState({
                         error: "",
                         message: result.data.message,
                         loadingPost: false,
+                        setShow: true, show: true
                       });
                     })
                     .catch((error) => {
@@ -343,7 +365,7 @@ class SellProduct extends Component {
                       x.className = "show";
                       setTimeout(function () {
                         x.className = x.className.replace("show", "");
-                        window.location.reload();
+
                       }, 5000);
                       this.setState({
                         error: error.response ? error.response.data.error : error.message,
@@ -366,6 +388,24 @@ class SellProduct extends Component {
             <div className="toast-body">{this.state.error}</div>
           </div>
         </div>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header >
+            <Modal.Title className="cart-modal-title">Saved Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="cart-modal-body">Do you want to add more product?</Modal.Body>
+          <Modal.Footer>
+            <Link to="/seller/myproduct">
+              <Button className="cart-button-add-product" onClick={this.handleClose}>
+                No
+              </Button>
+            </Link>
+            <Link to="/seller/sellproduct">
+              <Button className="cart-button-proceed" onClick={this.handleReload}>
+                Yes
+              </Button>
+            </Link>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   }
