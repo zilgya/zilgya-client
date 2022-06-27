@@ -30,6 +30,9 @@ const mapStateToProps = (state) => {
 };
 
 export class BlogDetail extends Component {
+  componentDidMount() { 
+    document.title = "Blog Detail"
+   }
   render() {
     return (
       <>

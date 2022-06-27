@@ -25,6 +25,9 @@ const mapStateToProps = (state) => {
 };
 
 export class AboutUs extends Component { 
+  componentDidMount() { 
+    document.title = "About Us"
+   }
   render() {
     return (
      <>
@@ -127,40 +130,40 @@ export class AboutUs extends Component {
               <div className="col-md-4 team-content-zilgya">
                 <img src={Hope} alt="" />
                 <h5>Achmad Rasidi</h5>
-                <p>--</p>
+                <p>-BACKEND-</p>
               </div>
               <div className="col-md-4 team-content-zilgya">
                 <img src={Rm} alt="" />
                 <h5>
                   Ilham Nurrohman
                 </h5>
-                <p>--</p>
+                <p>-BACKEND-</p>
               </div>
               <div className="col-md-4 team-content-zilgya">
                 <img src={Suga} alt="" />
                 <h5>
                 Lukman Dwi Susanto
                 </h5>
-                <p>--</p>
+                <p>-FULLSTACK-</p>
               </div>              
               <div className="col-md-4 team-content-zilgya">
                 <img src={V} alt="" />
                 <h5>Ghofar Asnanto</h5>
-                <p>--</p>
+                <p>-FRONTEND-</p>
               </div>
               <div className="col-md-4 team-content-zilgya">
                 <img src={Jin} alt="" />
                 <h5>
                 Yoga Arta Grahanantyo
                 </h5>
-                <p>--</p>
+                <p>-FRONTEND-</p>
               </div>
               <div className="col-md-4 team-content-zilgya">
                 <img src={Jimin} alt="" />
                 <h5>
                 Zul Fahmi Alfin
                 </h5>
-                <p>--</p>
+                <p>-FRONTEND-</p>
               </div>
               </div>             
             </div>
