@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
+import BackToTop from "../../component/ButtonToTop"
 import { CheckCircle } from 'react-bootstrap-icons'
 import './Wishlist.css'
 
@@ -51,6 +52,7 @@ class Wishlist extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     )

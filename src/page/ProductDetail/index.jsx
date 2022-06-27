@@ -5,6 +5,7 @@ import "./productdetail.css";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import DescTab from "../../component/DescTab";
+import BackToTop from "../../component/ButtonToTop";
 
 import ProductSmallEnam from "../../assets/img/home-product-6.png";
 // import ProductSmallSatu from "../../assets/img/home-product-1.png";
@@ -297,6 +298,7 @@ class ProductDetail extends Component {
             </div>
           </section>
         </main>
+        <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
           <div id="snackbar">

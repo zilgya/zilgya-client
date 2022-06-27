@@ -3,6 +3,7 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { connect } from "react-redux";
 import Loading from "../../component/Loading";
+import BackToTop from "../../component/ButtonToTop";
 
 //assets
 import AboutImg from "../../assets/img/about-img.png";
@@ -176,6 +177,7 @@ export class AboutUs extends Component {
             </div>
           </section>
           </main>
+          <BackToTop />
         <Footer />
      </>
     )

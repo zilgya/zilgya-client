@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Footer from '../../component/Footer'
 import Navbar from '../../component/Navbar'
+import BackToTop from "../../component/ButtonToTop"
 import './OrderTrack.css'
 import Map from '../../assets/img/trackmap.png'
 import { connect } from 'react-redux'
@@ -37,6 +38,7 @@ class OrderTrack extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     )
