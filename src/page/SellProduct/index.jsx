@@ -188,7 +188,7 @@ class SellProduct extends Component {
                     });
                   }}
                 >
-                  <option>Select category you want to use for this product</option>
+                  <option>Select this product category</option>
                   <option value="1">Table</option>
                   <option value="2">Chair</option>
                   <option value="3">Lamp</option>
@@ -212,7 +212,7 @@ class SellProduct extends Component {
                     });
                   }}
                 >
-                  <option>Select brand you want to use for this product</option>
+                  <option>Select this product brand</option>
                   <option value="1">IKEA</option>
                   <option value="2">Mr. Royal</option>
                   <option value="3">Sweet House</option>
@@ -231,7 +231,7 @@ class SellProduct extends Component {
                     });
                   }}
                 >
-                  <option>Select color you want to use for this product</option>
+                  <option>Select this product color</option>
                   <option value="1">Yellow</option>
                   <option value="2">Brown</option>
                   <option value="3">Purple</option>
