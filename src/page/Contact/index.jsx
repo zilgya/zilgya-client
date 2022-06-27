@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
 import Navbar from '../../component/Navbar'
 import Map from '../../assets/img/trackmap.png'
+import BackToTop from "../../component/ButtonToTop"
 import './Contact.css'
-export default class Contact extends Component {
+import { connect } from 'react-redux';
+import Loading from '../../component/Loading';
+import Footer from '../../component/Footer';
+
+
+const mapStateToProps = (state) => {
+  return {
+    loadingRedux: state.user.isLoading,
+  };
+};
+
+class Contact extends Component {
+  componentDidMount() { 
+    document.title = "Contact Us"
+   }
   render() {
     return (
       <>
+        {this.props.loadingRedux && <Loading />}
         <Navbar />
         <main className="login-global-container">
           <div className="co-header">
@@ -26,7 +42,11 @@ export default class Contact extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
+        <Footer/>
       </>
     )
   }
 }
+
+export default connect(mapStateToProps)(Contact)
