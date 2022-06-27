@@ -6,7 +6,7 @@ function PrivateElement({
     children,
     redirectTo = "/auth",
     isRouteReplaced = true,
-    extraData = undefined,
+    extraData = null,
 }) {
     const { token } = useSelector((state) => state.auth);
 
