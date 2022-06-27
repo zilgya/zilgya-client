@@ -67,6 +67,10 @@ class Profile extends Component {
       setShow: false,
     };
   }
+
+  componentDidMount() { 
+    document.title = "Profile"
+   }
   handleImage = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       this.setState({

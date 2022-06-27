@@ -26,6 +26,9 @@ const mapStateToProps = (state) => {
 };
 
 export class Blog extends Component {
+  componentDidMount() { 
+    document.title = "Blog"
+   }
   render() {
     return (
       <>
