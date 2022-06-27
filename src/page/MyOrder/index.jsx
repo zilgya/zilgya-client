@@ -27,6 +27,7 @@ class MyOrder extends Component {
       role: "buyer",
       roleActive: false,
       isLoading: false,
+      order_process: "sent",
     };
   }
   async componentDidMount() {
@@ -169,6 +170,8 @@ class MyOrder extends Component {
               <div className="mo-col-status">STATUS ORDER</div>
               <div className="mo-col-total">TOTAL</div>
               <div className="mo-col-orderId">{this.state.role === "buyer" ? "SELLER" : "BUYER"}</div>
+              <div className="mo-col-orderId">{this.state.order_process === "sent" ? "#" : "SENT"}</div>
+              
             </div>
             <div className="mo-item-container">
               {!this.state.product.length ? (
@@ -191,6 +194,7 @@ class MyOrder extends Component {
                     </div>
                     <div className="mo-product-total">{item.total_price}</div>
                     <div className="mo-product-total">{this.state.role === "buyer" ? item.seller : item.buyer}</div>
+                    {item.order_status === "SENT" ? <button className="btn btn-success">Complete</button>: <button className="btn btn-danger">Checkout</button>}
                   </div>
                 ))
               )}
