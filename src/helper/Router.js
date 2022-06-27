@@ -16,7 +16,6 @@ import OrderTrack from "../page/OrderTrack";
 import PageNotFound from "../page/PageNotFound";
 import Product from "../page/Product";
 import ProductDetail from "../page/ProductDetail";
-import About from "../page/About";
 import Profile from "../page/Profile";
 import SellProduct from "../page/SellProduct";
 import Wishlist from "../page/Wishlist";
@@ -24,6 +23,7 @@ import PrivateElement from "../component/PrivateElement/PrivateElement";
 import PrivateElementAfterLogin from "../component/PrivateElement/PrivateElementAfterLogin";
 import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateElementAfterLoginSeller";
 import Forgot from "../page/Forgot";
+import About from "../page/About"
 
 function Router() {
     return ( <
