@@ -8,20 +8,12 @@ import Navbar from "../../component/Navbar";
 // import CartProductOne from '../../assets/img/cart-product-1.png'
 // import CartProductTwo from '../../assets/img/cart-product-2.png'
 
-<<<<<<< HEAD
 import './Cart.css'
 import Loading from '../../component/Loading';
 import { connect } from 'react-redux';
 import { currencyFormatter } from '../../helper/currencyFormatter';
 import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from '../../redux/actionCreator/cart';
 import { Button, Modal } from "react-bootstrap";
-=======
-import "./Cart.css";
-import Loading from "../../component/Loading";
-import { connect } from "react-redux";
-import { currencyFormatter } from "../../helper/currencyFormatter";
-import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from "../../redux/actionCreator/cart";
->>>>>>> b5c5a629b1d08e23d389942e7cbecd624bb04943
 
 const mapStateToProps = (state) => {
   const {
@@ -75,7 +67,6 @@ class Cart extends Component {
         //   x.className = x.className.replace("show", "");
         // }, 10000);
       })
-<<<<<<< HEAD
       .catch(error => {
         console.log(error)
       })
@@ -96,12 +87,6 @@ class Cart extends Component {
     this.setState({ setShow: true, show: true })
   };
 
-=======
-      .catch((error) => {
-        console.log(error);
-      });
-  };
->>>>>>> b5c5a629b1d08e23d389942e7cbecd624bb04943
   componentDidMount() {
     const { cartItem } = this.props;
     if (cartItem.length > 0) {
