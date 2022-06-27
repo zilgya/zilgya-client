@@ -110,6 +110,7 @@ class Profile extends Component {
     }, 3000);
   };
 
+  //modal prompt logout
   handleClose = () => this.setState({ setShow: false, show: false });
   handleShow = () => this.setState({ setShow: true, show: true })
 
