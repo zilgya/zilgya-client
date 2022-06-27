@@ -8,11 +8,12 @@ import Navbar from "../../component/Navbar";
 // import CartProductOne from '../../assets/img/cart-product-1.png'
 // import CartProductTwo from '../../assets/img/cart-product-2.png'
 
-import "./Cart.css";
-import Loading from "../../component/Loading";
-import { connect } from "react-redux";
-import { currencyFormatter } from "../../helper/currencyFormatter";
-import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from "../../redux/actionCreator/cart";
+import './Cart.css'
+import Loading from '../../component/Loading';
+import { connect } from 'react-redux';
+import { currencyFormatter } from '../../helper/currencyFormatter';
+import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from '../../redux/actionCreator/cart';
+import { Button, Modal } from "react-bootstrap";
 
 const mapStateToProps = (state) => {
   const {
@@ -35,21 +36,15 @@ class Cart extends Component {
       total_price: 0,
       qty: false,
       isPost: false,
+      show: false,
+      setShow: false,
     };
   }
   handlePostTransaction = () => {
     const { shipping } = this.state;
     const { cartItem } = this.props;
 
-    if (!shipping) {
-      let x = document.getElementById("toast");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 10000);
 
-      return;
-    }
 
     const total_price = this.state.sub_total + Number(shipping);
 
@@ -72,10 +67,26 @@ class Cart extends Component {
         //   x.className = x.className.replace("show", "");
         // }, 10000);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+
+  handleClose = () => this.setState({ setShow: false, show: false });
+  handleShow = () => {
+    const { shipping } = this.state;
+    if (!shipping) {
+      let x = document.getElementById("toast");
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 10000);
+      return;
+    }
+    this.setState({ setShow: true, show: true })
   };
+
   componentDidMount() {
     const { cartItem } = this.props;
     if (cartItem.length > 0) {
@@ -251,9 +262,7 @@ class Cart extends Component {
                     <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total + Number(this.state.shipping))}</div>
                   </div>
                 </div>
-                <div className="cart-checkout-button" onClick={this.handlePostTransaction}>
-                  Proceed To Check Out
-                </div>
+                <div className="cart-checkout-button" onClick={this.handleShow}>Proceed To Check Out</div>
               </div>
             </main>
           )}
@@ -264,6 +273,24 @@ class Cart extends Component {
             <div className="toast-body">Please input shipping !{/* nambah komen buat push */}</div>
           </div>
         </div>
+        <Modal backdrop='static' show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title className="cart-modal-title">Warning !</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="cart-modal-body">Do you want to checkout this product?</Modal.Body>
+          <Modal.Footer>
+            <Link to='/product'>
+              <Button className="cart-button-add-product" onClick={this.handleClose}>
+                Add More Product
+              </Button>
+            </Link>
+            <Link to='/checkout'>
+              <Button className="cart-button-proceed" onClick={this.handlePostTransaction}>
+                Proceed
+              </Button>
+            </Link>
+          </Modal.Footer>
+        </Modal>
       </React.Fragment>
     );
   }
