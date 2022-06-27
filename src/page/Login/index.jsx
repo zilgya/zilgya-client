@@ -9,6 +9,7 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import withLocation from "../../helper/withLocation";
 import Loading from "../../component/Loading";
+// import { Modal } from "react-bootstrap";
 
 //axios
 class Login extends Component {
@@ -38,19 +39,41 @@ class Login extends Component {
     const { state } = this.props.location;
     this.setState({
       message: null,
+
     });
+    // if (state !== null && !state.isAuthenticated) {
+    //   this.setState({
+    //     isShow: true
+    //   });
+    // }
     if (state) {
-      this.setState({
-        message: state,
-      });
-      let x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 8000);
+      if (!state.isAuthenticated) {
+        this.setState({
+          isError: true,
+          errorMsg: "Login First"
+        })
+        let x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+        return
+      }
+      if (state.message) {
+        this.setState({
+          message: state
+        })
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+        return
+      }
     }
   }
   render() {
+    console.log("LOCATION", this.props.location);
     const { isLoading } = this.props;
     return (
       <>
@@ -367,11 +390,11 @@ class Login extends Component {
         </main>
         <Footer />
         <div className="snackbar-wrapper">
-        <div id="snackbar">
-          {this.state.message
-            ? this.state.message
-            : "Register success, please check email for verification"}
-        </div>
+          <div id="snackbar">
+            {this.state.message
+              ? this.state.message
+              : "Register success, please check email for verification"}
+          </div>
         </div>
         {/* <div id="toast">Register Error</div> */}
         <div className="toast-container">

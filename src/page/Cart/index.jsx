@@ -13,6 +13,7 @@ import Loading from '../../component/Loading';
 import { connect } from 'react-redux';
 import { currencyFormatter } from '../../helper/currencyFormatter';
 import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from '../../redux/actionCreator/cart';
+import { Button, Modal } from "react-bootstrap";
 
 const mapStateToProps = (state) => {
   const { cart: { cartItem } } = state
@@ -33,21 +34,15 @@ class Cart extends Component {
       total_price: 0,
       qty: false,
       isPost: false,
+      show: false,
+      setShow: false,
     };
   }
   handlePostTransaction = () => {
     const { shipping } = this.state;
     const { cartItem } = this.props
 
-    if (!shipping) {
-      let x = document.getElementById("toast");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 10000);
 
-      return;
-    }
 
     // const product_id = cartItem.length > -1 && cartItem[0].id
     const quantity = cartItem.length > -1 && cartItem[0].quantity
@@ -80,6 +75,22 @@ class Cart extends Component {
         console.log(error)
       })
   }
+
+
+  handleClose = () => this.setState({ setShow: false, show: false });
+  handleShow = () => {
+    const { shipping } = this.state;
+    if (!shipping) {
+      let x = document.getElementById("toast");
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 10000);
+      return;
+    }
+    this.setState({ setShow: true, show: true })
+  };
+
   componentDidMount() {
     const { cartItem } = this.props
     if (cartItem.length > 0) {
@@ -282,7 +293,7 @@ class Cart extends Component {
                     <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total + Number(this.state.shipping))}</div>
                   </div>
                 </div>
-                <div className="cart-checkout-button" onClick={this.handlePostTransaction}>Proceed To Check Out</div>
+                <div className="cart-checkout-button" onClick={this.handleShow}>Proceed To Check Out</div>
               </div>
             </main>
           )}
@@ -302,6 +313,24 @@ class Cart extends Component {
             </div>
           </div>
         </div>
+        <Modal backdrop='static' show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title className="cart-modal-title">Warning !</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="cart-modal-body">Do you want to checkout this product?</Modal.Body>
+          <Modal.Footer>
+            <Link to='/product'>
+              <Button className="cart-button-add-product" onClick={this.handleClose}>
+                Add More Product
+              </Button>
+            </Link>
+            <Link to='/checkout'>
+              <Button className="cart-button-proceed" onClick={this.handlePostTransaction}>
+                Proceed
+              </Button>
+            </Link>
+          </Modal.Footer>
+        </Modal>
       </React.Fragment>
     );
   }
