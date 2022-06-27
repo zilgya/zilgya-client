@@ -40,18 +40,39 @@ class Login extends Component {
     this.setState({
       message: null,
     });
+    // if (state !== null && !state.isAuthenticated) {
+    //   this.setState({
+    //     isShow: true
+    //   });
+    // }
     if (state) {
-      this.setState({
-        message: state,
-      });
-      let x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 8000);
+      if (!state.isAuthenticated) {
+        this.setState({
+          isError: true,
+          errorMsg: "Login First",
+        });
+        let x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+        return;
+      }
+      if (state.message) {
+        this.setState({
+          message: state,
+        });
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+        return;
+      }
     }
   }
   render() {
+    console.log("LOCATION", this.props.location);
     const { isLoading } = this.props;
     return (
       <>

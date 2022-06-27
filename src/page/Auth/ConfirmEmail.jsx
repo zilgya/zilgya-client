@@ -10,12 +10,12 @@ const ConfirmEmail = () => {
       try {
         const result = await axios.get(`${process.env.REACT_APP_HOST_API}/auth/confirm/${token}`);
         const { message } = result.data;
-        navigate("/auth", { state: message });
+        navigate("/auth", { state: { message } });
       } catch (error) {
         navigate("/auth", { state: { message: error.response ? error.response.data.err : error.message } });
       }
     })();
-  }, [token,navigate]);
+  }, [token, navigate]);
 };
 
 export default ConfirmEmail;
