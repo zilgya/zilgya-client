@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavDropdown, Dropdown, Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,12 +20,13 @@ function MenuAfterLogin() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const navigate = useNavigate()
   const handleLogout = async () => {
     await Promise.all([dispatch(logOutFromServer({ token: token }))]).then(
       setTimeout(() => {
         dispatch(logoutAction());
         dispatch(resetUserState());
+        navigate("/")
       }, 3000)
     );
   };
