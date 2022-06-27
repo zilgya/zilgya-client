@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../component/Navbar/index";
 import Footer from "../../component/Footer/index";
 import CardProducts from "./CardProducts";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./Product.css";
 import Loading from "../../component/Loading";
@@ -410,6 +411,7 @@ const Product = () => {
           />
         </aside>
       </main>
+      <BackToTop />
       <Footer />
     </React.Fragment>
   );

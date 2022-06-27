@@ -4,6 +4,8 @@ import { XLg, Cart as CartIcon } from "react-bootstrap-icons";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
+
 
 // import CartProductOne from '../../assets/img/cart-product-1.png'
 // import CartProductTwo from '../../assets/img/cart-product-2.png'
@@ -79,6 +81,9 @@ class Cart extends Component {
   handleShow = () => {
     const { shipping } = this.state;
     if (!shipping) {
+      this.setState({
+        error: 'Please Select Shipping'
+      })
       let x = document.getElementById("toast");
       x.className = "show";
       setTimeout(function () {
@@ -86,7 +91,10 @@ class Cart extends Component {
       }, 1000);
       return;
     }
-    this.setState({ setShow: true, show: true });
+    this.setState({
+      setShow: true,
+      show: true,
+    });
   };
 
   componentDidMount() {
@@ -345,6 +353,7 @@ class Cart extends Component {
             </main>
           )}
         </div>
+        <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
           <div id="snackbar">Promo Added</div>

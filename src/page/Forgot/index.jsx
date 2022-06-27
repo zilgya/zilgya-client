@@ -6,6 +6,7 @@ import Loading from "../../component/Loading";
 import Navbar from "../../component/Navbar";
 import withNavigate from "../../helper/withNavigate";
 import withParams from "../../helper/withParams";
+import BackToTop from "../../component/ButtonToTop";
 import "./Forgot.css";
 
 class Forgot extends Component {
@@ -247,6 +248,7 @@ class Forgot extends Component {
             </div>
           )}
         </main>
+        <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
           <div id="snackbar">{this.state.message}</div>

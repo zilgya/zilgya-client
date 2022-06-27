@@ -19,6 +19,8 @@ import FooterImgFour from "../../assets/img/home-img-footer-4.png";
 import "./Home.css";
 import { connect } from "react-redux";
 import Loading from "../../component/Loading";
+import BackToTop from "../../component/ButtonToTop";
+import { Back } from "react-bootstrap-icons";
 
 const mapStateToProps = (state) => {
   return {
@@ -191,6 +193,7 @@ class Home extends Component {
             </div>
           </section>
         </footer>
+        <BackToTop />
         <Footer />
       </React.Fragment>
     );

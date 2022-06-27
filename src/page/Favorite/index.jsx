@@ -6,6 +6,7 @@ import './Favorite.css'
 import Product from '../../assets/img/product.png'
 import { connect } from 'react-redux'
 import Loading from '../../component/Loading'
+import BackToTop from "../../component/ButtonToTop";
 
 const mapStateToProps = (state) => {
   return {
@@ -79,6 +80,7 @@ const mapStateToProps = (state) => {
             </div>
           </div>
         </main>
+        <BackToTop />   
         <Footer />
       </>
     )

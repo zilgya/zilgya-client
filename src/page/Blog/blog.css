@@ -92,7 +92,6 @@ h5 {
 .sidebar-banner-blog>img {
     display: block;
     position: relative;
-    z-index: 2;
     overflow: hidden;
     object-fit: cover;
     filter: brightness(.5);
