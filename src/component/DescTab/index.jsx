@@ -59,7 +59,7 @@ export class DescTab extends Component {
                       </div>
                       <div className="col-lg-5 order-1">
                         <div className="banner">
-                          <img src={Banner} alt="banner" />
+                          <img src={Banner} alt="banner" className="banner-img"/>
                         </div>
                       </div>
                     </div>
