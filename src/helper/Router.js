@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfirmEmail from "../page/Auth/ConfirmEmail";
 import Blog from "../page/Blog";
+import BlogDetail from "../page/BlogDetail";
 import Cart from "../page/Cart";
 import Checkout from "../page/Checkout";
 import ComingSoon from "../page/ComingSoon";
@@ -22,6 +23,7 @@ import PrivateElement from "../component/PrivateElement/PrivateElement";
 import PrivateElementAfterLogin from "../component/PrivateElement/PrivateElementAfterLogin";
 import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateElementAfterLoginSeller";
 import Forgot from "../page/Forgot";
+import About from "../page/About"
 
 function Router() {
   return (
@@ -105,6 +107,8 @@ function Router() {
               <MyOrder />
           }
         />
+        <Route path="/blog/detail" element={<BlogDetail />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

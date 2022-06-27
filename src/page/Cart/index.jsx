@@ -90,6 +90,7 @@ class Cart extends Component {
   };
 
   componentDidMount() {
+    document.title = "Cart"
     const { cartItem } = this.props;
     if (cartItem.length > 0) {
       const sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
