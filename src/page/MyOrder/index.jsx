@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CheckCircle } from "react-bootstrap-icons";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import { Modal } from "react-bootstrap";
 
 import "./MyOrder.css";
 import { connect } from "react-redux";
@@ -27,9 +28,15 @@ class MyOrder extends Component {
       role: "buyer",
       roleActive: false,
       isLoading: false,
+      order_process: "sent",
+      isShow: false,
+      isShowDelete: false,
+      orderId: "",
+      orderIdDelete: "",
     };
   }
   async componentDidMount() {
+    document.title = "My Order"
     try {
       const result = await axios.get(`${process.env.REACT_APP_HOST_API}/transactions/users`, { headers: { Authorization: `Bearer ${this.props.token}` } });
       const { data } = result.data;
@@ -91,7 +98,62 @@ class MyOrder extends Component {
       }
     }
   }
+  handleCompletedTransactions = (id) => {
+    // const token = this.props.token
+    // const config = { headers: { Authorization: `Bearer ${token}` } }
+    this.setState({
+      isLoading: true,
+    })
+    axios
+      .patch(`${process.env.REACT_APP_HOST_API}/transactions/completed/${id}`, { headers: { Authorization: `Bearer ${this.props.token}` } })
+      .then(result => {
+        this.setState({
+          isLoading: false,
+          roleActive: true,
+        })
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 5000);
+      }).catch(error => {
+        this.setState({
+          isLoading: false,
+        })
+      })
+  }
+  handleDeleteTransactions = (id) => {
+    // const token = this.props.token
+    // const config = { headers: { Authorization: `Bearer ${token}` } }
+    this.setState({
+      isLoading: true,
+    })
+    axios
+      .delete(`${process.env.REACT_APP_HOST_API}/transactions/delete/${id}`, { headers: { Authorization: `Bearer ${this.props.token}` } })
+      .then(result => {
+        this.setState({
+          isLoading: false,
+          roleActive: true,
+        })
+        let x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 5000);
+      }).catch(error => {
+        this.setState({
+          isLoading: false,
+        })
+      })
+  }
+  modalTrigger = () => {
+    this.setState({ isShow: !this.state.isShowDelete });
+  };
+  modalTriggerDelete = () => {
+    this.setState({ isShowDelete: !this.state.isShowDelete });
+  };
   render() {
+    // console.log(this.props.token)
     return (
       <>
         {this.props.loadingRedux && <Loading />}
@@ -169,6 +231,8 @@ class MyOrder extends Component {
               <div className="mo-col-status">STATUS ORDER</div>
               <div className="mo-col-total">TOTAL</div>
               <div className="mo-col-orderId">{this.state.role === "buyer" ? "SELLER" : "BUYER"}</div>
+              <div className="mo-col-orderId">{this.state.order_process === "sent" ? "#" : "SENT"}</div>
+
             </div>
             <div className="mo-item-container">
               {!this.state.product.length ? (
@@ -191,6 +255,23 @@ class MyOrder extends Component {
                     </div>
                     <div className="mo-product-total">{item.total_price}</div>
                     <div className="mo-product-total">{this.state.role === "buyer" ? item.seller : item.buyer}</div>
+                    {item.order_status === "SENT" ?
+                      <button className="btn btn-success btn-sm"
+                        onClick={() => {
+                          this.modalTrigger();
+                          this.setState({
+                            orderId: item.id,
+                          })
+                        }}>Complete</button>
+                      : item.order_status === "COMPLETED" ?
+                        <button className="btn btn-danger btn-sm"
+                          onClick={() => {
+                            this.modalTriggerDelete();
+                            this.setState({
+                              orderIdDelete: item.id,
+                            })
+                          }}>Delete</button>
+                        : <Link className="btn btn-warning btn-sm" to="/checkout">Checkout</Link>}
                   </div>
                 ))
               )}
@@ -198,6 +279,63 @@ class MyOrder extends Component {
           </div>
         </main>
         <Footer />
+        <div className="snackbar-wrapper">
+          <div id="snackbar">Data updated !</div>
+        </div>
+        <div className="toast-container">
+          <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">Data deleted !</div>
+          </div>
+        </div>
+        <Modal show={this.state.isShow} centered>
+          <Modal.Header>
+            Confirmation
+          </Modal.Header>
+          <Modal.Body className="modal-body">
+            <p className="modal-text" style={{ marginTop: "15px" }}>Are you sure to completed transactions ?</p>
+          </Modal.Body>
+          <Modal.Footer className="modal-footer">
+            <div className="modal-btn">
+              <button className="btn btn-danger" onClick={this.modalTrigger}>
+                No
+              </button>
+              <button className="btn btn-success" style={{ marginLeft: "10px" }}
+                onClick={() => {
+                  this.handleCompletedTransactions(this.state.orderId)
+                  this.setState({
+                    isShow: false,
+                  })
+                }}>
+                Yes
+              </button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={this.state.isShowDelete} centered>
+          <Modal.Header>
+            Confirmation
+          </Modal.Header>
+          <Modal.Body className="modal-body">
+            <p className="modal-text" style={{ marginTop: "15px" }}>Are you sure to delete transactions ?</p>
+          </Modal.Body>
+          <Modal.Footer className="modal-footer">
+            <div className="modal-btn">
+              <button className="btn btn-danger" onClick={this.modalTriggerDelete}>
+                No
+              </button>
+              <button className="btn btn-success" style={{ marginLeft: "10px" }}
+                onClick={() => {
+                  this.handleDeleteTransactions(this.state.orderIdDelete)
+                  this.setState({
+                    isShowDelete: false,
+                  })
+                }}>
+                Yes
+              </button>
+            </div>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   }
