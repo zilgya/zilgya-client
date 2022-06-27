@@ -12,6 +12,9 @@ const mapStateToProps = (state) => {
 };
 
 class PageNotFound extends Component {
+  componentDidMount() { 
+    document.title = "Page Not Found"
+   }
   render() {
     return (
       <React.Fragment>

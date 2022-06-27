@@ -7,6 +7,7 @@ import "./Product.css";
 import Loading from "../../component/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { removeKeyword } from "../../redux/actionCreator/search";
+import { useEffect } from "react";
 const init = {
   brown: true,
   yellow: true,
@@ -32,7 +33,9 @@ const Product = () => {
 
   const { isLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  useEffect(()=>{
+    document.title = "Product"
+  })
   const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 });
   return (
     <React.Fragment>
