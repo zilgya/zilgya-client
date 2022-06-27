@@ -9,6 +9,7 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import withLocation from "../../helper/withLocation";
 import Loading from "../../component/Loading";
+import withNavigate from "../../helper/withNavigate";
 
 //axios
 class Login extends Component {
@@ -38,18 +39,36 @@ class Login extends Component {
     const { state } = this.props.location;
     this.setState({
       message: null,
+      errorMsg: null,
+      isError: false,
     });
+
     if (state) {
-      this.setState({
-        message: state,
-      });
-      let x = document.getElementById("snackbar");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 8000);
+      if (state.isAuthenticated === false) {
+        this.setState({
+          isError: true,
+          errorMsg: "Login First",
+        });
+        let x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+        return;
+      }
+      if (state.message) {
+        this.setState({
+          message: state.message,
+        });
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 8000);
+      }
     }
   }
+
   render() {
     const { isLoading } = this.props;
     return (
@@ -61,9 +80,7 @@ class Login extends Component {
         <main className="login-global-container">
           <div className="login-header">
             <div className="login-header-title">My Account</div>
-            <div className="login-header-info">
-              Register and log in with your account to be able to shop at will
-            </div>
+            <div className="login-header-info">Register and log in with your account to be able to shop at will</div>
           </div>
           <div className="login-main-container">
             <form
@@ -170,10 +187,7 @@ class Login extends Component {
                         message: null,
                       });
                       delete this.props.location.state;
-                      window.history.replaceState(
-                        { ...this.props.location.state },
-                        ""
-                      );
+                      window.history.replaceState({ ...this.props.location.state }, "");
                     })
                     .catch((error) => {
                       console.log(error);
@@ -193,15 +207,12 @@ class Login extends Component {
 
               <div className="login-checkbox">
                 <label htmlFor="remember-me" className="login-customer">
-                  <input
-                    type="checkbox"
-                    name="remember-me"
-                    id="remember-me"
-                    className="login-customer-input"
-                  />
+                  <input type="checkbox" name="remember-me" id="remember-me" className="login-customer-input" />
                   Remember me
                 </label>
-                <div className="login-forgot">Forget your password?</div>
+                <div className="login-forgot" onClick={() => this.props.navigate("/auth/forgot")}>
+                  Forget your password?
+                </div>
               </div>
             </form>
             <form
@@ -341,10 +352,7 @@ class Login extends Component {
                         loadingRegister: false,
                       });
                       delete this.props.location.state;
-                      window.history.replaceState(
-                        { ...this.props.location.state },
-                        ""
-                      );
+                      window.history.replaceState({ ...this.props.location.state }, "");
                     })
                     .catch((error) => {
                       console.log(error);
@@ -367,26 +375,12 @@ class Login extends Component {
         </main>
         <Footer />
         <div className="snackbar-wrapper">
-        <div id="snackbar">
-          {this.state.message
-            ? this.state.message
-            : "Register success, please check email for verification"}
-        </div>
+          <div id="snackbar">{this.state.message ? this.state.message : "Register success, please check email for verification"}</div>
         </div>
         {/* <div id="toast">Register Error</div> */}
         <div className="toast-container">
-          <div
-            id="toast"
-            className="toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-body">
-              {this.state.isError
-                ? `${this.state.errorMsg}`
-                : "Register success, please check email for verification"}
-            </div>
+          <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{this.state.isError ? `${this.state.errorMsg}` : "Register success, please check email for verification"}</div>
           </div>
         </div>
       </>
@@ -400,4 +394,4 @@ const mapStateToProps = (reduxState) => {
   return { userInfo, isSuccess, err, isLoading };
 };
 
-export default connect(mapStateToProps)(withLocation(Login));
+export default connect(mapStateToProps)(withNavigate(withLocation(Login)));

@@ -26,6 +26,7 @@ import Forgot from "../page/Forgot";
 import About from "../page/About"
 
 function Router() {
+<<<<<<< HEAD
     return ( <
         BrowserRouter >
         <
@@ -141,6 +142,93 @@ function Router() {
         /Routes> <
         /BrowserRouter>
     );
+=======
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/auth"
+          element={
+            <PrivateElementAfterLogin>
+              <Login />
+            </PrivateElementAfterLogin>
+          }
+        />
+        <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateElement extraData={{isAuthenticated:false}}>
+              <Profile />
+            </PrivateElement>
+          }
+        />
+        <Route path="/auth/forgot">
+          <Route path="" element={<Forgot />} />
+          <Route path=":email" element={<Forgot />} />
+        </Route>
+        <Route path="/product/:id" 
+        element={
+          <PrivateElement extraData={{isAuthenticated:false}}>    
+            <ProductDetail />
+          </PrivateElement>
+        } />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/cart" 
+        element={
+          <PrivateElement extraData={{isAuthenticated:false}}>
+              <Cart />
+            </PrivateElement>
+        } />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateElement extraData={{isAuthenticated:false}}>
+              <Checkout />
+            </PrivateElement>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateElement extraData={{isAuthenticated:false}}>
+              <Wishlist />
+            </PrivateElement>
+          }
+        />
+        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/track" element={<OrderTrack />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
+        <Route
+          path="/seller/myproduct"
+          element={
+            <PrivateElementAfterLoginSeller>
+              <MyProduct />
+            </PrivateElementAfterLoginSeller>
+          }
+        />
+        <Route
+          path="/seller/sellproduct"
+          element={
+            <PrivateElementAfterLoginSeller>
+              <SellProduct />
+            </PrivateElementAfterLoginSeller>
+          }
+        />
+        <Route
+          path="/seller/myorder"
+          element={
+              <MyOrder />
+          }
+        />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+>>>>>>> 9d07d0cea4614eab79f45c7132beda4f1878757a
 }
 
 export default Router;

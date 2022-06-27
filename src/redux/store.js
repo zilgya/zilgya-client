@@ -1,8 +1,4 @@
-import {
-  legacy_createStore as createStore,
-  applyMiddleware,
-  compose,
-} from "redux";
+import { legacy_createStore as createStore, applyMiddleware, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import { createLogger } from "redux-logger";
 import rpm from "redux-promise-middleware";

@@ -684,6 +684,38 @@ label span {
     height: 335px;
 }
 
+.cart-button-cancel {
+    width: 100px;
+    height: 50px;
+    background-color: #8D8D8D;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.cart-button-logout {
+    width: 100px;
+    height: 50px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+}
+
+.cart-button-cancel:hover {
+    width: 100px;
+    height: 50px;
+    background-color: #e9e5e5;
+    color: #6c6a6a;
+}
+
+.cart-button-logout:hover {
+    width: 100px;
+    height: 50px;
+    background-color: #9c9898;
+    color: #ffffff;
+}
+
 
 /* responsive */
 

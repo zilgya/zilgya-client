@@ -13,6 +13,7 @@ import Loading from "../../component/Loading";
 import { connect } from "react-redux";
 import { currencyFormatter } from "../../helper/currencyFormatter";
 import { counterDownByIdAction, counterUpByIdAction, deleteCartAction, deleteFromCartAction } from "../../redux/actionCreator/cart";
+import { Button, Modal } from "react-bootstrap";
 
 const mapStateToProps = (state) => {
   const {
@@ -35,28 +36,25 @@ class Cart extends Component {
       total_price: 0,
       qty: false,
       isPost: false,
+      show: false,
+      setShow: false,
+      promoCode: "",
+      promos: {},
+      error: "",
+      discount: 0,
+      isPromo: false,
     };
   }
   handlePostTransaction = () => {
     const { shipping } = this.state;
     const { cartItem } = this.props;
 
-    if (!shipping) {
-      let x = document.getElementById("toast");
-      x.className = "show";
-      setTimeout(function () {
-        x.className = x.className.replace("show", "");
-      }, 10000);
-
-      return;
-    }
-
     const total_price = this.state.sub_total + Number(shipping);
 
     const users_id = this.props.token;
     const config = { headers: { Authorization: `Bearer ${users_id}` } };
 
-    const body = { sub_total: this.state.sub_total, shipping, total_price, product: cartItem };
+    const body = { sub_total: this.state.sub_total, shipping, total_price, product: cartItem, promo_id: this.state.promos ? this.state.promos.id : null };
     // console.log(users_id)
     axios
       .post(`${process.env.REACT_APP_HOST_API}/transactions`, body, config)
@@ -76,6 +74,21 @@ class Cart extends Component {
         console.log(error);
       });
   };
+
+  handleClose = () => this.setState({ setShow: false, show: false });
+  handleShow = () => {
+    const { shipping } = this.state;
+    if (!shipping) {
+      let x = document.getElementById("toast");
+      x.className = "show";
+      setTimeout(function () {
+        x.className = x.className.replace("show", "");
+      }, 10000);
+      return;
+    }
+    this.setState({ setShow: true, show: true });
+  };
+
   componentDidMount() {
     const { cartItem } = this.props;
     if (cartItem.length > 0) {
@@ -85,14 +98,34 @@ class Cart extends Component {
   }
   componentDidUpdate() {
     if (this.state.qty) {
+      let sub_total;
       const { cartItem } = this.props;
       if (cartItem.length > 0) {
-        const sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
+        sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
         this.setState({ sub_total });
         this.setState({
           qty: false,
         });
       }
+      if (!cartItem.length) {
+        this.setState({
+          qty: false,
+        });
+      }
+      const { discount } = this.state.promos;
+      const newPrice = sub_total * (Number(discount) / 100);
+      this.setState({
+        discount: newPrice,
+        isPromo: false,
+      });
+    }
+    if (this.state.isPromo) {
+      const { discount } = this.state.promos;
+      const newPrice = this.state.sub_total * (Number(discount) / 100);
+      this.setState({
+        discount: newPrice,
+        isPromo: false,
+      });
     }
   }
   render() {
@@ -180,8 +213,57 @@ class Cart extends Component {
                 </div>
                 <div className="cart-main-content-left-footer">
                   <div className="cart-main-content-promo">
-                    <input type="text" placeholder="Enter your coupon code" className="cart-input-promo" />
-                    <div className="cart-apply-promo">Apply Coupon</div>
+                    <input
+                      type="text"
+                      placeholder="Enter your coupon code"
+                      className="cart-input-promo"
+                      onChange={(e) => {
+                        this.setState({
+                          promoCode: e.target.value,
+                        });
+                      }}
+                    />
+                    <div
+                      className="cart-apply-promo"
+                      onClick={() => {
+                        if (!this.state.promoCode) {
+                          this.setState({
+                            error: "Please input your coupon code",
+                          });
+                          let x = document.getElementById("toast");
+                          x.className = "show";
+                          setTimeout(function () {
+                            x.className = x.className.replace("show", "");
+                          }, 1000);
+                          return;
+                        }
+                        axios
+                          .get(`${process.env.REACT_APP_HOST_API}/promo/${this.state.promoCode}`)
+                          .then((result) => {
+                            this.setState({
+                              isPromo: true,
+                              promos: result.data.data,
+                            });
+                            let x = document.getElementById("snackbar");
+                            x.className = "show";
+                            setTimeout(function () {
+                              x.className = x.className.replace("show", "");
+                            }, 2500);
+                          })
+                          .catch((error) => {
+                            this.setState({
+                              error: error.response ? error.response.data.err : error.message,
+                            });
+                            let x = document.getElementById("toast");
+                            x.className = "show";
+                            setTimeout(function () {
+                              x.className = x.className.replace("show", "");
+                            }, 1000);
+                          });
+                      }}
+                    >
+                      Apply Coupon
+                    </div>
                   </div>
                   <div className="cart-main-content-clear-update">
                     <div
@@ -206,6 +288,10 @@ class Cart extends Component {
                     <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total)}</div>
                   </div>
                   <div className="cart-right-item">
+                    <div className="cart-right-title">Discount</div>
+                    <div className="cart-subtotal-body">- {currencyFormatter.format(this.state.discount)}</div>
+                  </div>
+                  <div className="cart-right-item">
                     <div className="cart-right-title">Shipping</div>
                     <div className="cart-right-input-container">
                       <label htmlFor="rate" className="cart-right-label">
@@ -218,7 +304,7 @@ class Cart extends Component {
                             this.setState({ shipping: "100000" });
                           }}
                         />
-                        Flat rate: $10
+                        Flat rate : 100k
                       </label>
                       <label htmlFor="free" className="cart-right-label">
                         <input
@@ -248,10 +334,10 @@ class Cart extends Component {
                   </div>
                   <div className="cart-right-item">
                     <div className="cart-right-title">Total Price</div>
-                    <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total + Number(this.state.shipping))}</div>
+                    <div className="cart-subtotal-body">{currencyFormatter.format(this.state.sub_total + Number(this.state.shipping) - this.state.discount)}</div>
                   </div>
                 </div>
-                <div className="cart-checkout-button" onClick={this.handlePostTransaction}>
+                <div className="cart-checkout-button" onClick={this.handleShow}>
                   Proceed To Check Out
                 </div>
               </div>
@@ -259,11 +345,32 @@ class Cart extends Component {
           )}
         </div>
         <Footer />
+        <div className="snackbar-wrapper">
+          <div id="snackbar">Promo Added</div>
+        </div>
         <div className="toast-container">
           <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div className="toast-body">Please input shipping !{/* nambah komen buat push */}</div>
+            <div className="toast-body">{this.state.error}</div>
           </div>
         </div>
+        <Modal backdrop="static" show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title className="cart-modal-title">Warning !</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="cart-modal-body">Do you want to checkout this product?</Modal.Body>
+          <Modal.Footer>
+            <Link to="/product">
+              <Button className="cart-button-add-product" onClick={this.handleClose}>
+                Add More Product
+              </Button>
+            </Link>
+            <Link to="/checkout">
+              <Button className="cart-button-proceed" onClick={this.handlePostTransaction}>
+                Proceed
+              </Button>
+            </Link>
+          </Modal.Footer>
+        </Modal>
       </React.Fragment>
     );
   }

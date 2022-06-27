@@ -429,3 +429,38 @@ input[name="green"] {
   accent-color: green;
   transform: scale(2);
 }
+
+@media (max-width:768px){
+  .container-main-content {
+    padding: 0% 5%;
+    display: flex;
+    flex-direction: column;
+  }
+  .pd-main-content-left{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .pd-main-content-right{
+    padding: 5% 0;
+  }
+  .pd-banner-content-body h1 {
+    font-weight: 400;
+    font-size: 40px;
+  }
+}
+
+@media (max-width:425px){
+  .pd-main-content-left{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  .pd-main-content-right{
+    padding: 5% 0;
+  }
+  .pd-banner-content-body h1 {
+    font-weight: 400;
+    font-size: 35px;
+  }
+}

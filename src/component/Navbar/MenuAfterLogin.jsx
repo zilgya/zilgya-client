@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { NavDropdown, Dropdown } from "react-bootstrap";
+import { NavDropdown, Dropdown, Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUserInfo,
@@ -14,6 +14,12 @@ function MenuAfterLogin() {
   const token = useSelector((state) => state.auth.token);
   const { updateResult, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  //modal prompt logout
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleLogout = async () => {
     await Promise.all([dispatch(logOutFromServer({ token: token }))]).then(
@@ -98,11 +104,26 @@ function MenuAfterLogin() {
         <div
           className="link1"
           style={{ cursor: "pointer" }}
-          onClick={handleLogout}
+          onClick={handleShow}
         >
           Logout
         </div>
       </nav>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title className="cart-modal-title">Warning !</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="cart-modal-body">Do you want to logout?</Modal.Body>
+        <Modal.Footer>
+
+          <Button className="cart-button-cancel" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className="cart-button-logout" onClick={handleLogout}>
+            Proceed
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
