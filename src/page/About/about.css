@@ -1,0 +1,29 @@
+.about-content>img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.about-desc-content {
+    line-height: 47px;
+}
+
+.team-content-zilgya>img {
+    object-fit: cover;
+    width: 100%;
+    height: 50vh;
+}
+
+.team-content-zilgya>h5,
+.team-content-zilgya>p {
+    text-align: left;
+    padding: 15px 0;
+}
+
+.back-comment-about {
+    background: #F9F9F9;
+}
+
+.back-comment-about>h4,
+.back-comment-about>p {
+    line-height: 60px;
+}

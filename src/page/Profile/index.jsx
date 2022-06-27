@@ -18,6 +18,7 @@ import {
 import { logoutAction } from "../../redux/actionCreator/auth";
 import { Link } from "react-router-dom";
 import Loading from "../../component/Loading";
+import { Button, Modal } from "react-bootstrap";
 
 const mapStateToProps = (state) => {
   return {
@@ -62,6 +63,8 @@ class Profile extends Component {
       description: this.props.userData.description,
       store_name: this.props.userData.store_name,
       photo: null,
+      show: false,
+      setShow: false,
     };
   }
 
@@ -110,6 +113,10 @@ class Profile extends Component {
       this.props.resetUser();
     }, 3000);
   };
+
+  //modal prompt logout
+  handleClose = () => this.setState({ setShow: false, show: false });
+  handleShow = () => this.setState({ setShow: true, show: true })
 
   render() {
     console.log(this.state);
@@ -420,7 +427,7 @@ class Profile extends Component {
             >
               <div
                 className="profile-logout-button"
-                onClick={this.handleLogout}
+                onClick={this.handleShow}
               >
                 <img
                   src={Logout}
@@ -443,6 +450,20 @@ class Profile extends Component {
           </div>
         </main>
         <Footer />
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header>
+            <Modal.Title className="cart-modal-title">Warning !</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="cart-modal-body">Do you want to logout?</Modal.Body>
+          <Modal.Footer>
+            <Button className="cart-button-cancel" onClick={this.handleClose}>
+              Cancel
+            </Button>
+            <Button className="cart-button-proceed" onClick={this.handleLogout}>
+              Proceed
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   }
