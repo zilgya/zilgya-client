@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import Loading from "../../component/Loading";
 import axios from "axios";
 import { Dropdown } from "react-bootstrap";
+import { currencyFormatter } from "../../helper/currencyFormatter";
 
 const mapStateToProps = (state) => {
   return {
@@ -249,12 +250,12 @@ class MyOrder extends Component {
                       </div>
                       <div className="mo-product-name">{item.name}</div>
                     </div>
-                    <div className="mo-product-price">{item.price}</div>
+                    <div className="mo-product-price">{currencyFormatter.format(item.price)}</div>
                     <div className="mo-product-quantity">{item.quantity}</div>
                     <div className="mo-product-status">
                       <CheckCircle /> {item.order_status}
                     </div>
-                    <div className="mo-product-total">{item.total_price}</div>
+                    <div className="mo-product-total">{currencyFormatter.format(item.total_price)}</div>
                     <div className="mo-product-total">{this.state.role === "buyer" ? item.seller : item.buyer}</div>
                     {item.order_status === "SENT" ?
                       <button className="btn btn-success btn-sm"

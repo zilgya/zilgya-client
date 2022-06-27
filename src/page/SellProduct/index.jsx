@@ -348,12 +348,12 @@ class SellProduct extends Component {
                   axios
                     .post(`${process.env.REACT_APP_HOST_API}/product`, formData, { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } })
                     .then((result) => {
-                      let x = document.getElementById("snackbar");
-                      x.className = "show";
-                      setTimeout(function () {
-                        x.className = x.className.replace("show", "");
+                      // let x = document.getElementById("snackbar");
+                      // x.className = "show";
+                      // setTimeout(function () {
+                      //   x.className = x.className.replace("show", "");
 
-                      }, 5000);
+                      // }, 5000);
                       this.setState({
                         error: "",
                         message: result.data.message,
@@ -384,7 +384,7 @@ class SellProduct extends Component {
         <BackToTop />
         <Footer />
         <div id="snackbar">{this.state.message}</div>
-        {/* <div id="toast">Register Error</div> */}
+        
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
           <div id="toast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div className="toast-body">{this.state.error}</div>

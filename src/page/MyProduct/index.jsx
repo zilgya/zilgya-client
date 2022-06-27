@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
@@ -13,14 +13,19 @@ import Loading from "../../component/Loading";
 
 function MyProduct() {
   const [products, setProducts] = useState([]);
-  const [isloading, setLoading] = useState(false);
+  const [loadingOrder, setLoadingOrder] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [delMsg, setDelMsg] = useState("false");
+  // eslint-disable-next-line no-unused-vars
+  const [emptyMsg, setEmptyMsg] = useState("");
 
   const { token } = useSelector((state) => state.auth);
-  const { isLoading} = useSelector((state)=> state.user)
-  // console.log(token)
+  const { isLoading } = useSelector((state) => state.user);
 
-  const handleGetProduct = (token) => {
-    setLoading(true);
+  // console.log(delMsg);
+  const handleGetProduct = useCallback((token) => {
+    setLoadingOrder(true);
+    
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_HOST_API}/product/seller`,
@@ -29,27 +34,30 @@ function MyProduct() {
       },
     })
       .then((result) => {
-        setLoading(false);
-        // console.log(result.data.data);
+        setLoadingOrder(false);
         setProducts(result.data.data);
         console.log(products, "ini dah masok");
       })
       .catch((error) => {
-        setLoading(false);
-        console.error(error);
+        setLoadingOrder(false);
+        console.error(error)
+        setEmptyMsg(error.response.data.err)
       });
-  };
-  console.log(isloading)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(products.length);
   useEffect(() => {
     document.title = "My Product";
     handleGetProduct(token);
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if(delMsg){
+      handleGetProduct(token)
+    }
+  }, [delMsg, handleGetProduct, token]);
   return (
     <>
-    {isloading && <Loading />}
-    {isLoading && <Loading/>}
+      {loadingOrder && <Loading />}
+      {isLoading && <Loading />}
       <Navbar />
       <main className="login-global-container">
         <div className="login-header">
@@ -81,15 +89,18 @@ function MyProduct() {
             <div className="wl-col-price">Price</div>
           </div>
           <div className="wl-product-container">
-            
-            {products ? (
-              products.map((result) => 
-                (
-                <ProductItemSeller key={result.id} products={result} />
+            {Array.isArray(products) ? (
+              products.map((result) => (
+                <ProductItemSeller
+                  key={result.id}
+                  wishlist={result}
+                  setDelMsg={setDelMsg}
+                  setLoading={setLoadingOrder}
+                  handleGetProduct={handleGetProduct}
+                />
               ))
-            ) : (
-              <h1>You have no product to display</h1>
-            )}
+            ) : <></> }
+            {products.length === 0 && <h1 style={{textAlign: "center", marginTop: '10px'}}>You have no product to display</h1>}
           </div>
         </div>
       </main>
