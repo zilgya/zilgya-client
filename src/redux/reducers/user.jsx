@@ -15,7 +15,7 @@ const UserReducer = (prevState = initialState, action) => {
     case GET_USER_INFO_REQUEST:
       return {
         ...prevState,
-        isLoading: action.payload.loading,
+        isLoading: true,
         userResult: action.payload.data,
         err: action.payload.errorMessage,
         isSuccess: action.payload.isSuccess,
@@ -24,7 +24,7 @@ const UserReducer = (prevState = initialState, action) => {
     case GET_USER_INFO:
       return {
         ...prevState,
-        isLoading: action.payload.loading,
+        isLoading: false,
         userResult: action.payload.data,
         err: action.payload.errorMessage,
         isSuccess: action.payload.isSuccess,
@@ -33,7 +33,7 @@ const UserReducer = (prevState = initialState, action) => {
     case GET_USER_INFO_FAIL:
       return {
         ...prevState,
-        isLoading: action.payload.loading,
+        isLoading: false,
         userResult: action.payload.data,
         err: action.payload.errorMessage,
         isSuccess: action.payload.isSuccess,
