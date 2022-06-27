@@ -1,9 +1,4 @@
-import {
-  GET_USER_INFO,
-  PATCH_UPDATE_USER,
-  DEL_USER_INFO,
-  RESET_USER_STATE,
-} from "../actionCreator/actionString";
+import { GET_USER_INFO, PATCH_UPDATE_USER, DEL_USER_INFO, RESET_USER_STATE, GET_USER_INFO_REQUEST, GET_USER_INFO_FAIL } from "../actionCreator/actionString";
 
 const initialState = {
   userResult: false,
@@ -17,7 +12,25 @@ const initialState = {
 
 const UserReducer = (prevState = initialState, action) => {
   switch (action.type) {
+    case GET_USER_INFO_REQUEST:
+      return {
+        ...prevState,
+        isLoading: action.payload.loading,
+        userResult: action.payload.data,
+        err: action.payload.errorMessage,
+        isSuccess: action.payload.isSuccess,
+        updateResult: action.payload.isUpdate,
+      };
     case GET_USER_INFO:
+      return {
+        ...prevState,
+        isLoading: action.payload.loading,
+        userResult: action.payload.data,
+        err: action.payload.errorMessage,
+        isSuccess: action.payload.isSuccess,
+        updateResult: action.payload.isUpdate,
+      };
+    case GET_USER_INFO_FAIL:
       return {
         ...prevState,
         isLoading: action.payload.loading,
@@ -44,10 +57,10 @@ const UserReducer = (prevState = initialState, action) => {
         isSuccess: action.payload.errorMessage,
         err: action.payload.errorMessage,
       };
-      case RESET_USER_STATE:
-        return{
-          ...initialState
-        }
+    case RESET_USER_STATE:
+      return {
+        ...initialState,
+      };
     default:
       return prevState;
   }
