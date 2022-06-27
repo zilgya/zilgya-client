@@ -116,13 +116,13 @@ class MyOrder extends Component {
               <Link to="/seller/myorder">
                 <div className="profile-seller-navbar-active">
                   {" "}
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-autoclose-true" className="bg-white border-0" variant="light">
+                  <Dropdown className="mo-dropdown">
+                    <Dropdown.Toggle id="dropdown-autoclose-true" className="bg-white border-0 mo-nav-dropdown" variant="light">
                       My Order
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                      <Dropdown.Item
+                    <Dropdown.Menu className="mo-dropdown-menu">
+                      <Dropdown.Item className="mo-dropdown-item"
                         onClick={() => {
                           this.setState({
                             role: "buyer",
@@ -133,7 +133,7 @@ class MyOrder extends Component {
                       >
                         as Customer
                       </Dropdown.Item>
-                      <Dropdown.Item
+                      <Dropdown.Item className="mo-dropdown-item"
                         onClick={() => {
                           this.setState({
                             role: "seller",
@@ -162,7 +162,7 @@ class MyOrder extends Component {
 
           <div className="mo-main-content">
             <div className="mo-col-name">
-              <div className="mo-col-orderId">Order Id</div>
+              <div className="mo-col-orderId">ORDER ID</div>
               <div className="mo-col-product">PRODUCTS</div>
               <div className="mo-col-price">PRICE</div>
               <div className="mo-col-quantity">QUANTITY</div>
