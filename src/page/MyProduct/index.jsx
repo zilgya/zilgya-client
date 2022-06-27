@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./MyProduct.css";
 import ProductItemSeller from "./ProductItemSeller";
@@ -49,7 +50,10 @@ function MyProduct() {
   useEffect(() => {
     document.title = "My Product";
     handleGetProduct(token);
-  }, [handleGetProduct, token]);
+    if(delMsg){
+      handleGetProduct(token)
+    }
+  }, [delMsg, handleGetProduct, token]);
   return (
     <>
       {loadingOrder && <Loading />}
@@ -92,6 +96,7 @@ function MyProduct() {
                   wishlist={result}
                   setDelMsg={setDelMsg}
                   setLoading={setLoadingOrder}
+                  handleGetProduct={handleGetProduct}
                 />
               ))
             ) : <></> }
@@ -99,6 +104,7 @@ function MyProduct() {
           </div>
         </div>
       </main>
+      <BackToTop />
       <Footer />
     </>
   );

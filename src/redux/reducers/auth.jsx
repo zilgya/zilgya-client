@@ -1,10 +1,4 @@
-import {
-  FULFILLED,
-  loginString,
-  logoutString,
-  PENDING,
-  REJECTED,
-} from "../actionCreator/actionString";
+import { FULFILLED, loginString, logoutString, PENDING, REJECTED } from "../actionCreator/actionString";
 
 const initialState = {
   userInfo: false,

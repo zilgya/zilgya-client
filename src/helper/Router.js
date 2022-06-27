@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfirmEmail from "../page/Auth/ConfirmEmail";
 import Blog from "../page/Blog";
+import BlogDetail from "../page/BlogDetail";
 import Cart from "../page/Cart";
 import Checkout from "../page/Checkout";
 import ComingSoon from "../page/ComingSoon";
@@ -22,6 +23,7 @@ import PrivateElement from "../component/PrivateElement/PrivateElement";
 import PrivateElementAfterLogin from "../component/PrivateElement/PrivateElementAfterLogin";
 import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateElementAfterLoginSeller";
 import Forgot from "../page/Forgot";
+import About from "../page/About"
 
 function Router() {
   return (
@@ -40,7 +42,7 @@ function Router() {
         <Route
           path="/profile"
           element={
-            <PrivateElement>
+            <PrivateElement extraData={{isAuthenticated:false}}>
               <Profile />
             </PrivateElement>
           }
@@ -49,14 +51,24 @@ function Router() {
           <Route path="" element={<Forgot />} />
           <Route path=":email" element={<Forgot />} />
         </Route>
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/product/:id" 
+        element={
+          <PrivateElement extraData={{isAuthenticated:false}}>    
+            <ProductDetail />
+          </PrivateElement>
+        } />
         <Route path="/blog" element={<Blog />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" 
+        element={
+          <PrivateElement extraData={{isAuthenticated:false}}>
+              <Cart />
+            </PrivateElement>
+        } />
         <Route
           path="/checkout"
           element={
-            <PrivateElement>
+            <PrivateElement extraData={{isAuthenticated:false}}>
               <Checkout />
             </PrivateElement>
           }
@@ -64,7 +76,7 @@ function Router() {
         <Route
           path="/wishlist"
           element={
-            <PrivateElement>
+            <PrivateElement extraData={{isAuthenticated:false}}>
               <Wishlist />
             </PrivateElement>
           }
@@ -95,6 +107,8 @@ function Router() {
               <MyOrder />
           }
         />
+        <Route path="/blog/detail" element={<BlogDetail />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

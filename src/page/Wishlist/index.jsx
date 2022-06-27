@@ -2,6 +2,8 @@ import React, {  useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import "./Wishlist.css";
+import BackToTop from "../../component/ButtonToTop"
+import './Wishlist.css'
 
 import { useSelector } from "react-redux";
 import Loading from "../../component/Loading";
@@ -82,6 +84,7 @@ const Wishlist = () => {
           </div>
         </div>
       </main>
+      <BackToTop/>
       <Footer />
     </>
   );

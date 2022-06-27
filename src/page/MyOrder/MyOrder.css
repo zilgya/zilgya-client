@@ -2,6 +2,33 @@
   padding: 50px 15%;
 }
 
+.mo-nav-dropdown:focus{
+  box-shadow: none;
+}
+.mo-nav-dropdown{
+  font-family: Arimo;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  padding: 0;
+}
+
+.mo-dropdown-menu{
+  background-color: #1a1a1a;
+}
+
+.mo-dropdown-item{
+  color: #868686;
+  background-color: #1a1a1a;
+}
+
+.mo-dropdown-item:hover{
+  color: #ffffff;
+  background-color: #1a1a1a;
+}
+
 .mo-col-name {
   display: flex;
   font-family: Arimo;

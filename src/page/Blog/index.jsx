@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./blog.css";
 
@@ -25,10 +27,13 @@ const mapStateToProps = (state) => {
 };
 
 export class Blog extends Component {
+  componentDidMount() { 
+    document.title = "Blog"
+   }
   render() {
     return (
       <>
-      {this.props.loadingRedux&& <Loading/>}
+        {this.props.loadingRedux && <Loading />}
         <Navbar />
         <main>
           <div className="co-header">
@@ -83,35 +88,41 @@ export class Blog extends Component {
                 <h4 className="pt-5">Recent News </h4>
                 <div className="d-flex recent-content">
                   <img src={RecentOne} alt="Recent Images" />
-                  <div className="flex-row pl-3">
-                    <strong className="pl-3 recent-tag-title">
+                  <div className="flex-row ml-3">
+                    <strong className="recent-tag-title">
                       How To Put Movies Iphone
                     </strong>
-                    <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
+                    <p className="recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
                 </div>
                 <hr />
                 <div className="d-flex recent-content">
                   <img src={RecentTwo} alt="Recent Images" />
-                  <div className="flex-row pl-3">
-                    <strong className="pl-3 recent-tag-title">Windows Registry Cleaner</strong>
-                    <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
+                  <div className="flex-row ml-3">
+                    <strong className="recent-tag-title">
+                      Windows Registry Cleaner
+                    </strong>
+                    <p className="recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
                 </div>
                 <hr />
                 <div className="d-flex recent-content">
                   <img src={RecentThree} alt="Recent Images" />
-                  <div className="flex-row pl-3">
-                    <strong className="pl-3 recent-tag-title">Messes Make Memories</strong>
-                    <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
+                  <div className="flex-row ml-3">
+                    <strong className="recent-tag-title">
+                      Messes Make Memories
+                    </strong>
+                    <p className="recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
                 </div>
                 <hr />
                 <div className="d-flex recent-content">
                   <img src={RecentFour} alt="Recent Images" />
-                  <div className="flex-row pl-3">
-                    <strong className="pl-3 recent-tag-title">Modern Light House</strong>
-                    <p className="pl-3 recent-tag">24 Apr 2019, 45 mins ago</p>
+                  <div className="flex-row ml-3">
+                    <strong className="recent-tag-title">
+                      Modern Light House
+                    </strong>
+                    <p className="recent-tag">24 Apr 2019, 45 mins ago</p>
                   </div>
                 </div>
                 <div className="pt-5">
@@ -161,7 +172,9 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-                <strong className="py-4 read-text">Read me</strong>
+              <Link className="mt-4" to="/blog/detail ">
+                  <strong className="text-dark read-text">Read me</strong>
+                </Link>
                 <hr className="hr-readme" />
               </div>
               <div className="col-lg-8 pr-5 py-5 pl-0 img-content-blog">
@@ -182,7 +195,9 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-                <strong className="py-4 read-text">Read me</strong>
+                <Link className="mt-4" to="/blog/detail ">
+                  <strong className="text-dark read-text">Read me</strong>
+                </Link>
                 <hr className="hr-readme" />
               </div>
               <div className="col-lg-8 pr-5 py-5 pl-0 img-content-blog">
@@ -205,7 +220,9 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-                <strong className="py-4 read-text">Read me</strong>
+              <Link className="mt-4" to="/blog/detail ">
+                  <strong className="text-dark read-text">Read me</strong>
+                </Link>
                 <hr className="hr-readme" />
               </div>
               <div className="col-lg-8 pr-5 py-5 pl-0 img-content-blog">
@@ -253,7 +270,9 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-                <strong className="py-4 read-text">Read me</strong>
+              <Link className="mt-4" to="/blog/detail ">
+                  <strong className="text-dark read-text">Read me</strong>
+                </Link>
                 <hr className="hr-readme" />
               </div>
               <div className="d-flex flex-row">
@@ -276,10 +295,11 @@ export class Blog extends Component {
             </section>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     );
   }
 }
 
-export default connect(mapStateToProps)(Blog) 
+export default connect(mapStateToProps)(Blog);

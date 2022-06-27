@@ -1,16 +1,12 @@
 import axios from "axios";
 
-import {
-  GET_USER_INFO,
-  PATCH_UPDATE_USER,
-  DEL_USER_INFO,
-} from "./actionString";
+import { GET_USER_INFO, PATCH_UPDATE_USER, DEL_USER_INFO, GET_USER_INFO_REQUEST, GET_USER_INFO_FAIL } from "./actionString";
 
 export const getUserInfo = ({ token }) => {
   return (dispatch) => {
     //loading
     dispatch({
-      type: GET_USER_INFO,
+      type: GET_USER_INFO_REQUEST,
       payload: {
         loading: true,
         data: [],
@@ -26,7 +22,6 @@ export const getUserInfo = ({ token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      timeout: 10000,
     })
       .then((result) => {
         //success get api
@@ -45,11 +40,11 @@ export const getUserInfo = ({ token }) => {
         console.log(error);
         //failed get api
         dispatch({
-          type: GET_USER_INFO,
+          type: GET_USER_INFO_FAIL,
           payload: {
             loading: false,
             data: false,
-            errorMessage: error.response.data.err.msg,
+            errorMessage: error.response ? error.response.data.err.msg : error.message,
             isSuccess: false,
             isUpdate: false,
           },
@@ -58,16 +53,7 @@ export const getUserInfo = ({ token }) => {
   };
 };
 
-export const updateUser = ({
-  token,
-  username,
-  email,
-  gender,
-  address,
-  description,
-  photo,
-  store_name,
-}) => {
+export const updateUser = ({ token, username, email, gender, address, description, photo, store_name }) => {
   console.log("2. masuk action");
   return (dispatch) => {
     //loading
@@ -163,7 +149,7 @@ export const logOutFromServer = ({ token }) => {
         });
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         dispatch({
           type: GET_USER_INFO,
           payload: {

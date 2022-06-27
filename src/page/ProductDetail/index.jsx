@@ -5,6 +5,7 @@ import "./productdetail.css";
 import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import DescTab from "../../component/DescTab";
+import BackToTop from "../../component/ButtonToTop";
 
 import ProductSmallEnam from "../../assets/img/home-product-6.png";
 // import ProductSmallSatu from "../../assets/img/home-product-1.png";
@@ -17,7 +18,7 @@ import withParams from "../../helper/withParams";
 import axios from "axios";
 import { currencyFormatter } from "../../helper/currencyFormatter";
 import { addToCartAction } from "../../redux/actionCreator/cart";
-
+import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   const {
@@ -110,29 +111,30 @@ class ProductDetail extends Component {
   deleteFromServer = (w_id) => {
     this.setState({
       loadingWishlist: true,
-      successAddtoWishlist:false,
-    })
+      successAddtoWishlist: false,
+    });
     axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_HOST_API}/wishlist/${w_id}`,
       headers: {
         Authorization: `Bearer ${this.props.token}`,
-      }
+      },
     })
       .then((result) => {
         this.setState({
           loadingWishlist: false,
           successAddtoWishlist: true,
-        })
+        });
         console.log(`${result.data.message} ${w_id}`);
         // setDelMsg(result.data.message);
       })
       .catch((error) => {
         this.setState({
-          loadingWishlist:false,
-          successAddtoWishlist:false
-        })
-        console.error(error)});
+          loadingWishlist: false,
+          successAddtoWishlist: false,
+        });
+        console.error(error);
+      });
   };
 
   componentDidMount() {
@@ -178,14 +180,16 @@ class ProductDetail extends Component {
         <Navbar />
         <main>
           <section>
-            <div className="col-md-6 nav-title">
-              <p>Shop &gt; {this.state.product.name}</p>
+            <div className="nav-title">
+              <p>
+                <Link to="/product"> Shop</Link> &gt; {this.state.product.name}
+              </p>
             </div>
-            <div className="d-flex">
-              <div className="flex-row col-md-2">
+            <div className="protail-pict-container">
+              <div className="protail-small-pict-container">
                 {this.state.pict.map((pict, idx) => (
                   <div
-                    className="col-md-3 p-4 product-small"
+                    className="protail-small"
                     key={idx}
                     onClick={() => {
                       this.setState({
@@ -193,32 +197,24 @@ class ProductDetail extends Component {
                       });
                     }}
                   >
-                    <img src={pict.url} alt="product-small" />
+                    <img
+                      src={pict.url}
+                      alt={`product${idx + 1}`}
+                      className="protail-small-img"
+                    />
                   </div>
                 ))}
-                {/* <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallEnam} alt="product-small" />
-                </div>
-                <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallEnam} alt="product-small" />
-                </div>
-                <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallSatu} alt="product-small" />
-                </div> */}
               </div>
-              <div className="col-md-11 product-big">
+              <div className="protail-big-pict-container">
                 {this.state.pictPrev !== "" ? (
-                  <img src={this.state.pictPrev} alt="product-big" />
+                  <img src={this.state.pictPrev} alt="product-preview" />
                 ) : (
                   // <div className="product-big-prev">Click image to preview</div>
                   <img
                     src={this.state.pict.length && this.state.pict[0].url}
-                    alt="product-big"
+                    alt="product-preview"
                   />
                 )}
-              </div>
-              <div className="product-label">
-                <span className="sale">Hot</span>
               </div>
             </div>
           </section>
@@ -252,7 +248,7 @@ class ProductDetail extends Component {
               <p className="product-desc">{this.state.product.description}</p>
             </div>
           </section>
-          <section>
+          <section className="protail-button-container">
             <div className="pro-details-quality">
               <div className="quantity quantity--2">
                 <div
@@ -274,6 +270,8 @@ class ProductDetail extends Component {
                   +
                 </div>
               </div>
+            </div>
+            <div className="protail-button-cart-wish-container">
               <div
                 className="pro-details-cart"
                 onClick={() => {
@@ -294,7 +292,7 @@ class ProductDetail extends Component {
                   }, 2000);
                 }}
               >
-                <p className="btn-hover">Add To Cart</p>
+                Add To Cart
               </div>
               <div className="pro-details-heart d-none">
                 <p className="btn-hover">
@@ -306,29 +304,30 @@ class ProductDetail extends Component {
                   className="pro-details-wish"
                   onClick={() => this.handleAddtoWishlist()}
                 >
-                  <p className="btn-hover">Add To Wishlist</p>
+                  Add To Wishlist
                 </div>
               ) : this.state.successAddtoWishlist === true ? (
                 <div className="pro-details-wish">
-                  <p
+                  <div
                     className="btn-hover"
                     style={{ backgroundColor: "#d94141", color: "#fff" }}
                   >
                     Remove from wishlist
-                  </p>
+                  </div>
                 </div>
-              ) : this.state.wishlistMsg === 'Already on wishlist' ? (
-                <div className="pro-details-wish" onClick={()=>{
-                  this.deleteFromServer(this.props.params.id)
-                }}>
-                  <p
-                    className="btn-hover"
-                    style={{ backgroundColor: "#d94141", color: "#fff" }}
-                  >
-                    Remove from wishlist
-                  </p>
+              ) : this.state.wishlistMsg === "Already on wishlist" ? (
+                <div
+                  className="pro-details-wish"
+                  style={{ backgroundColor: "#d94141", color: "#fff" }}
+                  onClick={() => {
+                    this.deleteFromServer(this.props.params.id);
+                  }}
+                >
+                  Remove from wishlist
                 </div>
-              ):<></>}
+              ) : (
+                <></>
+              )}
             </div>
           </section>
           <section className="details-sku">
@@ -381,7 +380,7 @@ class ProductDetail extends Component {
                 </li>
               </ul>
               <DescTab />
-              <section>
+              <section className="protail-related-product">
                 <h1 className="text-center title-related ">Related Product</h1>
                 <div className="d-flex d-flex justify-content-around">
                   <div className="flex-row d-flex justify-content-center related-content">
@@ -414,6 +413,7 @@ class ProductDetail extends Component {
             </div>
           </section>
         </main>
+        <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
           <div id="snackbar">Product added</div>

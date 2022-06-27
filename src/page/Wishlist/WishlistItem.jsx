@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { CheckCircle } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
+import { currencyFormatter } from "../../helper/currencyFormatter";
 
 function WishlistItem({ wishlist, setLoading, setUpdate }) {
 
@@ -51,8 +52,8 @@ function WishlistItem({ wishlist, setLoading, setUpdate }) {
             <div className="sold-out-wrapper">Sold Out</div>
           )}
         </div>
-        <div className="wl-product-price-container">
-          <div className="wl-product-price">{wishlist.price}</div>
+        <div className="wl-product-price-container" style={{gap: '10px'}}>
+          <div className="wl-product-price">{currencyFormatter.format(wishlist.price)}</div>
           <div className="sp-delete-button" onClick={()=>handleDelete(wishlist.product_id)}>Delete</div>
           <div className="wl-addcart-button">Add to cart</div>
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 // import icons
 import CartIcon from "../../assets/icons/delivery-icon.png";
@@ -230,6 +231,7 @@ class Faq extends Component {
             <div className="button-contact">Contact Us</div>
           </div>
         </main>
+        <BackToTop />   
         <Footer />
       </React.Fragment>
     );
