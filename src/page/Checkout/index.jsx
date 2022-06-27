@@ -7,6 +7,7 @@ import "./Checkout.css";
 // import Visa from "../../assets/icons/visa.png";
 import Loading from "../../component/Loading";
 import { connect } from "react-redux";
+import { Modal } from "react-bootstrap";
 
 const mapStateToProps = (state) => {
   return {
@@ -25,6 +26,7 @@ class Checkout extends Component {
       payment_method: "",
       isPost: false,
       doAxios: false,
+      isShow: false,
     };
   }
   handleCheckout = () => {
@@ -41,6 +43,11 @@ class Checkout extends Component {
         this.setState({
           isPost: true
         });
+        let x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 5000);
       })
       .catch(error => {
         console.log(error)
@@ -80,6 +87,10 @@ class Checkout extends Component {
         })
     }
   }
+  modalTrigger = () => {
+    this.setState({ isShow: true });
+  };
+  handleClose = () => this.setState({ isShow: false });
   render() {
     // console.log(this.state.transactions)
     return (
@@ -114,47 +125,74 @@ class Checkout extends Component {
               placeholder="Address"
               value={this.props.users.address}
             />
-              <input
-                type="text"
-                className="co-input-name"
-                placeholder="Phone Number"
-                onChange={(e) => {
-                  this.setState({ phone_number: e.target.value });
-                }}
-              />
+            <input
+              type="text"
+              className="co-input-name"
+              placeholder="Phone Number"
+              onChange={(e) => {
+                this.setState({ phone_number: e.target.value });
+              }}
+            />
             {/* {this.state.transactions.map((transactions) => ( */}
-              <select name="orderId" id="orderId" className="co-payment-dropdown" 
+            <select name="orderId" id="orderId" className="co-payment-dropdown"
               onChange={(e) => {
                 this.setState({ order_id: e.target.value });
               }}>
-                <option>Please input your transaction data</option>
-                {this.state.transactions.length > 0 && 
+              <option>Please input your transaction data</option>
+              {this.state.transactions.length > 0 &&
                 this.state.transactions.map((transactions) => (
-                <option value={transactions.id}>
-                  {transactions.id} || {transactions.name}
-                </option>
+                  <option value={transactions.id}>
+                    {transactions.id} || {transactions.name}
+                  </option>
                 ))}
-              </select>
+            </select>
             {/* ))} */}
 
-            <select name="payment_method" id="payment_method" className="co-payment-dropdown" 
-            onChange={(e) => {
+            <select name="payment_method" id="payment_method" className="co-payment-dropdown"
+              onChange={(e) => {
                 this.setState({ payment_method: e.target.value });
               }}>
               <option value="Pay with visa">
-                 Pay with Visa
+                Pay with Visa
               </option>
               <option value="Pay with master card">
                 Pay with Master Card
               </option>
               <option value="Pay with bit coin">
-                 Pay with Bit Coin
+                Pay with Bit Coin
               </option>
             </select>
-            <div className="co-button" onClick={this.handleCheckout}>Check Out</div>
+            <div className="co-button" onClick={this.modalTrigger}>Check Out</div>
           </div>
         </main>
         <Footer />
+        <Modal show={this.state.isShow} centered>
+          <Modal.Header>
+            Confirmation
+          </Modal.Header>
+          <Modal.Body className="modal-body">
+            <p className="modal-text" style={{ marginTop: "15px" }}>Are you sure ?</p>
+          </Modal.Body>
+          <Modal.Footer className="modal-footer">
+            <div className="modal-btn">
+              <button className="btn btn-danger" onClick={this.handleClose}>
+                No
+              </button>
+              <button className="btn btn-success" style={{ marginLeft: "10px" }}
+                onClick={() => {
+                  this.handleCheckout()
+                  this.setState({
+                    isShow: false,
+                  })
+                }}>
+                Yes
+              </button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+        <div className="snackbar-wrapper">
+          <div id="snackbar" centered>Payment success !</div>
+        </div>
       </>
     );
   }
