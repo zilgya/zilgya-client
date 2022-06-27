@@ -44,10 +44,7 @@ const Navbar = () => {
                             </li>
                             <li>
                               <Link to="/contact ">Contact us</Link>
-                            </li>
-                            <li>
-                              <Link to="/about ">About Us</Link>
-                            </li>
+                            </li>                            
                             <li>
                               <Link to="/404">404 Page</Link>
                             </li>
@@ -103,8 +100,7 @@ const Navbar = () => {
                       </ul>
                     </nav>
                   </div>
-                </div>
-                
+                </div>                
                 <div className="col-xl-4 pl-5 col-lg-4 col-md-4 col-4 d-flex icon-nav-group nav-icon-custom">
                   <div className="header-icon search ">
                     <nav className="search-menu">

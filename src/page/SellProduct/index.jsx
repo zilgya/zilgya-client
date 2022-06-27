@@ -41,7 +41,7 @@ class SellProduct extends Component {
     };
   }
 
-  // coba coba
+  
   inputPictHandler = async (e) => {
     e.preventDefault();
 
