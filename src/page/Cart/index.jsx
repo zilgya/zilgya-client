@@ -83,14 +83,14 @@ class Cart extends Component {
       x.className = "show";
       setTimeout(function () {
         x.className = x.className.replace("show", "");
-      }, 10000);
+      }, 1000);
       return;
     }
     this.setState({ setShow: true, show: true });
   };
 
   componentDidMount() {
-    document.title = "Cart"
+    document.title = "Cart";
     const { cartItem } = this.props;
     if (cartItem.length > 0) {
       const sub_total = cartItem.map((item) => item.quantity * item.price).reduce((b, a) => b + a);
@@ -114,7 +114,7 @@ class Cart extends Component {
         });
       }
       const { discount } = this.state.promos;
-      const newPrice = sub_total * (Number(discount) / 100);
+      const newPrice = discount ? sub_total * (Number(discount) / 100) : 0;
       this.setState({
         discount: newPrice,
         isPromo: false,
@@ -122,7 +122,7 @@ class Cart extends Component {
     }
     if (this.state.isPromo) {
       const { discount } = this.state.promos;
-      const newPrice = this.state.sub_total * (Number(discount) / 100);
+      const newPrice = discount ? this.state.sub_total * (Number(discount) / 100) : 0;
       this.setState({
         discount: newPrice,
         isPromo: false,
