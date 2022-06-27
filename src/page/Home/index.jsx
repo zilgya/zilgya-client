@@ -20,7 +20,6 @@ import "./Home.css";
 import { connect } from "react-redux";
 import Loading from "../../component/Loading";
 import BackToTop from "../../component/ButtonToTop";
-import { Back } from "react-bootstrap-icons";
 
 const mapStateToProps = (state) => {
   return {

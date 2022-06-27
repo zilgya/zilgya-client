@@ -39,16 +39,19 @@ class ProductDetail extends Component {
     this.state = {
       product: [],
       pict: [],
+      wishlist: [],
+      successAddtoWishlist: false,
       pictPrev: "",
       quantity: 1,
       loadingWishlist: false,
       wishlistMessage: false,
     };
   }
-  handleWishlist = () => {
+  handleAddtoWishlist = () => {
     const { params, token } = this.props;
     this.setState({
       loadingWishlist: true,
+      successAddtoWishlist: false,
     });
     axios({
       method: "POST",
@@ -57,12 +60,13 @@ class ProductDetail extends Component {
         Authorization: `Bearer ${token}`,
       },
       data: {
-        product_id: params.id
+        product_id: params.id,
       },
     })
       .then((result) => {
         this.setState({
           loadingWishlist: false,
+          successAddtoWishlist: true,
           wishlistMessage: result.data.message,
         });
         console.log(result.data.message);
@@ -70,9 +74,66 @@ class ProductDetail extends Component {
       .catch((error) => {
         this.setState({
           loadingWishlist: false,
+          successAddtoWishlist: false,
           wishlistMessage: false,
         });
         console.log(error);
+      });
+  };
+
+  handleGetWishlist = () => {
+    const { token, params } = this.props;
+    this.setState({
+      loadingWishlist: true,
+      successAddtoWishlist: false,
+    });
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_HOST_API}/wishlist/${params.id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((result) => {
+        console.log(result.data, "ini dari wishlist");
+        this.setState({
+          wishlistMsg: result.data.message,
+          loadingWishlist: false,
+          successAddtoWishlist: false,
+        });
+      })
+      .catch((error) => {
+        token.setState({ loadingWishlist: false, successAddtoWishlist: false });
+        console.error(error);
+      });
+  };
+
+  deleteFromServer = (w_id) => {
+    this.setState({
+      loadingWishlist: true,
+      successAddtoWishlist: false,
+    });
+    axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_HOST_API}/wishlist/${w_id}`,
+      headers: {
+        Authorization: `Bearer ${this.props.token}`,
+      },
+    })
+      .then((result) => {
+        this.setState({
+          loadingWishlist: false,
+          successAddtoWishlist: true,
+        });
+        console.log(`${result.data.message} ${w_id}`);
+        // setDelMsg(result.data.message);
+      })
+      .catch((error) => {
+        this.setState({
+          loadingWishlist: false,
+          successAddtoWishlist: false,
+        });
+        console.error(error);
       });
   };
 
@@ -102,6 +163,13 @@ class ProductDetail extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    this.handleGetWishlist();
+  }
+  componentDidUpdate() {
+    if (this.state.successAddtoWishlist) {
+      this.handleGetWishlist();
+    }
   }
 
   render() {
@@ -113,7 +181,9 @@ class ProductDetail extends Component {
         <main>
           <section>
             <div className="nav-title">
-              <p><Link to="/product"> Shop</Link> &gt; {this.state.product.name}</p>
+              <p>
+                <Link to="/product"> Shop</Link> &gt; {this.state.product.name}
+              </p>
             </div>
             <div className="protail-pict-container">
               <div className="protail-small-pict-container">
@@ -127,7 +197,11 @@ class ProductDetail extends Component {
                       });
                     }}
                   >
-                    <img src={pict.url} alt={`product${idx + 1}`} className="protail-small-img" />
+                    <img
+                      src={pict.url}
+                      alt={`product${idx + 1}`}
+                      className="protail-small-img"
+                    />
                   </div>
                 ))}
               </div>
@@ -198,21 +272,62 @@ class ProductDetail extends Component {
               </div>
             </div>
             <div className="protail-button-cart-wish-container">
-              <div className="pro-details-cart"
+              <div
+                className="pro-details-cart"
                 onClick={() => {
-                  const { product, pict, quantity } = this.state
-                  this.props.dispatch(addToCartAction(this.props.params.id, product.name, pict[0], quantity, product.price))
+                  const { product, pict, quantity } = this.state;
+                  this.props.dispatch(
+                    addToCartAction(
+                      this.props.params.id,
+                      product.name,
+                      pict[0],
+                      quantity,
+                      product.price
+                    )
+                  );
                   let x = document.getElementById("snackbar");
                   x.className = "show";
                   setTimeout(function () {
                     x.className = x.className.replace("show", "");
                   }, 2000);
-                }}>
+                }}
+              >
                 Add To Cart
               </div>
-              <div className="pro-details-wish" onClick={this.handleWishlist}>
-                Add To Wishlist
+              <div className="pro-details-heart d-none">
+                <p className="btn-hover">
+                  <i className="fa fa-heart-o"></i>
+                </p>
               </div>
+              {this.state.wishlistMsg === "Product can be added to wishlist" ? (
+                <div
+                  className="pro-details-wish"
+                  onClick={() => this.handleAddtoWishlist()}
+                >
+                  Add To Wishlist
+                </div>
+              ) : this.state.successAddtoWishlist === true ? (
+                <div className="pro-details-wish">
+                  <div
+                    className="btn-hover"
+                    style={{ backgroundColor: "#d94141", color: "#fff" }}
+                  >
+                    Remove from wishlist
+                  </div>
+                </div>
+              ) : this.state.wishlistMsg === "Already on wishlist" ? (
+                <div
+                  className="pro-details-wish"
+                  style={{ backgroundColor: "#d94141", color: "#fff" }}
+                  onClick={() => {
+                    this.deleteFromServer(this.props.params.id);
+                  }}
+                >
+                  Remove from wishlist
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </section>
           <section className="details-sku">
@@ -301,9 +416,7 @@ class ProductDetail extends Component {
         <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
-          <div id="snackbar">
-            Product added
-          </div>
+          <div id="snackbar">Product added</div>
         </div>
       </>
     );

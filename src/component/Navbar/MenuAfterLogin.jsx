@@ -14,6 +14,7 @@ function MenuAfterLogin() {
   const token = useSelector((state) => state.auth.token);
   const { updateResult, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  // console.log(token);
 
   //modal prompt logout
   const [show, setShow] = useState(false);
@@ -38,8 +39,11 @@ function MenuAfterLogin() {
     if (updateResult) {
       dispatch(getUserInfo({ token: token }));
     }
-    if (getUserFail & !userInfo) {
+    if ((getUserFail && !userInfo) || getUserFail) {
       dispatch(logoutAction());
+      setTimeout(() => {
+        dispatch(resetUserState());
+      }, 2000);
     }
   }, [dispatch, getUserFail, token, updateResult, userInfo]);
   return (
