@@ -3,7 +3,6 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
 import { Button, Form, Modal } from "react-bootstrap";
-import { Form } from "react-bootstrap";
 import BackToTop from "../../component/ButtonToTop";
 // import { PlusLg } from 'react-bootstrap-icons'
 
