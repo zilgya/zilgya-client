@@ -17,6 +17,7 @@ import withParams from "../../helper/withParams";
 import axios from "axios";
 import { currencyFormatter } from "../../helper/currencyFormatter";
 import { addToCartAction } from "../../redux/actionCreator/cart";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   const {
@@ -110,14 +111,14 @@ class ProductDetail extends Component {
         <Navbar />
         <main>
           <section>
-            <div className="col-md-6 nav-title">
-              <p>Shop &gt; {this.state.product.name}</p>
+            <div className="nav-title">
+              <p><Link to="/product"> Shop</Link> &gt; {this.state.product.name}</p>
             </div>
-            <div className="d-flex">
-              <div className="flex-row col-md-2">
+            <div className="protail-pict-container">
+              <div className="protail-small-pict-container">
                 {this.state.pict.map((pict, idx) => (
                   <div
-                    className="col-md-3 p-4 product-small"
+                    className="protail-small"
                     key={idx}
                     onClick={() => {
                       this.setState({
@@ -125,32 +126,20 @@ class ProductDetail extends Component {
                       });
                     }}
                   >
-                    <img src={pict.url} alt="product-small" />
+                    <img src={pict.url} alt={`product${idx + 1}`} className="protail-small-img" />
                   </div>
                 ))}
-                {/* <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallEnam} alt="product-small" />
-                </div>
-                <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallEnam} alt="product-small" />
-                </div>
-                <div className="col-md-3 p-4 product-small">
-                  <img src={ProductSmallSatu} alt="product-small" />
-                </div> */}
               </div>
-              <div className="col-md-11 product-big">
+              <div className="protail-big-pict-container">
                 {this.state.pictPrev !== "" ? (
-                  <img src={this.state.pictPrev} alt="product-big" />
+                  <img src={this.state.pictPrev} alt="product-preview" />
                 ) : (
                   // <div className="product-big-prev">Click image to preview</div>
                   <img
                     src={this.state.pict.length && this.state.pict[0].url}
-                    alt="product-big"
+                    alt="product-preview"
                   />
                 )}
-              </div>
-              <div className="product-label">
-                <span className="sale">Hot</span>
               </div>
             </div>
           </section>
@@ -184,7 +173,7 @@ class ProductDetail extends Component {
               <p className="product-desc">{this.state.product.description}</p>
             </div>
           </section>
-          <section>
+          <section className="protail-button-container">
             <div className="pro-details-quality">
               <div className="quantity quantity--2">
                 <div
@@ -206,8 +195,9 @@ class ProductDetail extends Component {
                   +
                 </div>
               </div>
-              <div
-                className="pro-details-cart"
+            </div>
+            <div className="protail-button-cart-wish-container">
+              <div className="pro-details-cart"
                 onClick={() => {
                   const { product, pict, quantity } = this.state
                   this.props.dispatch(addToCartAction(this.props.params.id, product.name, pict[0], quantity, product.price))
@@ -217,15 +207,10 @@ class ProductDetail extends Component {
                     x.className = x.className.replace("show", "");
                   }, 2000);
                 }}>
-                <p className="btn-hover">Add To Cart</p>
-              </div>
-              <div className="pro-details-heart d-none">
-                <p className="btn-hover">
-                  <i className="fa fa-heart-o"></i>
-                </p>
+                Add To Cart
               </div>
               <div className="pro-details-wish" onClick={this.handleWishlist}>
-                <p className="btn-hover">Add To Wishlist</p>
+                Add To Wishlist
               </div>
             </div>
           </section>
@@ -279,7 +264,7 @@ class ProductDetail extends Component {
                 </li>
               </ul>
               <DescTab />
-              <section>
+              <section className="protail-related-product">
                 <h1 className="text-center title-related ">Related Product</h1>
                 <div className="d-flex d-flex justify-content-around">
                   <div className="flex-row d-flex justify-content-center related-content">
