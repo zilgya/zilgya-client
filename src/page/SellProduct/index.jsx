@@ -43,7 +43,7 @@ class SellProduct extends Component {
     };
   }
 
-  //modal prompt sell product
+  // prompt sell product 
   handleClose = () => this.setState({ setShow: false, show: false });
   handleReload = () => window.location.reload();
   // handleReset = () => {
