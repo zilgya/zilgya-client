@@ -39,14 +39,12 @@ class Login extends Component {
     const { state } = this.props.location;
     this.setState({
       message: null,
+      errorMsg: null,
+      isError: false,
     });
-    // if (state !== null && !state.isAuthenticated) {
-    //   this.setState({
-    //     isShow: true
-    //   });
-    // }
+
     if (state) {
-      if (!state.isAuthenticated) {
+      if (state.isAuthenticated === false) {
         this.setState({
           isError: true,
           errorMsg: "Login First",
@@ -60,19 +58,18 @@ class Login extends Component {
       }
       if (state.message) {
         this.setState({
-          message: state,
+          message: state.message,
         });
         let x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function () {
           x.className = x.className.replace("show", "");
         }, 8000);
-        return;
       }
     }
   }
+
   render() {
-    console.log("LOCATION", this.props.location);
     const { isLoading } = this.props;
     return (
       <>
