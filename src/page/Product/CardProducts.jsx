@@ -79,8 +79,8 @@ const CardProducts = ({ filterColor, color, setTotalProduct, brand, setTotalCat,
           <h1 className="mt-5">{error}</h1>
         ) : (
           product.map((items, i) => (
-            <div className="col-md-4">
-              <div className="card col card-product" key={i} onClick={() => navigate(`/product/${items.id}`)}>
+            <div className="col-lg-4 col-md-6 col-sm-12">
+              <div className="card card-product" key={i} onClick={() => navigate(`/product/${items.id}`)}>
                 <div className="card-product-img">
                   <img src={items.image} alt="" />
                 </div>
