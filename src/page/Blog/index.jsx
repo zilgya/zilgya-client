@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./blog.css";
 
@@ -171,7 +172,7 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-              <Link className="mt-4" to="/blogdetail ">
+              <Link className="mt-4" to="/blog/detail ">
                   <strong className="text-dark read-text">Read me</strong>
                 </Link>
                 <hr className="hr-readme" />
@@ -194,7 +195,7 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-                <Link className="mt-4" to="/blogdetail ">
+                <Link className="mt-4" to="/blog/detail ">
                   <strong className="text-dark read-text">Read me</strong>
                 </Link>
                 <hr className="hr-readme" />
@@ -219,7 +220,7 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-              <Link className="mt-4" to="/blogdetail ">
+              <Link className="mt-4" to="/blog/detail ">
                   <strong className="text-dark read-text">Read me</strong>
                 </Link>
                 <hr className="hr-readme" />
@@ -269,7 +270,7 @@ export class Blog extends Component {
                 sagittis faucibu
               </h5>
               <div className="d-flex flex-row">
-              <Link className="mt-4" to="/blogdetail ">
+              <Link className="mt-4" to="/blog/detail ">
                   <strong className="text-dark read-text">Read me</strong>
                 </Link>
                 <hr className="hr-readme" />
@@ -294,6 +295,7 @@ export class Blog extends Component {
             </section>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     );

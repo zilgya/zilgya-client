@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import RecentOne from "../../assets/img/recent-news-1.png";
 import RecentTwo from "../../assets/img/recent-news-2.png";
@@ -526,6 +527,7 @@ export class BlogDetail extends Component {
             </div>
           </section>
         </main>
+        <BackToTop />        
         <Footer />
       </>
     );

@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { loginAction } from "../../redux/actionCreator/auth";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
+import BackToTop from "../../component/ButtonToTop";
 
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
@@ -373,6 +374,7 @@ class Login extends Component {
             </form>
           </div>
         </main>
+        <BackToTop />
         <Footer />
         <div className="snackbar-wrapper">
           <div id="snackbar">{this.state.message ? this.state.message : "Register success, please check email for verification"}</div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CheckCircle } from "react-bootstrap-icons";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./MyOrder.css";
 import { connect } from "react-redux";
@@ -197,6 +198,7 @@ class MyOrder extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     );

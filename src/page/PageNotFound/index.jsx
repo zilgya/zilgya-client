@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loading from "../../component/Loading";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./PageNotFound.css";
 
@@ -38,6 +39,7 @@ class PageNotFound extends Component {
             <div className="pnf-circle"></div>
           </div>
         </main>
+        <BackToTop />
       </React.Fragment>
     );
   }

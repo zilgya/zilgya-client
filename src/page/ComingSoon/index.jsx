@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 //import icon
 import Fb from "../../assets/icons/fb-icon.png";
@@ -65,6 +66,7 @@ class ComingSoon extends Component {
             </footer>
           </section>
         </div>
+        <BackToTop />        
       </React.Fragment>
     );
   }

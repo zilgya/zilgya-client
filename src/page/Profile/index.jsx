@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Pencil } from "react-bootstrap-icons";
+import BackToTop from "../../component/ButtonToTop";
 import "./Profile.css";
 
 import Profpict from "../../assets/img/profpict.png";
@@ -449,6 +450,7 @@ class Profile extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header>

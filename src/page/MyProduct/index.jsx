@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./MyProduct.css";
 import ProductItemSeller from "./ProductItemSeller";
@@ -92,6 +93,7 @@ function MyProduct() {
           </div>
         </div>
       </main>
+      <BackToTop />
       <Footer />
     </>
   );

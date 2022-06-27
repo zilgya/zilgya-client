@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
+import BackToTop from "../../component/ButtonToTop";
 
 import "./Checkout.css";
 import Visa from "../../assets/icons/visa.png";
@@ -69,6 +70,7 @@ class Checkout extends Component {
             <div className="co-button">Check Out</div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
       </>
     );

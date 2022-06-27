@@ -3,6 +3,7 @@ import Footer from "../../component/Footer";
 import Navbar from "../../component/Navbar";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import BackToTop from "../../component/ButtonToTop";
 // import { PlusLg } from 'react-bootstrap-icons'
 
 import "./SellProduct.css";
@@ -358,6 +359,7 @@ class SellProduct extends Component {
             </div>
           </div>
         </main>
+        <BackToTop />
         <Footer />
         <div id="snackbar">{this.state.message}</div>
         {/* <div id="toast">Register Error</div> */}
