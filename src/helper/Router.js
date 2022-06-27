@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfirmEmail from "../page/Auth/ConfirmEmail";
 import Blog from "../page/Blog";
+import BlogDetail from "../page/BlogDetail";
 import Cart from "../page/Cart";
 import Checkout from "../page/Checkout";
 import ComingSoon from "../page/ComingSoon";
@@ -15,6 +16,7 @@ import OrderTrack from "../page/OrderTrack";
 import PageNotFound from "../page/PageNotFound";
 import Product from "../page/Product";
 import ProductDetail from "../page/ProductDetail";
+import About from "../page/About";
 import Profile from "../page/Profile";
 import SellProduct from "../page/SellProduct";
 import Wishlist from "../page/Wishlist";
@@ -24,81 +26,121 @@ import PrivateElementAfterLoginSeller from "../component/PrivateElement/PrivateE
 import Forgot from "../page/Forgot";
 
 function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/auth"
-          element={
-            <PrivateElementAfterLogin>
-              <Login />
-            </PrivateElementAfterLogin>
-          }
-        />
-        <Route path="/auth/confirm/:token" element={<ConfirmEmail />} />
-        <Route
-          path="/profile"
-          element={
-            <PrivateElement>
-              <Profile />
-            </PrivateElement>
-          }
-        />
-        <Route path="/auth/forgot">
-          <Route path="" element={<Forgot />} />
-          <Route path=":email" element={<Forgot />} />
-        </Route>
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route
-          path="/checkout"
-          element={
-            <PrivateElement>
-              <Checkout />
-            </PrivateElement>
-          }
-        />
-        <Route
-          path="/wishlist"
-          element={
-            <PrivateElement>
-              <Wishlist />
-            </PrivateElement>
-          }
-        />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/track" element={<OrderTrack />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/comingsoon" element={<ComingSoon />} />
-        <Route
-          path="/seller/myproduct"
-          element={
-            <PrivateElementAfterLoginSeller>
-              <MyProduct />
-            </PrivateElementAfterLoginSeller>
-          }
-        />
-        <Route
-          path="/seller/sellproduct"
-          element={
-            <PrivateElementAfterLoginSeller>
-              <SellProduct />
-            </PrivateElementAfterLoginSeller>
-          }
-        />
-        <Route
-          path="/seller/myorder"
-          element={
-              <MyOrder />
-          }
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return ( <
+        BrowserRouter >
+        <
+        Routes >
+        <
+        Route path = "/"
+        element = { < Home / > }
+        /> <
+        Route path = "/auth"
+        element = { <
+            PrivateElementAfterLogin >
+            <
+            Login / >
+            <
+            /PrivateElementAfterLogin>
+        }
+        /> <
+        Route path = "/auth/confirm/:token"
+        element = { < ConfirmEmail / > }
+        /> <
+        Route path = "/profile"
+        element = { <
+            PrivateElement >
+            <
+            Profile / >
+            <
+            /PrivateElement>
+        }
+        /> <
+        Route path = "/auth/forgot" >
+        <
+        Route path = ""
+        element = { < Forgot / > }
+        /> <
+        Route path = ":email"
+        element = { < Forgot / > }
+        /> <
+        /Route> <
+        Route path = "/product/:id"
+        element = { < ProductDetail / > }
+        /> <
+        Route path = "/blog"
+        element = { < Blog / > }
+        /> <
+        Route path = "/blogdetail"
+        element = { < BlogDetail / > }
+        /> <
+        Route path = "/about"
+        element = { < About / > }
+        /> <
+        Route path = "/product"
+        element = { < Product / > }
+        /> <
+        Route path = "/cart"
+        element = { < Cart / > }
+        /> <
+        Route path = "/checkout"
+        element = { <
+            PrivateElement >
+            <
+            Checkout / >
+            <
+            /PrivateElement>
+        }
+        /> <
+        Route path = "/wishlist"
+        element = { <
+            PrivateElement >
+            <
+            Wishlist / >
+            <
+            /PrivateElement>
+        }
+        /> <
+        Route path = "/favorite"
+        element = { < Favorite / > }
+        /> <
+        Route path = "/track"
+        element = { < OrderTrack / > }
+        /> <
+        Route path = "/faq"
+        element = { < Faq / > }
+        /> <
+        Route path = "/comingsoon"
+        element = { < ComingSoon / > }
+        /> <
+        Route path = "/seller/myproduct"
+        element = { <
+            PrivateElementAfterLoginSeller >
+            <
+            MyProduct / >
+            <
+            /PrivateElementAfterLoginSeller>
+        }
+        /> <
+        Route path = "/seller/sellproduct"
+        element = { <
+            PrivateElementAfterLoginSeller >
+            <
+            SellProduct / >
+            <
+            /PrivateElementAfterLoginSeller>
+        }
+        /> <
+        Route path = "/seller/myorder"
+        element = { <
+            MyOrder / >
+        }
+        /> <
+        Route path = "*"
+        element = { < PageNotFound / > }
+        /> <
+        /Routes> <
+        /BrowserRouter>
+    );
 }
 
 export default Router;
