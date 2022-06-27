@@ -18,6 +18,7 @@ import axios from "axios";
 import { currencyFormatter } from "../../helper/currencyFormatter";
 import { addToCartAction } from "../../redux/actionCreator/cart";
 
+
 const mapStateToProps = (state) => {
   const {
     cart: { cartItem },
@@ -37,16 +38,19 @@ class ProductDetail extends Component {
     this.state = {
       product: [],
       pict: [],
+      wishlist: [],
+      successAddtoWishlist: false,
       pictPrev: "",
       quantity: 1,
       loadingWishlist: false,
       wishlistMessage: false,
     };
   }
-  handleWishlist = () => {
+  handleAddtoWishlist = () => {
     const { params, token } = this.props;
     this.setState({
       loadingWishlist: true,
+      successAddtoWishlist: false,
     });
     axios({
       method: "POST",
@@ -55,12 +59,13 @@ class ProductDetail extends Component {
         Authorization: `Bearer ${token}`,
       },
       data: {
-        product_id: params.id
+        product_id: params.id,
       },
     })
       .then((result) => {
         this.setState({
           loadingWishlist: false,
+          successAddtoWishlist: true,
           wishlistMessage: result.data.message,
         });
         console.log(result.data.message);
@@ -68,10 +73,66 @@ class ProductDetail extends Component {
       .catch((error) => {
         this.setState({
           loadingWishlist: false,
+          successAddtoWishlist: false,
           wishlistMessage: false,
         });
         console.log(error);
       });
+  };
+
+  handleGetWishlist = () => {
+    const { token, params } = this.props;
+    this.setState({
+      loadingWishlist: true,
+      successAddtoWishlist: false,
+    });
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_HOST_API}/wishlist/${params.id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((result) => {
+        console.log(result.data, "ini dari wishlist");
+        this.setState({
+          wishlistMsg: result.data.message,
+          loadingWishlist: false,
+          successAddtoWishlist: false,
+        });
+      })
+      .catch((error) => {
+        token.setState({ loadingWishlist: false, successAddtoWishlist: false });
+        console.error(error);
+      });
+  };
+
+  deleteFromServer = (w_id) => {
+    this.setState({
+      loadingWishlist: true,
+      successAddtoWishlist:false,
+    })
+    axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_HOST_API}/wishlist/${w_id}`,
+      headers: {
+        Authorization: `Bearer ${this.props.token}`,
+      }
+    })
+      .then((result) => {
+        this.setState({
+          loadingWishlist: false,
+          successAddtoWishlist: true,
+        })
+        console.log(`${result.data.message} ${w_id}`);
+        // setDelMsg(result.data.message);
+      })
+      .catch((error) => {
+        this.setState({
+          loadingWishlist:false,
+          successAddtoWishlist:false
+        })
+        console.error(error)});
   };
 
   componentDidMount() {
@@ -100,6 +161,13 @@ class ProductDetail extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    this.handleGetWishlist();
+  }
+  componentDidUpdate() {
+    if (this.state.successAddtoWishlist) {
+      this.handleGetWishlist();
+    }
   }
 
   render() {
@@ -209,14 +277,23 @@ class ProductDetail extends Component {
               <div
                 className="pro-details-cart"
                 onClick={() => {
-                  const { product, pict, quantity } = this.state
-                  this.props.dispatch(addToCartAction(this.props.params.id, product.name, pict[0], quantity, product.price))
+                  const { product, pict, quantity } = this.state;
+                  this.props.dispatch(
+                    addToCartAction(
+                      this.props.params.id,
+                      product.name,
+                      pict[0],
+                      quantity,
+                      product.price
+                    )
+                  );
                   let x = document.getElementById("snackbar");
                   x.className = "show";
                   setTimeout(function () {
                     x.className = x.className.replace("show", "");
                   }, 2000);
-                }}>
+                }}
+              >
                 <p className="btn-hover">Add To Cart</p>
               </div>
               <div className="pro-details-heart d-none">
@@ -224,9 +301,34 @@ class ProductDetail extends Component {
                   <i className="fa fa-heart-o"></i>
                 </p>
               </div>
-              <div className="pro-details-wish" onClick={this.handleWishlist}>
-                <p className="btn-hover">Add To Wishlist</p>
-              </div>
+              {this.state.wishlistMsg === "Product can be added to wishlist" ? (
+                <div
+                  className="pro-details-wish"
+                  onClick={() => this.handleAddtoWishlist()}
+                >
+                  <p className="btn-hover">Add To Wishlist</p>
+                </div>
+              ) : this.state.successAddtoWishlist === true ? (
+                <div className="pro-details-wish">
+                  <p
+                    className="btn-hover"
+                    style={{ backgroundColor: "#d94141", color: "#fff" }}
+                  >
+                    Remove from wishlist
+                  </p>
+                </div>
+              ) : this.state.wishlistMsg === 'Already on wishlist' ? (
+                <div className="pro-details-wish" onClick={()=>{
+                  this.deleteFromServer(this.props.params.id)
+                }}>
+                  <p
+                    className="btn-hover"
+                    style={{ backgroundColor: "#d94141", color: "#fff" }}
+                  >
+                    Remove from wishlist
+                  </p>
+                </div>
+              ):<></>}
             </div>
           </section>
           <section className="details-sku">
@@ -314,9 +416,7 @@ class ProductDetail extends Component {
         </main>
         <Footer />
         <div className="snackbar-wrapper">
-          <div id="snackbar">
-            Product added
-          </div>
+          <div id="snackbar">Product added</div>
         </div>
       </>
     );

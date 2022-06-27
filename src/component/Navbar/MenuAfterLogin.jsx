@@ -14,7 +14,7 @@ function MenuAfterLogin() {
   const token = useSelector((state) => state.auth.token);
   const { updateResult, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(token);
+  // console.log(token);
   const handleLogout = async () => {
     await Promise.all([dispatch(logOutFromServer({ token: token }))]).then(
       setTimeout(() => {
