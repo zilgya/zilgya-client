@@ -1,0 +1,148 @@
+.mo-main-content {
+  padding: 50px 15%;
+}
+
+.mo-nav-dropdown:focus{
+  box-shadow: none;
+}
+.mo-nav-dropdown{
+  font-family: Arimo;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+  padding: 0;
+}
+
+.mo-dropdown-menu{
+  background-color: #1a1a1a;
+}
+
+.mo-dropdown-item{
+  color: #868686;
+  background-color: #1a1a1a;
+}
+
+.mo-dropdown-item:hover{
+  color: #ffffff;
+  background-color: #1a1a1a;
+}
+
+.mo-col-name {
+  display: flex;
+  font-family: Arimo;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0.9166666865348816px;
+  text-align: center;
+}
+.mo-col-orderId {
+  flex: 1;
+}
+.mo-product-orderId {
+  flex: 1;
+  text-align: center;
+}
+.mo-col-product {
+  text-align: center;
+}
+
+.mo-col-product,
+.mo-img-name-container {
+  flex: 3;
+}
+
+.mo-col-price,
+.mo-col-quantity,
+.mo-col-total,
+.mo-product-price,
+.mo-product-quantity,
+.mo-product-total {
+  flex: 1;
+}
+
+.mo-col-status,
+.mo-product-status {
+  flex: 2;
+}
+
+.mo-item-container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.mo-product-item {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.mo-img-name-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mo-img-container {
+  width: 100px;
+  height: 100px;
+}
+
+.mo-item-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.mo-product-name {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.mo-product-price {
+  font-family: Arimo;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.mo-product-quantity {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #4a4141;
+}
+
+.mo-product-status {
+  font-family: Arimo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #262626;
+}
+
+.mo-product-total {
+  font-family: Arimo;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #262626;
+}

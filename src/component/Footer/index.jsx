@@ -12,11 +12,12 @@ export default class Footer extends Component {
                 <div className="footer-widget footer-column footer-column__a col-xl-5 col-lg-12 col-md-12 col-sm-6 col-12 text-xl-left mb-40">
                   <div className="inner">
                     <div className="logo">
-                      <a href="index.html">
-                        <img
+                      <a href="/">
+                        <h1 style={{ color: "white"}}>ZILGYA</h1>
+                        {/* <img
                           src="assets/images/logo-white.png"
                           alt="logo white"
-                        />
+                        /> */}
                       </a>
                     </div>
                     <div className="footer-content">
@@ -128,7 +129,7 @@ export default class Footer extends Component {
                           <span className="list-icon">
                             <i className="fa fa-phone"></i>
                           </span>{" "}
-                          <span className="list-content">+44.954.954.86</span>
+                          <span className="list-content">+62.954.954.86</span>
                         </p>
                         <p>
                           <span className="list-icon">
@@ -148,7 +149,7 @@ export default class Footer extends Component {
               <div className="row align-items-center">
                 <div className="col-lg-12">
                   <div className="content text-center">
-                    <p>© 2019 RAZ Store All rights reserved</p>
+                    <p>© 2022 ZILGYA Store All rights reserved</p>
                   </div>
                 </div>
               </div>
