@@ -233,7 +233,10 @@ class MyOrder extends Component {
               <div className="mo-col-status">STATUS ORDER</div>
               <div className="mo-col-total">TOTAL</div>
               <div className="mo-col-orderId">{this.state.role === "buyer" ? "SELLER" : "BUYER"}</div>
+              {this.state.role === "buyer" ?
               <div className="mo-col-orderId">{this.state.order_process === "sent" ? "#" : "SENT"}</div>
+              : <></>
+              }
 
             </div>
             <div className="mo-item-container">
@@ -257,7 +260,8 @@ class MyOrder extends Component {
                     </div>
                     <div className="mo-product-total">{currencyFormatter.format(item.total_price)}</div>
                     <div className="mo-product-total">{this.state.role === "buyer" ? item.seller : item.buyer}</div>
-                    {item.order_status === "SENT" ?
+                    {this.state.role === "buyer" ? 
+                    item.order_status === "SENT" ?
                       <button className="btn btn-success btn-sm"
                         onClick={() => {
                           this.modalTrigger();
@@ -273,7 +277,8 @@ class MyOrder extends Component {
                               orderIdDelete: item.id,
                             })
                           }}>Delete</button>
-                        : <Link className="btn btn-warning btn-sm" to="/checkout">Checkout</Link>}
+                        : <Link className="btn btn-warning btn-sm" to="/checkout">Checkout</Link>
+                      : <></>}
                   </div>
                 ))
               )}
